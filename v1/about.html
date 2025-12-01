@@ -1,35 +1,48 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>About Me</title>
-    <!-- Other meta tags, links to CSS, or scripts can go here -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>My Portfolio — Home</title>
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-    <header>
-        <div>
-            <a href="/">Main Page</a>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="project.html">Projects</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-    <main>
-        <section>
-            <h1>This page is about Me</h1>
-            <p>My name is Salima</p>
-        </section>
-    </main>
-    <footer>
-        <div>
-            <p>All Rights Reserved (c) 2025</p>
-        </div>
-    </footer>    
-    <!-- Visible content of the webpage goes here -->
+  <!-- Header -->
+  <header>
+    <div class="container header-inner">
+      <a href="/" class="logo">
+        <img src="./assets/github_pfp2.jpg" alt="Main Page" style="border-radius: 40px; width: 80px; height: 80px;"/>
+      </a>
+      <nav>
+        <ul class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="project.html">Projects</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main>
+    <!-- Home section -->
+    <section id="about" class="section about">
+      <div class="container">
+        <h1>Main info</h1>
+        <p>I am ...</p>
+        <h1>My interests</h1>
+        <p>My interests are ...</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>© <span id="year"></span> 2025 All Rights Reserved</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
 </body>
 </html>

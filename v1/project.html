@@ -1,35 +1,47 @@
-<!DOCTYPE html>
-<html lang="en">
+<!doctype html>
+<html lang="ru">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>My projects</title>
-    <!-- Other meta tags, links to CSS, or scripts can go here -->
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>My Portfolio — Home</title>
+  <link rel="stylesheet" href="css/styles.css" />
 </head>
 <body>
-    <header>
-        <div>
-            <a href="/">Main Page</a>
-            <nav>
-                <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="project.html">Projects</a></li>
-                </ul>
-            </nav>
-        </div>
-    </header>
-    <main>
-        <section>
-            <h1>This page is about My Projects</h1>
-            <p>Here will be the list of my projects</p>
-        </section>
-    </main>
-    <footer>
-        <div>
-            <p>All Rights Reserved (c) 2025</p>
-        </div>
-    </footer>    
-    <!-- Visible content of the webpage goes here -->
+  <!-- Header -->
+  <header>
+    <div class="container header-inner">
+      <a href="/" class="logo">
+        <img src="./assets/github_pfp2.jpg" alt="Main Page" style="border-radius: 40px; width: 80px; height: 80px;"/>
+      </a>
+      <nav>
+        <ul class="nav-list">
+          <li><a href="index.html">Home</a></li>
+          <li><a href="about.html">About</a></li>
+          <li><a href="project.html">Projects</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main -->
+  <main>
+    <!-- Home section -->
+    <section id="projects" class="section projects">
+      <div class="container">
+        <a href="#footer" class="btn">Click here to Read More</a>
+        <h1>Hi, my name is Salima</h1>
+        <p>This is my personal website</p>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer id="footer">
+    <div class="container">
+      <p>© <span id="year"></span> 2025 All Rights Reserved</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
 </body>
 </html>
