@@ -20,6 +20,17 @@ body {
   background: var(--bg);
 }
 
+body.light {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  margin: 0;
+  font-family: "Fira Code", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  color: var(--text);
+  background: white;
+}
+
 .container {
   max-width: 100%;
   margin: 0 0;
@@ -45,6 +56,14 @@ body {
 }
 
 .nav-list {
+  list-style: none;
+  display: flex;
+  gap: 50px;
+  margin: 0;
+  padding: 0;
+}
+
+.nav-list ul {
   list-style: none;
   display: flex;
   gap: 50px;
@@ -89,6 +108,10 @@ body {
   box-shadow: 0 0 10px rgba(48, 165, 233, 0.6);
 }
 
+.burgermenu {
+  display: none;
+}
+
 footer {
   padding: 24px 0;
   text-align: center;
@@ -111,10 +134,20 @@ main {
     background: var(--bg);
   }
 
+  .burgermenu {
+    display: block;
+    cursor: pointer;
+    font-size: large;
+    background: none;
+    color: white;
+    border: none;
+  }
+
   .container {
     max-width: 100%;
     margin: 0 0;
     padding: 16px 16px;
+    justify-content: space-between;
   }
 
   .container-about {
@@ -127,7 +160,6 @@ main {
     display: flex;
     background-color: #292f36;
     align-items: center;
-    justify-content: space-between;
     gap: 10px
   }
 
@@ -136,9 +168,20 @@ main {
   }
 
   .nav-list {
+    display: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-list.open {
+    display: block !important;
+  }
+
+  .nav-list ul {
     list-style: none;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     gap: 15px;
     margin: 0;
     padding: 0;
@@ -201,6 +244,15 @@ main {
     background: var(--bg);
   }
 
+  .burgermenu {
+    display: block;
+    cursor: pointer;
+    font-size: large;
+    background: none;
+    color: white;
+    border: none;
+  }
+
   .container {
     max-width: 100%;
     margin: 0 0;
@@ -226,8 +278,20 @@ main {
   }
 
   .nav-list {
+    display: none;
+    list-style: none;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-list.open {
+    display: block !important;
+  }
+
+  .nav-list ul {
     list-style: none;
     display: flex;
+    flex-direction: column;
     gap: 20px;
     margin: 0;
     padding: 0;
@@ -322,6 +386,14 @@ main {
     padding: 0;
   }
 
+  .nav-list ul {
+    list-style: none;
+    display: flex;
+    gap: 50px;
+    margin: 0;
+    padding: 0;
+  }
+
   .nav-list a {
     text-decoration: none;
     color: white;
@@ -404,6 +476,14 @@ main {
   }
 
   .nav-list {
+    list-style: none;
+    display: flex;
+    gap: 50px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-list ul {
     list-style: none;
     display: flex;
     gap: 50px;
@@ -505,6 +585,14 @@ main {
   }
 
   .nav-list {
+    list-style: none;
+    display: flex;
+    gap: 50px;
+    margin: 0;
+    padding: 0;
+  }
+
+  .nav-list ul {
     list-style: none;
     display: flex;
     gap: 50px;
