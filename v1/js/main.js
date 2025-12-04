@@ -4,20 +4,21 @@ btnburger.addEventListener("click", () => {
     mobilenav.classList.toggle("open");
 });
 
-// const themeToggle = document.getElementById("themeToggle");
+const toggleBtn = document.getElementById('themeToggle');
+const root = document.documentElement;
 
-// themeToggle.addEventListener("click", () => {
-//   document.body.classList.toggle("dark");
+const savedTheme = localStorage.getItem('theme');
 
-//   // чтобы тема сохранялась между визитами
-//   if (document.body.classList.contains("dark")) {
-//     localStorage.setItem("theme", "dark");
-//   } else {
-//     localStorage.setItem("theme", "light");
-//   }
-// });
+if (savedTheme === 'light') {
+    root.classList.add('light');
+}
 
-// // Восстанавливаем тему при загрузке
-// if (localStorage.getItem("theme") === "dark") {
-//   document.body.classList.add("dark");
-// }
+toggleBtn.addEventListener('click', () => {
+    root.classList.toggle('light');
+
+    if (root.classList.contains('light')) {
+        localStorage.setItem('theme', 'light');
+    } else {
+        localStorage.setItem('theme', 'dark');
+    }
+});
