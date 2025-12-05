@@ -1,0 +1,20 @@
+---
+const navLinks= [
+    {name: "Main", href: "/"},
+    {name: "About", href: "/about"},
+    {name: "Projects", href: "/projects"},
+    {name: "Contacts", href: "/contacts"},
+];
+---
+<header>
+    <div class="flex flex-row flex-start gap-10 border-b bg-[#30343b] p-5">
+      <a href="/" class="logo">
+        <img src="/github_pfp2.jpg" alt="Main Page" class="max-w-30 max-h-30 rounded-full"/>
+      </a>
+      <nav class="flex gap-10 items-center " id="navList">
+        {navLinks.map(({ name, href }) => (
+            <a href={href} class="text-[#30A5E9]">{name}</a>
+        ))}
+      </nav>
+    </div>
+</header>
