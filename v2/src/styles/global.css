@@ -1,7 +1,19 @@
 @import "tailwindcss";
 
+:root {
+  --bg: #30343b;
+  --text: #30A5E9;
+}
+
+/* Светлая тема */
+.light {
+  --bg: #F2F6FA;
+  --text: #30A5E9;
+}
+
 @layer base {
   body {
-    font-family: 'Fira Code', monospace;
+    font-family: 'Fira Code', monospace; 
+    background: var(--bg);
   }
 }

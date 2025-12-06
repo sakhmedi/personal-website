@@ -1,34 +1,26 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Cards from '../components/Cards.astro';
 
 // Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
 // Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
 <Layout>
-	<section id="home" class="section home">
-      <div class="container">
-        <h1>Hi, my name is Salima</h1>
-        <p>This is my personal website</p>
-        <a href="#projects" class="btn">My project</a>
-      </div>
-    </section>
+  <Cards
+    title="Hi, my name is Salima"
+    description="This is my personal website"
+  />  
 
     <!-- About section -->
-    <section id="about" class="section about">
-      <div class="container">
-        <h2>About</h2>
-        <p>Read more about me</p>
-      </div>
-    </section>
+  <Cards
+    title="About"
+    description="Read more about me"
+  />
 
     <!-- Projects section -->
-    <section id="projects" class="section projects">
-      <div class="container">
-        <h2>Projects</h2>
-        <ul class="projects-list">
-          <li class="project-card">Project 1 — This website</li>
-        </ul>
-      </div>
-    </section>
+  <Cards
+    title="Projects"
+    description="Coming soon..."
+  />
 </Layout>

@@ -7,14 +7,56 @@ const navLinks= [
 ];
 ---
 <header>
-    <div class="flex flex-row flex-start gap-10 border-b bg-[#30343b] p-5">
+    <div class="flex flex-row justify-between sm:justify-start gap-10 border-b border-[#30A5E9] bg-[#292f36] p-5">
       <a href="/" class="logo">
-        <img src="/github_pfp2.jpg" alt="Main Page" class="max-w-30 max-h-30 rounded-full"/>
+        <img src="/github_pfp2.jpg" alt="Main Page" class="max-w-14 max-h-14 sm:max-w-30 sm:max-h-30 rounded-full border-4 border-[#30A5E9]"/>
       </a>
-      <nav class="flex gap-10 items-center " id="navList">
+      <nav class="hidden gap-4 p-4 md:flex md:flex-row transition-all items-center" id="navList">
         {navLinks.map(({ name, href }) => (
             <a href={href} class="text-[#30A5E9]">{name}</a>
         ))}
       </nav>
+      <div class="flex items-center gap-4" id="burgerxtheme">
+        <button id="themeToggle" class="p-2 border rounded border-[#30A5E9] min-w-[40px]">
+          🌓
+        </button>
+
+        <button id="burgermenu" class="md:hidden p-2 border rounded border-[#30A5E9] min-w-[40px]">
+          ☰
+        </button>
+      </div>
     </div>
+
 </header>
+
+<script>
+  // === ЛОГИКА БУРГЕРА ===
+  const btnburger = document.getElementById("burgermenu");
+  const mobilenav = document.getElementById("navList");
+  const burgerxthemeicon = document.getElementById("burgerxtheme");
+
+  btnburger?.addEventListener("click", () => {
+    mobilenav?.classList.toggle("hidden");
+    mobilenav?.classList.toggle("flex");
+    mobilenav?.classList.toggle("flex-col");
+    burgerxthemeicon?.classList.toggle("flex-col");
+  });
+
+  // === ЛОГИКА ТЕМЫ ===
+  const btn = document.getElementById('themeToggle');
+  const root = document.documentElement;
+
+  const saved = localStorage.getItem('theme');
+  if (saved === 'light') {
+    root.classList.add('light');
+  }
+
+  btn?.addEventListener('click', () => {
+    root.classList.toggle('light');
+
+    localStorage.setItem(
+      'theme',
+      root.classList.contains('light') ? 'light' : 'dark'
+    );
+  });
+</script>
