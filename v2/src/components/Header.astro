@@ -1,4 +1,7 @@
 ---
+import { Image } from 'astro:assets';
+import salima from '../assets/salima.jpg';
+
 const navLinks= [
     {name: "Main", href: "/"},
     {name: "About", href: "/about"},
@@ -8,8 +11,16 @@ const navLinks= [
 ---
 <header>
     <div class="flex flex-row justify-between sm:justify-start gap-10 border-b border-[#30A5E9] bg-[#292f36] p-5">
-      <a href="/" class="logo">
-        <img src="/github_pfp2.jpg" alt="Main Page" class="max-w-14 max-h-14 sm:max-w-30 sm:max-h-30 rounded-full border-4 border-[#30A5E9]"/>
+      <a href="/" class="logo" aria-label="На главную">
+        <Image
+          src={salima}
+          alt="Салима"
+          width={120}
+          height={120}
+          densities={[1, 2]}
+          loading="eager"
+          class="w-14 h-14 sm:w-30 sm:h-30 object-cover rounded-full border-4 border-[#30A5E9]"
+        />
       </a>
       <nav class="hidden gap-4 p-4 md:flex md:flex-row transition-all items-center" id="navList">
         {navLinks.map(({ name, href }) => (
