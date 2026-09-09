@@ -2,64 +2,109 @@
 import { Image } from 'astro:assets';
 import salima from '../assets/salima.jpg';
 
-const navLinks= [
-    {name: "Main", href: "/"},
-    {name: "About", href: "/about"},
-    {name: "Projects", href: "/projects"},
-    {name: "Contacts", href: "/contacts"},
+const navLinks = [
+  { name: "Главная", href: "/" },
+  { name: "Обо мне", href: "/about" },
+  { name: "Работы", href: "/projects" },
+  { name: "Контакты", href: "/contacts" },
 ];
 ---
-<header>
-    <div class="flex flex-row justify-between sm:justify-start gap-10 border-b border-accent bg-surface-raised p-5">
-      <a href="/" class="logo" aria-label="На главную">
-        <Image
-          src={salima}
-          alt="Салима"
-          width={120}
-          height={120}
-          densities={[1, 2]}
-          loading="eager"
-          class="w-14 h-14 sm:w-30 sm:h-30 object-cover rounded-full border-4 border-accent"
-        />
-      </a>
-      <nav class="hidden gap-4 p-4 md:flex md:flex-row transition-all items-center" id="navList">
-        {navLinks.map(({ name, href }) => (
-            <a href={href} class="text-accent">{name}</a>
-        ))}
-      </nav>
-      <div class="flex items-center gap-4" id="burgerxtheme">
-        <button id="themeToggle" class="p-2 border rounded border-accent text-text min-w-[40px]">
-          🌓
-        </button>
+<header class="border-b border-accent bg-surface-raised">
+  <div class="flex flex-row items-center justify-between sm:justify-start gap-10 p-5">
+    <a href="/" class="logo" aria-label="На главную">
+      <Image
+        src={salima}
+        alt="Салима"
+        width={120}
+        height={120}
+        densities={[1, 2]}
+        loading="eager"
+        class="w-14 h-14 sm:w-30 sm:h-30 object-cover rounded-full border-4 border-accent"
+      />
+    </a>
 
-        <button id="burgermenu" class="md:hidden p-2 border rounded border-accent text-text min-w-[40px]">
-          ☰
-        </button>
-      </div>
+    <nav class="hidden md:flex md:flex-row gap-4 p-4 items-center" aria-label="Основное меню">
+      {navLinks.map(({ name, href }) => (
+        <a href={href} class="text-accent">{name}</a>
+      ))}
+    </nav>
+
+    <div class="flex items-center gap-4">
+      <button id="themeToggle" class="p-2 border rounded border-accent text-text min-w-[40px]" aria-label="Переключить тему">
+        🌓
+      </button>
+
+      <button
+        id="burgermenu"
+        class="md:hidden p-2 border rounded border-accent text-text min-w-[40px]"
+        aria-label="Меню"
+        aria-controls="mobileNav"
+        aria-expanded="false"
+      >
+        ☰
+      </button>
     </div>
+  </div>
 
+  <!-- Выпадающее меню: отдельный блок под строкой шапки, а не внутри неё.
+       Видимостью на десктопе управляет только CSS (md:hidden), состоянием
+       на телефоне — атрибут hidden. Они не конфликтуют. -->
+  <nav
+    id="mobileNav"
+    hidden
+    class="md:hidden flex flex-col border-t border-border px-5 pb-4"
+    aria-label="Мобильное меню"
+  >
+    {navLinks.map(({ name, href }) => (
+      <a href={href} class="text-accent py-3">{name}</a>
+    ))}
+  </nav>
 </header>
 
 <script>
-  // === ЛОГИКА БУРГЕРА ===
-  const btnburger = document.getElementById("burgermenu");
-  const mobilenav = document.getElementById("navList");
-  const burgerxthemeicon = document.getElementById("burgerxtheme");
+  // === БУРГЕР-МЕНЮ ===
+  const burger = document.getElementById("burgermenu");
+  const panel = document.getElementById("mobileNav");
+  const desktop = window.matchMedia("(min-width: 768px)");
 
-  btnburger?.addEventListener("click", () => {
-    mobilenav?.classList.toggle("hidden");
-    mobilenav?.classList.toggle("flex");
-    mobilenav?.classList.toggle("flex-col");
-    burgerxthemeicon?.classList.toggle("flex-col");
-  });
+  if (burger && panel) {
+    const setOpen = (open: boolean) => {
+      panel.hidden = !open;
+      burger.setAttribute("aria-expanded", String(open));
+    };
 
-  // === ЛОГИКА ТЕМЫ ===
+    setOpen(false);
+
+    burger.addEventListener("click", () => setOpen(panel.hidden));
+
+    // Клик по пункту меню закрывает его: на якорях страница не перезагружается.
+    panel.addEventListener("click", (event) => {
+      if (event.target instanceof Element && event.target.closest("a")) {
+        setOpen(false);
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape" && !panel.hidden) {
+        setOpen(false);
+        burger.focus();
+      }
+    });
+
+    // Ушли на десктопную ширину — сбрасываем состояние, чтобы при возврате
+    // на узкий экран меню не оказалось открытым само по себе.
+    desktop.addEventListener("change", (event) => {
+      if (event.matches) setOpen(false);
+    });
+  }
+
+  // === ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ ===
   // Тема уже применена скриптом в <head>, здесь только переключение.
-  const btn = document.getElementById('themeToggle');
+  const themeToggle = document.getElementById("themeToggle");
   const root = document.documentElement;
 
-  btn?.addEventListener('click', () => {
-    const isLight = root.classList.toggle('light');
-    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+  themeToggle?.addEventListener("click", () => {
+    const isLight = root.classList.toggle("light");
+    localStorage.setItem("theme", isLight ? "light" : "dark");
   });
 </script>
