@@ -26,7 +26,7 @@ export const projects: Project[] = [
   {
     id: "dala-coffee",
     title: "DALA COFFEE",
-    subtitle: "Сайт кофейни — концепт",
+    subtitle: "Сайт кофейни",
     description:
       "Двуязычная страница кофейни в Астане: меню с корзиной, две точки на карте с часами работы и ссылками в 2ГИС, форма обратной связи. Языки переключаются без перезагрузки страницы.",
     url: "https://dalacoffee.netlify.app/?lang=ru",
@@ -38,7 +38,7 @@ export const projects: Project[] = [
   {
     id: "dental-plus",
     title: "Дентал Плюс",
-    subtitle: "Сайт стоматологии — концепт",
+    subtitle: "Сайт стоматологии",
     description:
       "Лендинг клиники: шесть услуг с ценами, карточки врачей, запись через форму с выбором услуги и согласием на обработку данных. Русский и казахский, кнопка WhatsApp в шапке.",
     url: "https://dental-plus-kz.netlify.app/",
@@ -50,7 +50,7 @@ export const projects: Project[] = [
   {
     id: "bloom",
     title: "Bloom",
-    subtitle: "Учебный проект",
+    subtitle: "Справочник цветов",
     description:
       "Многостраничный справочник цветов на английском. Делала, чтобы разобраться с роутингом и выводом списков.",
     url: "https://bloomings.netlify.app/",
