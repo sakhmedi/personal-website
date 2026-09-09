@@ -43,7 +43,8 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 			} catch (e) {}
 		</script>
 	</head>
-	<body>
+	<!-- Отступ снизу — под липкую кнопку WhatsApp, чтобы она не накрывала подвал. -->
+	<body class="pb-16 md:pb-0">
 		<Header/>
 		<main class="min-h-screen">
 			<slot />

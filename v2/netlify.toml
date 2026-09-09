@@ -12,3 +12,15 @@
   # Скриншоты лежат в репозитории, поэтому на сборке
   # не качаем браузер на сотни мегабайт.
   PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = "1"
+
+# /about и /contacts стали секциями главной.
+# 301 — постоянный переезд: браузеры и поисковики запомнят новый адрес.
+[[redirects]]
+  from = "/about"
+  to = "/#services"
+  status = 301
+
+[[redirects]]
+  from = "/contacts"
+  to = "/#contacts"
+  status = 301

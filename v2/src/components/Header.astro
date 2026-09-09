@@ -1,35 +1,46 @@
 ---
 import { Image } from 'astro:assets';
 import salima from '../assets/salima.jpg';
+import { contacts } from '../data/contacts';
 
+// Якоря пишем от корня, чтобы ссылки работали и с /projects, и со страницы 404.
 const navLinks = [
-  { name: "Главная", href: "/" },
-  { name: "Обо мне", href: "/about" },
-  { name: "Работы", href: "/projects" },
-  { name: "Контакты", href: "/contacts" },
+  { name: "Работы", href: "/#works" },
+  { name: "Что я делаю", href: "/#services" },
+  { name: "Контакты", href: "/#contacts" },
 ];
 ---
 <header class="border-b border-accent bg-surface-raised">
-  <div class="flex flex-row items-center justify-between sm:justify-start gap-10 p-5">
-    <a href="/" class="logo" aria-label="На главную">
+  <div class="max-w-5xl mx-auto flex flex-row items-center justify-between gap-6 p-5">
+    <a href="/" class="flex items-center gap-3" aria-label="На главную">
       <Image
         src={salima}
-        alt="Салима"
-        width={120}
-        height={120}
+        alt=""
+        width={96}
+        height={96}
         densities={[1, 2]}
         loading="eager"
-        class="w-14 h-14 sm:w-30 sm:h-30 object-cover rounded-full border-4 border-accent"
+        class="w-12 h-12 object-cover rounded-full border-2 border-accent"
       />
+      <span class="text-lg font-bold">{contacts.name}</span>
     </a>
 
-    <nav class="hidden md:flex md:flex-row gap-4 p-4 items-center" aria-label="Основное меню">
+    <nav class="hidden md:flex md:flex-row gap-6 items-center" aria-label="Основное меню">
       {navLinks.map(({ name, href }) => (
         <a href={href} class="text-accent">{name}</a>
       ))}
     </nav>
 
-    <div class="flex items-center gap-4">
+    <div class="flex items-center gap-3">
+      <a
+        href={contacts.whatsapp}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="hidden md:inline-block px-4 py-2 rounded-xl bg-accent text-on-accent hover:bg-accent-hover transition-colors"
+      >
+        Написать в WhatsApp
+      </a>
+
       <button id="themeToggle" class="p-2 border rounded border-accent text-text min-w-[40px]" aria-label="Переключить тему">
         🌓
       </button>
@@ -60,6 +71,17 @@ const navLinks = [
     ))}
   </nav>
 </header>
+
+<!-- Липкая кнопка: на телефоне человек читает с прокруткой, и связаться
+     должно быть можно в любой момент, не возвращаясь наверх. -->
+<a
+  href={contacts.whatsapp}
+  target="_blank"
+  rel="noopener noreferrer"
+  class="md:hidden fixed inset-x-0 bottom-0 z-50 p-4 text-center font-semibold bg-accent text-on-accent border-t border-accent-hover"
+>
+  Написать в WhatsApp
+</a>
 
 <script>
   // === БУРГЕР-МЕНЮ ===

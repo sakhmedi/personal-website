@@ -1,3 +1,11 @@
-<footer class="border-t border-border flex justify-center p-1.5 text-text-muted">
-    <p>&copy; 2025 All Rights Reserved</p>
+---
+import { contacts } from '../data/contacts';
+
+// Год берётся из даты сборки — в январе не придётся вспоминать про подвал.
+const year = new Date().getFullYear();
+---
+<footer class="border-t border-border">
+  <div class="max-w-5xl mx-auto flex justify-center p-6 text-text-muted">
+    <p>{contacts.name} · {contacts.city} · {year}</p>
+  </div>
 </footer>
