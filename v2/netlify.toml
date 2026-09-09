@@ -1,0 +1,10 @@
+# Настройки сборки живут в репозитории, а не только в панели Netlify.
+# Netlify читает этот файл из Base directory (сейчас = v2), поэтому
+# все пути ниже указаны относительно папки v2.
+
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "24"
