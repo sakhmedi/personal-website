@@ -1,7 +1,21 @@
+---
+const formspreeId = import.meta.env.PUBLIC_FORMSPREE_ID;
+
+if (!formspreeId) {
+  throw new Error(
+    "Не задана переменная PUBLIC_FORMSPREE_ID. " +
+    "Локально: скопируйте .env.example в .env. " +
+    "На Netlify: Site configuration → Environment variables."
+  );
+}
+
+const endpoint = `https://formspree.io/f/${formspreeId}`;
+---
+
 <div class="flex min-w-full justify-center">
     <form
     class="bg-surface-raised flex flex-col rounded-2xl items-center"
-    action="https://formspree.io/f/mqarljwd"
+    action={endpoint}
     method="POST"
     >
         <input class="w-[80%] p-4 m-10 rounded-2xl bg-surface border border-border-strong text-text placeholder:text-text-muted" placeholder="E-mail" type="email" name="email">
