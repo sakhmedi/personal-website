@@ -10,18 +10,206 @@ if (!formspreeId) {
 }
 
 const endpoint = `https://formspree.io/f/${formspreeId}`;
+
+const fieldClass =
+  "w-full p-3 rounded-xl bg-surface border border-border-strong text-text placeholder:text-text-muted";
+const labelClass = "block mb-2";
+const errorClass = "mt-2 text-sm text-danger";
 ---
 
-<div class="flex min-w-full justify-center">
-    <form
-    class="bg-surface-raised flex flex-col rounded-2xl items-center"
+<div class="w-full max-w-xl mx-auto p-4">
+  <form
+    id="contactForm"
     action={endpoint}
     method="POST"
+    class="bg-surface-raised border border-border rounded-2xl p-6 flex flex-col gap-5"
+  >
+    <div>
+      <label for="field-name" class={labelClass}>Как вас зовут</label>
+      <input id="field-name" name="name" type="text" required autocomplete="name" class={fieldClass} />
+      <p id="field-name-error" class={errorClass} hidden></p>
+    </div>
+
+    <div>
+      <label for="field-phone" class={labelClass}>Телефон или WhatsApp</label>
+      <input
+        id="field-phone"
+        name="phone"
+        type="tel"
+        required
+        autocomplete="tel"
+        inputmode="tel"
+        placeholder="+7 701 123 45 67"
+        class={fieldClass}
+      />
+      <p id="field-phone-error" class={errorClass} hidden></p>
+    </div>
+
+    <div>
+      <label for="field-email" class={labelClass}>
+        Почта <span class="text-text-muted">— если удобнее так</span>
+      </label>
+      <input id="field-email" name="email" type="email" autocomplete="email" class={fieldClass} />
+      <p id="field-email-error" class={errorClass} hidden></p>
+    </div>
+
+    <div>
+      <label for="field-message" class={labelClass}>Что нужно сделать</label>
+      <textarea id="field-message" name="message" rows="4" required class={fieldClass}></textarea>
+      <p id="field-message-error" class={errorClass} hidden></p>
+    </div>
+
+    <!-- Ловушка для спам-ботов: люди это поле не видят и не заполняют. -->
+    <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" hidden />
+
+    <p id="formError" class="text-sm text-danger" hidden></p>
+
+    <button
+      id="formSubmit"
+      type="submit"
+      class="p-3 rounded-xl bg-accent text-on-accent hover:bg-accent-hover transition-colors disabled:opacity-60"
     >
-        <input class="w-[80%] p-4 m-10 rounded-2xl bg-surface border border-border-strong text-text placeholder:text-text-muted" placeholder="E-mail" type="email" name="email">
+      Отправить
+    </button>
+  </form>
 
-        <textarea class="w-[80%] p-4 m-10 rounded-2xl bg-surface border border-border-strong text-text placeholder:text-text-muted" placeholder="Your idea" name="message"></textarea>
-
-    <button class="p-2 m-10 w-[50%] rounded-2xl bg-accent text-on-accent hover:bg-accent-hover transition-colors" type="submit">Send</button>
-    </form>
+  <div
+    id="formSuccess"
+    hidden
+    tabindex="-1"
+    role="status"
+    class="bg-surface-raised border border-border rounded-2xl p-6 text-center"
+  >
+    <p class="text-lg font-semibold">Спасибо, отвечу в течение дня.</p>
+  </div>
 </div>
+
+<script>
+  const form = document.getElementById("contactForm") as HTMLFormElement | null;
+  const success = document.getElementById("formSuccess");
+  const formError = document.getElementById("formError");
+  const submitButton = document.getElementById("formSubmit") as HTMLButtonElement | null;
+
+  type Field = HTMLInputElement | HTMLTextAreaElement;
+
+  const rules: { id: string; validate: (value: string) => string }[] = [
+    {
+      id: "field-name",
+      validate: (value) =>
+        value.trim().length >= 2 ? "" : "Напишите, как к вам обращаться.",
+    },
+    {
+      id: "field-phone",
+      validate: (value) => {
+        const digits = value.replace(/\D/g, "");
+        return digits.length >= 10 && digits.length <= 15
+          ? ""
+          : "Проверьте номер. Например: +7 701 123 45 67";
+      },
+    },
+    {
+      id: "field-email",
+      // Почта необязательна, поэтому проверяем формат только если её заполнили.
+      validate: (value) => {
+        const trimmed = value.trim();
+        if (trimmed === "") return "";
+        return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(trimmed)
+          ? ""
+          : "Проверьте адрес почты — похоже, в нём опечатка.";
+      },
+    },
+    {
+      id: "field-message",
+      validate: (value) =>
+        value.trim().length >= 10 ? "" : "Опишите задачу хотя бы парой предложений.",
+    },
+  ];
+
+  if (form && success && formError && submitButton) {
+    // Свою проверку показываем сами, поэтому отключаем встроенные подсказки
+    // браузера. Делаем это из скрипта: если JavaScript не сработает,
+    // атрибуты required и type останутся рабочими.
+    form.noValidate = true;
+
+    const setFieldError = (id: string, message: string) => {
+      const field = document.getElementById(id) as Field | null;
+      const box = document.getElementById(`${id}-error`);
+      if (!field || !box) return;
+
+      if (message) {
+        box.textContent = message;
+        box.hidden = false;
+        field.setAttribute("aria-invalid", "true");
+        field.setAttribute("aria-describedby", `${id}-error`);
+      } else {
+        box.textContent = "";
+        box.hidden = true;
+        field.removeAttribute("aria-invalid");
+        field.removeAttribute("aria-describedby");
+      }
+    };
+
+    const checkField = (rule: (typeof rules)[number]) => {
+      const field = document.getElementById(rule.id) as Field | null;
+      if (!field) return true;
+      const message = rule.validate(field.value);
+      setFieldError(rule.id, message);
+      return message === "";
+    };
+
+    for (const rule of rules) {
+      const field = document.getElementById(rule.id) as Field | null;
+      if (!field) continue;
+      field.addEventListener("blur", () => checkField(rule));
+      // Пока человек исправляет поле, ошибку убираем — не ругаемся на лету.
+      field.addEventListener("input", () => setFieldError(rule.id, ""));
+    }
+
+    const showFormError = (message: string) => {
+      formError.textContent = message;
+      formError.hidden = message === "";
+    };
+
+    form.addEventListener("submit", async (event) => {
+      event.preventDefault();
+      showFormError("");
+
+      const invalid = rules.filter((rule) => !checkField(rule));
+      if (invalid.length > 0) {
+        const first = document.getElementById(invalid[0].id) as Field | null;
+        first?.focus();
+        return;
+      }
+
+      submitButton.disabled = true;
+      const label = submitButton.textContent;
+      submitButton.textContent = "Отправляю…";
+
+      try {
+        const response = await fetch(form.action, {
+          method: "POST",
+          body: new FormData(form),
+          headers: { Accept: "application/json" },
+        });
+
+        if (response.ok) {
+          form.hidden = true;
+          success.hidden = false;
+          success.focus();
+          return;
+        }
+
+        showFormError(
+          "Не получилось отправить. Напишите мне в WhatsApp — так быстрее."
+        );
+      } catch {
+        showFormError(
+          "Похоже, пропал интернет. Проверьте связь и попробуйте ещё раз."
+        );
+      }
+
+      submitButton.disabled = false;
+      submitButton.textContent = label;
+    });
+  }
+</script>
