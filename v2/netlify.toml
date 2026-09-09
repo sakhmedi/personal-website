@@ -8,3 +8,7 @@
 
 [build.environment]
   NODE_VERSION = "24"
+  # Playwright нужен только локально, для npm run screens.
+  # Скриншоты лежат в репозитории, поэтому на сборке
+  # не качаем браузер на сотни мегабайт.
+  PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD = "1"

@@ -30,7 +30,7 @@ export const projects: Project[] = [
     description:
       "Двуязычная страница кофейни в Астане: меню с корзиной, две точки на карте с часами работы и ссылками в 2ГИС, форма обратной связи. Языки переключаются без перезагрузки страницы.",
     url: "https://dalacoffee.netlify.app/?lang=ru",
-    image: "",
+    image: "dala-coffee.png",
     imageAlt: "Главная страница сайта кофейни DALA COFFEE",
     tags: ["Концепт", "RU/EN", "Адаптив"],
     featured: true,
@@ -42,7 +42,7 @@ export const projects: Project[] = [
     description:
       "Лендинг клиники: шесть услуг с ценами, карточки врачей, запись через форму с выбором услуги и согласием на обработку данных. Русский и казахский, кнопка WhatsApp в шапке.",
     url: "https://dental-plus-kz.netlify.app/",
-    image: "",
+    image: "dental-plus.png",
     imageAlt: "Главная страница сайта стоматологии Дентал Плюс",
     tags: ["Концепт", "RU/KZ", "Форма записи"],
     featured: true,
@@ -54,7 +54,7 @@ export const projects: Project[] = [
     description:
       "Многостраничный справочник цветов на английском. Делала, чтобы разобраться с роутингом и выводом списков.",
     url: "https://bloomings.netlify.app/",
-    image: "",
+    image: "bloom.png",
     imageAlt: "Главная страница справочника цветов Bloom",
     tags: ["Учебный проект", "Многостраничный"],
     featured: false,

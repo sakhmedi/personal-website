@@ -1,11 +1,26 @@
 ---
+import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import type { Project } from '../data/projects';
 
 interface Props {
   project: Project;
+  /** Первая карточка на главной видна сразу — её картинку грузим не лениво. */
+  eager?: boolean;
 }
 
-const { project } = Astro.props;
+const { project, eager = false } = Astro.props;
+
+// Astro оптимизирует только те картинки, про которые знает на сборке.
+// Импортировать по переменной нельзя, поэтому забираем всю папку разом,
+// а нужный файл достаём по имени из данных.
+const screens = import.meta.glob<{ default: ImageMetadata }>(
+  '../assets/screens/*.png',
+  { eager: true }
+);
+const screen = project.image
+  ? screens[`../assets/screens/${project.image}`]?.default
+  : undefined;
 
 // Первый тег — статус работы ("Концепт", "Учебный проект"). Он выделен
 // заливкой, а не мелким серым текстом: человек должен увидеть его сразу,
@@ -13,30 +28,46 @@ const { project } = Astro.props;
 const [statusTag, ...otherTags] = project.tags;
 ---
 
-<article class="bg-surface-raised border border-border rounded-lg p-6 hover:border-border-strong transition-colors duration-300 flex flex-col gap-3">
-  <div class="flex flex-wrap items-center gap-2">
-    <span class="px-3 py-1 rounded-full bg-accent text-on-accent text-sm font-semibold">
-      {statusTag}
-    </span>
-    {otherTags.map((tag) => (
-      <span class="px-3 py-1 rounded-full border border-border text-text-muted text-sm">
-        {tag}
+<article class="bg-surface-raised border border-border rounded-lg overflow-hidden hover:border-border-strong transition-colors duration-300 flex flex-col">
+  {screen && (
+    <Image
+      src={screen}
+      alt={project.imageAlt}
+      widths={[440, 880]}
+      sizes="(min-width: 768px) 440px, 92vw"
+      width={880}
+      height={550}
+      loading={eager ? 'eager' : 'lazy'}
+      fetchpriority={eager ? 'high' : 'auto'}
+      class="w-full border-b border-border"
+    />
+  )}
+
+  <div class="p-6 flex flex-col gap-3 grow">
+    <div class="flex flex-wrap items-center gap-2">
+      <span class="px-3 py-1 rounded-full bg-accent text-on-accent text-sm font-semibold">
+        {statusTag}
       </span>
-    ))}
+      {otherTags.map((tag) => (
+        <span class="px-3 py-1 rounded-full border border-border text-text-muted text-sm">
+          {tag}
+        </span>
+      ))}
+    </div>
+
+    <h3 class="text-xl font-bold">{project.title}</h3>
+    <p class="text-text-muted">{project.subtitle}</p>
+    <p class="leading-relaxed">{project.description}</p>
+
+    <a
+      href={project.url}
+      target="_blank"
+      rel="noopener noreferrer"
+      class="mt-auto pt-2 inline-flex items-center gap-2 text-accent"
+    >
+      Открыть сайт
+      <span aria-hidden="true">↗</span>
+      <span class="sr-only">(откроется в новой вкладке)</span>
+    </a>
   </div>
-
-  <h3 class="text-xl font-bold">{project.title}</h3>
-  <p class="text-text-muted">{project.subtitle}</p>
-  <p class="leading-relaxed">{project.description}</p>
-
-  <a
-    href={project.url}
-    target="_blank"
-    rel="noopener noreferrer"
-    class="mt-auto pt-2 inline-flex items-center gap-2 text-accent"
-  >
-    Открыть сайт
-    <span aria-hidden="true">↗</span>
-    <span class="sr-only">(откроется в новой вкладке)</span>
-  </a>
 </article>

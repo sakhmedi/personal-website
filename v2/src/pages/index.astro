@@ -15,7 +15,7 @@ import { featuredProjects } from '../data/projects';
     <h2 class="text-2xl font-bold mb-6">Работы</h2>
 
     <div class="grid gap-6 md:grid-cols-2">
-      {featuredProjects.map((project) => <Cards project={project} />)}
+      {featuredProjects.map((project, index) => <Cards project={project} eager={index === 0} />)}
     </div>
 
     <a href="/projects" class="inline-block mt-6 text-accent">Все работы</a>
