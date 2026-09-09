@@ -37,9 +37,19 @@ for (const project of projects) {
   const page = await context.newPage();
   const file = path.join(outDir, `${project.id}.png`);
 
+  // У некоторых работ первый экран почти пустой, и снимать лучше
+  // внутреннюю страницу. Ссылка с карточки при этом ведёт на url.
+  const target = project.screenshotUrl ?? project.url;
+
   try {
     // networkidle — ждём, пока страница перестанет что-либо догружать.
-    await page.goto(project.url, { waitUntil: 'networkidle', timeout: TIMEOUT });
+    const response = await page.goto(target, { waitUntil: 'networkidle', timeout: TIMEOUT });
+
+    // Страница 404 тоже отрисуется и снимется как ни в чём не бывало,
+    // поэтому проверяем код ответа явно.
+    if (response && !response.ok()) {
+      throw new Error(`сервер ответил ${response.status()}`);
+    }
     // Шрифты приезжают отдельно от разметки; без этой строки текст
     // на снимке может оказаться системным.
     await page.evaluate(() => document.fonts.ready);
@@ -48,9 +58,9 @@ for (const project of projects) {
 
     // Без fullPage: нужен именно первый экран, а не страница целиком.
     await page.screenshot({ path: file });
-    console.log(`готово   ${project.id}  ←  ${project.url}`);
+    console.log(`готово   ${project.id}  ←  ${target}`);
   } catch (error) {
-    failed.push({ id: project.id, url: project.url, message: error.message });
+    failed.push({ id: project.id, url: target, message: error.message });
     console.error(`ошибка   ${project.id}  ←  ${project.url}\n         ${error.message}`);
   } finally {
     await page.close();

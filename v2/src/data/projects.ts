@@ -6,6 +6,11 @@ export interface Project {
   description: string;
   url: string;
   /**
+   * Адрес для скриншота, если первый экран главной плохо
+   * показывает работу. Ссылка с карточки всё равно ведёт на url.
+   */
+  screenshotUrl?: string;
+  /**
    * Имя файла скриншота в src/assets/projects (например "dala-coffee.png").
    * Пустая строка означает, что скриншота ещё нет — карточка просто
    * отрисуется без картинки.
@@ -54,8 +59,9 @@ export const projects: Project[] = [
     description:
       "Многостраничный справочник цветов на английском. Делала, чтобы разобраться с роутингом и выводом списков.",
     url: "https://bloomings.netlify.app/",
+    screenshotUrl: "https://bloomings.netlify.app/flowers",
     image: "bloom.png",
-    imageAlt: "Главная страница справочника цветов Bloom",
+    imageAlt: "Страница семейства цветов в справочнике Bloom",
     tags: ["Учебный проект", "Многостраничный"],
     featured: false,
   },
