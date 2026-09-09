@@ -19,7 +19,14 @@ const { title, description } = Astro.props;
 		<title>{title}</title>
 		<meta name="description" content={description} />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;400;500;600;700&display=swap">
+		<script is:inline>
+			// Ставим тему до первой отрисовки, иначе светлая тема мигает тёмным.
+			try {
+				if (localStorage.getItem("theme") === "light") {
+					document.documentElement.classList.add("light");
+				}
+			} catch (e) {}
+		</script>
 	</head>
 	<body>
 		<Header/>

@@ -10,7 +10,7 @@ const navLinks= [
 ];
 ---
 <header>
-    <div class="flex flex-row justify-between sm:justify-start gap-10 border-b border-[#30A5E9] bg-[#292f36] p-5">
+    <div class="flex flex-row justify-between sm:justify-start gap-10 border-b border-accent bg-surface-raised p-5">
       <a href="/" class="logo" aria-label="На главную">
         <Image
           src={salima}
@@ -19,20 +19,20 @@ const navLinks= [
           height={120}
           densities={[1, 2]}
           loading="eager"
-          class="w-14 h-14 sm:w-30 sm:h-30 object-cover rounded-full border-4 border-[#30A5E9]"
+          class="w-14 h-14 sm:w-30 sm:h-30 object-cover rounded-full border-4 border-accent"
         />
       </a>
       <nav class="hidden gap-4 p-4 md:flex md:flex-row transition-all items-center" id="navList">
         {navLinks.map(({ name, href }) => (
-            <a href={href} class="text-[#30A5E9]">{name}</a>
+            <a href={href} class="text-accent">{name}</a>
         ))}
       </nav>
       <div class="flex items-center gap-4" id="burgerxtheme">
-        <button id="themeToggle" class="p-2 border rounded border-[#30A5E9] min-w-[40px]">
+        <button id="themeToggle" class="p-2 border rounded border-accent text-text min-w-[40px]">
           🌓
         </button>
 
-        <button id="burgermenu" class="md:hidden p-2 border rounded border-[#30A5E9] min-w-[40px]">
+        <button id="burgermenu" class="md:hidden p-2 border rounded border-accent text-text min-w-[40px]">
           ☰
         </button>
       </div>
@@ -54,20 +54,12 @@ const navLinks= [
   });
 
   // === ЛОГИКА ТЕМЫ ===
+  // Тема уже применена скриптом в <head>, здесь только переключение.
   const btn = document.getElementById('themeToggle');
   const root = document.documentElement;
 
-  const saved = localStorage.getItem('theme');
-  if (saved === 'light') {
-    root.classList.add('light');
-  }
-
   btn?.addEventListener('click', () => {
-    root.classList.toggle('light');
-
-    localStorage.setItem(
-      'theme',
-      root.classList.contains('light') ? 'light' : 'dark'
-    );
+    const isLight = root.classList.toggle('light');
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
   });
 </script>

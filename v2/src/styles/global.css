@@ -1,19 +1,64 @@
 @import "tailwindcss";
+@import "@fontsource-variable/golos-text";
+
+/* ------------------------------------------------------------------
+   Дизайн-токены.
+   Имена говорят о назначении, а не о цвете: surface — фон, text —
+   текст, accent — акцент, border — рамки. Значения меняются только
+   здесь; в разметке цвета не пишем.
+   ------------------------------------------------------------------ */
 
 :root {
-  --bg: #30343b;
-  --text: #30A5E9;
+  color-scheme: dark;
+
+  --surface: #30343b;
+  --surface-raised: #292f36;
+  --text: #f5f7fa;
+  --text-muted: #a8b0bc;
+  --accent: #30a5e9;
+  --accent-hover: #52b6ee;
+  --on-accent: #0b1a24;
+  --border: #434956;
+  --border-strong: #7b8391;
 }
 
-/* Светлая тема */
-.light {
-  --bg: #F2F6FA;
-  --text: #30A5E9;
+:root.light {
+  color-scheme: light;
+
+  --surface: #f2f6fa;
+  --surface-raised: #ffffff;
+  --text: #1b1f27;
+  --text-muted: #4e5766;
+  --accent: #1b6fa8;
+  --accent-hover: #14608f;
+  --on-accent: #ffffff;
+  --border: #d3dce6;
+  --border-strong: #7d8592;
+}
+
+/* Шрифт отдаём Tailwind как есть: утилита font-sans начинает означать Golos Text. */
+@theme {
+  --font-sans: "Golos Text Variable", system-ui, sans-serif;
+}
+
+/* inline = Tailwind подставляет var(--surface) прямо в утилиту bg-surface,
+   поэтому смена темы работает без пересборки CSS. */
+@theme inline {
+  --color-surface: var(--surface);
+  --color-surface-raised: var(--surface-raised);
+  --color-text: var(--text);
+  --color-text-muted: var(--text-muted);
+  --color-accent: var(--accent);
+  --color-accent-hover: var(--accent-hover);
+  --color-on-accent: var(--on-accent);
+  --color-border: var(--border);
+  --color-border-strong: var(--border-strong);
 }
 
 @layer base {
   body {
-    font-family: 'Fira Code', monospace; 
-    background: var(--bg);
+    background-color: var(--surface);
+    color: var(--text);
+    font-family: var(--font-sans);
   }
 }
