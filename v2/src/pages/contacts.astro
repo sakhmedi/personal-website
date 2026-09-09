@@ -1,15 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Cards from '../components/Cards.astro';
-import Form from '../components/Form.astro'
+import Form from '../components/Form.astro';
 ---
 <Layout
   title="Контакты — Салима"
   description="Как со мной связаться: WhatsApp, Telegram, почта."
 >
-    <Cards
-      title="Contact me"
-      description="Fill in the form for further collaboration"
-    />
+  <section class="max-w-3xl mx-auto px-5 py-16">
+    <h1 class="text-3xl font-bold mb-6">Контакты</h1>
     <Form />
+  </section>
 </Layout>

@@ -1,13 +1,14 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Cards from '../components/Cards.astro';
 ---
 <Layout
   title="Обо мне — Салима"
   description="Кто делает сайт и как устроена работа."
 >
-  <Cards
-    title="About me"
-    description={`I’m Salima, a beginner full-stack developer from Astana, Kazakhstan.\n I’m passionate about coding and solving tech challenges, constantly exploring new tools and frameworks.`}
-  />
+  <section class="max-w-3xl mx-auto px-5 py-16">
+    <h1 class="text-3xl font-bold mb-6">Обо мне</h1>
+    <p class="leading-relaxed">
+      Делаю сайты для бизнеса в Астане: лендинги, сайты-визитки, доработку существующего сайта.
+    </p>
+  </section>
 </Layout>

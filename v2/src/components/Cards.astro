@@ -1,16 +1,42 @@
 ---
+import type { Project } from '../data/projects';
+
 interface Props {
-  title: string;
-  description: string;
+  project: Project;
 }
 
-const { title, description } = Astro.props;
+const { project } = Astro.props;
+
+// Первый тег — статус работы ("Концепт", "Учебный проект"). Он выделен
+// заливкой, а не мелким серым текстом: человек должен увидеть его сразу,
+// а не после перехода на сайт.
+const [statusTag, ...otherTags] = project.tags;
 ---
 
-<div class="m-10 bg-surface-raised border border-border rounded-lg p-6 hover:border-border-strong transition-colors duration-300">
-  <div class="flex justify-between items-start mb-4 gap-4">
-    <h3 class="text-xl font-bold text-accent">{title}</h3>
+<article class="bg-surface-raised border border-border rounded-lg p-6 hover:border-border-strong transition-colors duration-300 flex flex-col gap-3">
+  <div class="flex flex-wrap items-center gap-2">
+    <span class="px-3 py-1 rounded-full bg-accent text-on-accent text-sm font-semibold">
+      {statusTag}
+    </span>
+    {otherTags.map((tag) => (
+      <span class="px-3 py-1 rounded-full border border-border text-text-muted text-sm">
+        {tag}
+      </span>
+    ))}
   </div>
 
-  <p class="text-text-muted mb-4 leading-relaxed whitespace-pre-line">{description}</p>
-</div>
+  <h3 class="text-xl font-bold">{project.title}</h3>
+  <p class="text-text-muted">{project.subtitle}</p>
+  <p class="leading-relaxed">{project.description}</p>
+
+  <a
+    href={project.url}
+    target="_blank"
+    rel="noopener noreferrer"
+    class="mt-auto pt-2 inline-flex items-center gap-2 text-accent"
+  >
+    Открыть сайт
+    <span aria-hidden="true">↗</span>
+    <span class="sr-only">(откроется в новой вкладке)</span>
+  </a>
+</article>

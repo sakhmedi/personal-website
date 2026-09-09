@@ -1,13 +1,17 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Cards from '../components/Cards.astro';
+import { projects } from '../data/projects';
 ---
 <Layout
   title="Работы — Салима"
   description="Примеры сайтов: что сделано и как это выглядит."
 >
-    <Cards
-        title="Projects"
-        description="Coming soon..."
-    />
+  <section class="max-w-5xl mx-auto px-5 py-16">
+    <h1 class="text-3xl font-bold mb-6">Работы</h1>
+
+    <div class="grid gap-6 md:grid-cols-2">
+      {projects.map((project) => <Cards project={project} />)}
+    </div>
+  </section>
 </Layout>
