@@ -39,15 +39,15 @@
 :root {
   color-scheme: light;
 
-  --surface: #edefee;
+  --surface: #efeff2;
   --surface-raised: #ffffff;
-  --text: #16201e;
-  --text-muted: #566160;
-  --accent: #0e5b57;
-  --accent-hover: #093f3c;
+  --text: #16131e;
+  --text-muted: #545065;
+  --accent: #4f27b0;
+  --accent-hover: #3b1c89;
   --on-accent: #ffffff;
-  --border: #c2c9c7;
-  --border-strong: #5f6a68;
+  --border: #c3c2ce;
+  --border-strong: #5e5a70;
   --danger: #a81c1c;
 
   /* Высота липкой кнопки на телефоне. Отступ снизу у body считается
@@ -58,16 +58,48 @@
 :root.dark {
   color-scheme: dark;
 
-  --surface: #1a211f;
-  --surface-raised: #222a28;
-  --text: #eef2f0;
-  --text-muted: #9faaa7;
-  --accent: #6fcbbc;
-  --accent-hover: #8adacd;
-  --on-accent: #0b1614;
-  --border: #39433f;
-  --border-strong: #6d7a77;
+  --surface: #17161c;
+  --surface-raised: #1f1e26;
+  --text: #edecf2;
+  --text-muted: #a5a2b2;
+  --accent: #b49cff;
+  --accent-hover: #cdbbff;
+  --on-accent: #130f1e;
+  --border: #373544;
+  --border-strong: #77748a;
   --danger: #ff9a93;
+}
+
+/* ------------------------------------------------------------------
+   Полоса (.band). Секция во всю ширину, залитая плотным индиго.
+   Новых имён не заводим: внутри полосы те же десять токенов получают
+   другие значения, поэтому кнопки, ссылки, поля формы и чипы работают
+   там без единой правки в разметке. Значения одни для обеих тем:
+   полоса — предмет на листе, а не часть листа, и меняться вместе с
+   бумагой ей незачем.
+
+   Контраст внутри полосы: текст 11.42, приглушённый 6.69, ссылка 7.13,
+   текст на кнопке 9.79, ошибка 6.31, рамка поля 3.47.
+   ------------------------------------------------------------------ */
+.band {
+  --surface: #332961;
+  --surface-raised: #3d3170;
+  --text: #f2f0fa;
+  --text-muted: #bdb7d6;
+  --accent: #c9b6ff;
+  --accent-hover: #dcd0ff;
+  --on-accent: #1a1430;
+  --border: #55498f;
+  --border-strong: #918ab3;
+  --danger: #ff9a93;
+
+  color-scheme: dark;
+
+  /* Заголовки и абзацы цвет не назначают, а наследуют его от body,
+     где var(--text) уже посчитан. Поэтому полоса обязана назначить
+     цвет сама, иначе внутри неё останутся чернила светлой темы. */
+  background-color: var(--surface);
+  color: var(--text);
 }
 
 @theme {
@@ -141,6 +173,11 @@
     h3 {
       font-size: 1.25rem;
     }
+  }
+
+  ::selection {
+    background-color: var(--accent);
+    color: var(--on-accent);
   }
 
   /* Видимая рамка фокуса на всём, по чему можно ходить с клавиатуры. */

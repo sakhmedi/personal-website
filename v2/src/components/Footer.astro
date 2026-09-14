@@ -4,7 +4,7 @@ import { contacts } from '../data/contacts';
 // Год берётся из даты сборки — в январе не придётся вспоминать про подвал.
 const year = new Date().getFullYear();
 ---
-<footer class="border-t border-border">
+<footer class="band bg-surface">
   <div class="mx-auto flex max-w-[1120px] px-5 py-6 text-sm text-text-muted">
     <p>{contacts.name} · {contacts.city} · {year}</p>
   </div>

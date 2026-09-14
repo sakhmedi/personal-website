@@ -119,8 +119,10 @@ const links = [
     </section>
   </div>
 
-  <!-- КОНТАКТЫ -->
-  <div class="border-t border-border">
+  <!-- КОНТАКТЫ. Единственная залитая секция на странице: лист
+       заканчивается плотной полосой, и вместе с подвалом она читается
+       как одно основание страницы, а не как полоска посередине. -->
+  <div class="band bg-surface">
     <section id="contacts" class={`${section} scroll-mt-4`}>
       <h2 class="mb-4">Контакты</h2>
       <p class="measure mb-8 text-text-muted">
