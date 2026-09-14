@@ -7,6 +7,7 @@ import { contacts } from '../data/contacts';
 const navLinks = [
   { name: "Работы", href: "/#works" },
   { name: "Что я делаю", href: "/#services" },
+  { name: "Как я работаю", href: "/#process" },
   { name: "Контакты", href: "/#contacts" },
 ];
 
@@ -41,7 +42,7 @@ const iconButton =
         href={contacts.whatsapp}
         target="_blank"
         rel="noopener noreferrer"
-        class="btn hidden md:inline-flex"
+        class="btn hidden lg:inline-flex"
       >
         Написать в WhatsApp
       </a>
@@ -96,7 +97,7 @@ const iconButton =
   href={contacts.whatsapp}
   target="_blank"
   rel="noopener noreferrer"
-  class="fixed inset-x-0 bottom-0 z-50 flex min-h-[var(--sticky-cta)] items-center justify-center bg-accent pb-[env(safe-area-inset-bottom,0px)] text-center font-medium text-on-accent focus-visible:outline-offset-[-4px] md:hidden"
+  class="fixed inset-x-0 bottom-0 z-50 flex min-h-[var(--sticky-cta)] items-center justify-center bg-accent pb-[env(safe-area-inset-bottom,0px)] text-center font-medium text-on-accent focus-visible:outline-offset-[-4px] lg:hidden"
 >
   Написать в WhatsApp
 </a>
