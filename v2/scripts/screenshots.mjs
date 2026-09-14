@@ -50,6 +50,19 @@ for (const project of projects) {
     if (response && !response.ok()) {
       throw new Error(`сервер ответил ${response.status()}`);
     }
+    // Приложения на React отдают пустой <div id="root">, который заполняет
+    // уже браузер. networkidle этого не ловит: сеть замолкает раньше, чем
+    // страница отрисована, и снимок выходит белым. Поэтому ждём, пока
+    // на странице появится настоящий текст.
+    await page.waitForFunction(
+      () => {
+        const root = document.querySelector('#root, #app, main') ?? document.body;
+        return root.innerText.trim().length > 50;
+      },
+      null,
+      { timeout: TIMEOUT }
+    );
+
     // Шрифты приезжают отдельно от разметки; без этой строки текст
     // на снимке может оказаться системным.
     await page.evaluate(() => document.fonts.ready);

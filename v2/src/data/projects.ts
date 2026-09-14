@@ -51,6 +51,18 @@ export const projects: Project[] = [
     featured: true,
   },
   {
+    id: "shart-ai",
+    title: "Shart AI",
+    subtitle: "Ассистент по документам, демо",
+    description:
+      "Сотрудник компании загружает рабочие файлы и задаёт по ним вопросы, а ответ собирается из содержимого документов. Понимает сканы и распознаёт речь. По ссылке открывается интерфейс с готовыми данными, рабочий сервер сейчас выключен.",
+    url: "https://shartai.netlify.app/",
+    image: "shart-ai.png",
+    imageAlt:
+      "Главная страница Shart AI с примером диалога по документам",
+    featured: false,
+  },
+  {
     id: "bloom",
     title: "Bloom",
     subtitle: "Справочник цветов, учебный проект",
