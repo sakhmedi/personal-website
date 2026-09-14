@@ -41,7 +41,7 @@ const errorClass = "mt-2 text-sm text-danger";
 
     <div>
       <label for="field-email" class={labelClass}>
-        Почта <span class="text-text-muted">— если удобнее так</span>
+        Почта <span class="text-text-muted">если так удобнее</span>
       </label>
       <input id="field-email" name="email" type="email" autocomplete="email" class={fieldClass} />
       <p id="field-email-error" class={errorClass} hidden></p>
@@ -98,7 +98,7 @@ const errorClass = "mt-2 text-sm text-danger";
         const digits = value.replace(/\D/g, "");
         return digits.length >= 10 && digits.length <= 15
           ? ""
-          : "Проверьте номер. Например: +7 701 123 45 67";
+          : "Проверьте номер. Например, +7 701 123 45 67";
       },
     },
     {
@@ -109,7 +109,7 @@ const errorClass = "mt-2 text-sm text-danger";
         if (trimmed === "") return "";
         return /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(trimmed)
           ? ""
-          : "Проверьте адрес почты — похоже, в нём опечатка.";
+          : "Кажется, в адресе почты опечатка.";
       },
     },
     {
@@ -194,7 +194,7 @@ const errorClass = "mt-2 text-sm text-danger";
         }
 
         showFormError(
-          "Не получилось отправить. Напишите мне в WhatsApp — так быстрее."
+          "Не получилось отправить. Напишите мне в WhatsApp, так быстрее."
         );
       } catch {
         showFormError(
