@@ -12,6 +12,13 @@ const { title, description } = Astro.props;
 
 // Абсолютный адрес текущей страницы.
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
+
+// Картинка для карточки ссылки. Одна на все страницы: она показывает,
+// чем я занимаюсь, а не что на конкретной странице, и в ленте мессенджера
+// её видно размером с ноготь.
+const ogImage = new URL("/og.png", Astro.site ?? Astro.url);
+const ogImageAlt =
+  "Надпись «Делаю сайты для бизнеса в Астане», под ней подпись «Салима · Астана»";
 ---
 
 <!doctype html>
@@ -23,15 +30,22 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 		<meta name="description" content={description} />
 		<link rel="canonical" href={canonical} />
 
-		<!-- Карточка ссылки в WhatsApp, Telegram и соцсетях.
-		     Картинка (og:image) появится вместе с дизайном. -->
+		<!-- Карточка ссылки в WhatsApp, Telegram и соцсетях. -->
 		<meta property="og:type" content="website" />
 		<meta property="og:site_name" content="Салима" />
 		<meta property="og:locale" content="ru_RU" />
 		<meta property="og:title" content={title} />
 		<meta property="og:description" content={description} />
 		<meta property="og:url" content={canonical} />
-		<meta name="twitter:card" content="summary" />
+		<meta property="og:image" content={ogImage} />
+		<meta property="og:image:width" content="1200" />
+		<meta property="og:image:height" content="630" />
+		<meta property="og:image:alt" content={ogImageAlt} />
+		<!-- summary_large_image: под картинку 1200x630. С обычным summary
+		     её обрезали бы в маленький квадрат. -->
+		<meta name="twitter:card" content="summary_large_image" />
+		<meta name="twitter:image" content={ogImage} />
+		<meta name="twitter:image:alt" content={ogImageAlt} />
 
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<script is:inline>
