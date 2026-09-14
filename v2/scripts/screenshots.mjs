@@ -42,6 +42,17 @@ for (const project of projects) {
   const target = project.screenshotUrl ?? project.url;
 
   try {
+    // Язык у некоторых работ живёт в localStorage, а не в адресе. Кладём
+    // нужное значение до загрузки страницы: иначе снимок зависел бы от
+    // того, что осталось в браузере с прошлого раза.
+    if (project.screenshotStorage) {
+      await page.addInitScript((entries) => {
+        try {
+          for (const [key, value] of entries) localStorage.setItem(key, value);
+        } catch {}
+      }, Object.entries(project.screenshotStorage));
+    }
+
     // networkidle — ждём, пока страница перестанет что-либо догружать.
     const response = await page.goto(target, { waitUntil: 'networkidle', timeout: TIMEOUT });
 
@@ -66,8 +77,15 @@ for (const project of projects) {
     // Шрифты приезжают отдельно от разметки; без этой строки текст
     // на снимке может оказаться системным.
     await page.evaluate(() => document.fonts.ready);
-    // Запас на анимации появления.
-    await page.waitForTimeout(1000);
+    // Если у работы задано смещение, прокручиваем до нужного блока.
+    // Шапки у сайтов липкие, поэтому в кадр они попадают всё равно.
+    if (project.screenshotScroll) {
+      await page.evaluate((y) => window.scrollTo(0, y), project.screenshotScroll);
+    }
+
+    // Запас на анимации появления и на картинки, которые грузятся
+    // только когда до них доскроллили.
+    await page.waitForTimeout(1200);
 
     // Без fullPage: нужен именно первый экран, а не страница целиком.
     await page.screenshot({ path: file });
