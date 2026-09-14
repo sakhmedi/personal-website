@@ -18,7 +18,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 <html lang="ru">
 	<head>
 		<meta charset="utf-8" />
-		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
 		<title>{title}</title>
 		<meta name="description" content={description} />
 		<link rel="canonical" href={canonical} />
@@ -35,16 +35,16 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<script is:inline>
-			// Ставим тему до первой отрисовки, иначе светлая тема мигает тёмным.
+			// Ставим тему до первой отрисовки, иначе тёмная тема мигает светлым.
+			// По умолчанию светлая; в хранилище попадает только осознанный выбор.
 			try {
-				if (localStorage.getItem("theme") === "light") {
-					document.documentElement.classList.add("light");
+				if (localStorage.getItem("theme") === "dark") {
+					document.documentElement.classList.add("dark");
 				}
 			} catch (e) {}
 		</script>
 	</head>
-	<!-- Отступ снизу — под липкую кнопку WhatsApp, чтобы она не накрывала подвал. -->
-	<body class="pb-16 md:pb-0">
+	<body>
 		<Header/>
 		<main class="min-h-screen">
 			<slot />

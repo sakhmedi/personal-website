@@ -22,51 +22,53 @@ const screen = project.image
   ? screens[`../assets/screens/${project.image}`]?.default
   : undefined;
 
-// Первый тег — статус работы ("Концепт", "Учебный проект"). Он выделен
-// заливкой, а не мелким серым текстом: человек должен увидеть его сразу,
+// Домен показываем вместо слов "Открыть сайт": адрес можно проверить,
+// обещание — нет. Параметры и www. только мешают читать.
+const host = new URL(project.url).hostname.replace(/^www\./, '');
+
+// Первый тег — статус работы ("Концепт", "Учебный проект"). Он в рамке,
+// остальные — просто подписи: человек должен увидеть статус первым,
 // а не после перехода на сайт.
 const [statusTag, ...otherTags] = project.tags;
 ---
 
-<article class="bg-surface-raised border border-border rounded-lg overflow-hidden hover:border-border-strong transition-colors duration-300 flex flex-col">
+<article class="group relative flex flex-col rounded-md border border-border bg-surface-raised">
   {screen && (
-    <Image
-      src={screen}
-      alt={project.imageAlt}
-      widths={[440, 880]}
-      sizes="(min-width: 768px) 440px, 92vw"
-      width={880}
-      height={550}
-      loading={eager ? 'eager' : 'lazy'}
-      fetchpriority={eager ? 'high' : 'auto'}
-      class="w-full border-b border-border"
-    />
+    <div class="rounded-t-md bg-surface p-2.5">
+      <Image
+        src={screen}
+        alt={project.imageAlt}
+        widths={[440, 880]}
+        sizes="(min-width: 768px) 548px, 92vw"
+        width={880}
+        height={550}
+        loading={eager ? 'eager' : 'lazy'}
+        fetchpriority={eager ? 'high' : 'auto'}
+        class="shot"
+      />
+    </div>
   )}
 
-  <div class="p-6 flex flex-col gap-3 grow">
-    <div class="flex flex-wrap items-center gap-2">
-      <span class="px-3 py-1 rounded-full bg-accent text-on-accent text-sm font-semibold">
-        {statusTag}
-      </span>
-      {otherTags.map((tag) => (
-        <span class="px-3 py-1 rounded-full border border-border text-text-muted text-sm">
-          {tag}
-        </span>
-      ))}
+  <div class="flex grow flex-col gap-2 border-t border-border p-5">
+    <div class="mb-1 flex flex-wrap items-center gap-x-3 gap-y-2">
+      <span class="tag-status">{statusTag}</span>
+      {otherTags.map((tag) => <span class="tag">{tag}</span>)}
     </div>
 
-    <h3 class="text-xl font-bold">{project.title}</h3>
-    <p class="text-text-muted">{project.subtitle}</p>
-    <p class="leading-relaxed">{project.description}</p>
+    <h3>{project.title}</h3>
+    <p class="text-[0.9375rem] text-text-muted">{project.subtitle}</p>
+    <p class="measure">{project.description}</p>
 
+    <!-- Ссылка растянута на всю карточку через ::after: на телефоне
+         промахнуться по адресу в 13px иначе слишком легко. Своей высоты
+         у неё тоже хватает — 44px вместе с отступами. -->
     <a
       href={project.url}
       target="_blank"
       rel="noopener noreferrer"
-      class="mt-auto pt-2 inline-flex items-center gap-2 text-accent"
+      class="addr mt-auto inline-flex min-h-[44px] items-center pt-3 text-accent underline underline-offset-4 after:absolute after:inset-0 after:rounded-md hover:text-accent-hover"
     >
-      Открыть сайт
-      <span aria-hidden="true">↗</span>
+      {host}
       <span class="sr-only">(откроется в новой вкладке)</span>
     </a>
   </div>

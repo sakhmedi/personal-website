@@ -2,45 +2,78 @@
 @import "@fontsource-variable/golos-text";
 
 /* ------------------------------------------------------------------
+   JetBrains Mono — один файл: латиница, начертание 400.
+   Моноширинным набраны только веб-адреса, поэтому и кириллический
+   поднабор, и вариативная версия пакета (40 КБ против 21 КБ) здесь
+   лишние. Подключаем нужный файл руками, а не через index.css.
+   ------------------------------------------------------------------ */
+@font-face {
+  font-family: "JetBrains Mono";
+  font-style: normal;
+  font-display: swap;
+  font-weight: 400;
+  src: url("@fontsource/jetbrains-mono/files/jetbrains-mono-latin-400-normal.woff2")
+    format("woff2");
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
+    U+2212, U+2215, U+FEFF, U+FFFD;
+}
+
+/* ------------------------------------------------------------------
    Дизайн-токены.
-   Имена говорят о назначении, а не о цвете: surface — фон, text —
-   текст, accent — акцент, border — рамки. Значения меняются только
+   Имена говорят о назначении, а не о цвете. Значения меняются только
    здесь; в разметке цвета не пишем.
+
+   Светлая тема — основная: сайт открывают днём, с телефона, и светлый
+   лист читается как документ. Тёмная включается кнопкой в шапке.
+
+   Контраст (норма AA — 4.5, целимся в 5):
+     текст / фон            14.44   тёмная 14.51
+     приглушённый / фон      5.55   тёмная  6.85
+     акцент / фон            6.85   тёмная  8.54
+     текст на кнопке         7.92   тёмная  9.61
+     ошибка / фон            6.38   тёмная  8.04
+     рамка скриншота / фон   4.85   тёмная  3.67  (норма для не-текста 3)
    ------------------------------------------------------------------ */
 
 :root {
-  color-scheme: dark;
-
-  --surface: #30343b;
-  --surface-raised: #292f36;
-  --text: #f5f7fa;
-  --text-muted: #a8b0bc;
-  --accent: #30a5e9;
-  --accent-hover: #52b6ee;
-  --on-accent: #0b1a24;
-  --border: #434956;
-  --border-strong: #7b8391;
-  --danger: #ff8a8a;
-}
-
-:root.light {
   color-scheme: light;
 
-  --surface: #f2f6fa;
+  --surface: #edefee;
   --surface-raised: #ffffff;
-  --text: #1b1f27;
-  --text-muted: #4e5766;
-  --accent: #1b6fa8;
-  --accent-hover: #14608f;
+  --text: #16201e;
+  --text-muted: #566160;
+  --accent: #0e5b57;
+  --accent-hover: #093f3c;
   --on-accent: #ffffff;
-  --border: #d3dce6;
-  --border-strong: #7d8592;
-  --danger: #b3261e;
+  --border: #c2c9c7;
+  --border-strong: #5f6a68;
+  --danger: #a81c1c;
+
+  /* Высота липкой кнопки на телефоне. Отступ снизу у body считается
+     отсюда же, чтобы подвал и последнее поле формы не уезжали под неё. */
+  --sticky-cta: 3.5rem;
 }
 
-/* Шрифт отдаём Tailwind как есть: утилита font-sans начинает означать Golos Text. */
+:root.dark {
+  color-scheme: dark;
+
+  --surface: #1a211f;
+  --surface-raised: #222a28;
+  --text: #eef2f0;
+  --text-muted: #9faaa7;
+  --accent: #6fcbbc;
+  --accent-hover: #8adacd;
+  --on-accent: #0b1614;
+  --border: #39433f;
+  --border-strong: #6d7a77;
+  --danger: #ff9a93;
+}
+
 @theme {
   --font-sans: "Golos Text Variable", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo,
+    monospace;
 }
 
 /* inline = Tailwind подставляет var(--surface) прямо в утилиту bg-surface,
@@ -63,5 +96,151 @@
     background-color: var(--surface);
     color: var(--text);
     font-family: var(--font-sans);
+    font-size: 1rem;
+    line-height: 1.6;
+    /* Место под липкую кнопку. env() на не-айфонах равен нулю. */
+    padding-bottom: calc(var(--sticky-cta) + env(safe-area-inset-bottom, 0px));
+  }
+
+  @media (min-width: 768px) {
+    body {
+      font-size: 1.0625rem;
+      padding-bottom: 0;
+    }
+  }
+
+  h1 {
+    font-size: clamp(1.875rem, 1.2rem + 3vw, 2.875rem);
+    font-weight: 800;
+    line-height: 1.12;
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  h2 {
+    font-size: clamp(1.375rem, 1.15rem + 1vw, 1.625rem);
+    font-weight: 700;
+    line-height: 1.2;
+    letter-spacing: -0.01em;
+  }
+
+  h3 {
+    font-size: 1.1875rem;
+    font-weight: 700;
+    line-height: 1.25;
+  }
+
+  @media (min-width: 768px) {
+    h3 {
+      font-size: 1.25rem;
+    }
+  }
+
+  /* Видимая рамка фокуса на всём, по чему можно ходить с клавиатуры. */
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+@layer components {
+  /* Длина строки. 34rem — это 60–68 знаков кириллицы, до 80 не доходит. */
+  .measure {
+    max-width: 34rem;
+  }
+
+  /* Адрес: всё, что можно вбить в адресную строку или мессенджер. */
+  .addr {
+    font-family: var(--font-mono);
+    font-size: 0.8125rem;
+    line-height: 1.45;
+    word-break: break-all;
+  }
+
+  /* Тег работы: просто подпись, без плашки. */
+  .tag {
+    font-size: 0.8125rem;
+    line-height: 1;
+    color: var(--text-muted);
+  }
+
+  /* Статус работы ("Концепт", "Учебный проект") — единственная плашка
+     в карточке. Обводка border-strong даёт 5.60:1 к белому фону, поэтому
+     её видно раньше, чем соседние теги. */
+  .tag-status {
+    font-size: 0.8125rem;
+    line-height: 1;
+    font-weight: 700;
+    color: var(--text);
+    border: 1px solid var(--border-strong);
+    border-radius: 4px;
+    padding: 0.3125rem 0.5rem;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 3rem;
+    padding: 0.75rem 1.25rem;
+    border-radius: 6px;
+    font-weight: 500;
+    background-color: var(--accent);
+    color: var(--on-accent);
+    transition: background-color 120ms ease;
+  }
+
+  .btn:hover {
+    background-color: var(--accent-hover);
+  }
+
+  .field {
+    width: 100%;
+    min-height: 3rem;
+    padding: 0.75rem;
+    border-radius: 6px;
+    border: 1px solid var(--border-strong);
+    background-color: var(--surface-raised);
+    color: var(--text);
+    transition: border-color 120ms ease;
+  }
+
+  .field::placeholder {
+    color: var(--text-muted);
+  }
+
+  .field:hover {
+    border-color: var(--accent);
+  }
+
+  /* Скриншот работы: волосяная рамка поверх подложки цвета страницы.
+     Без неё светлый скриншот сливается со светлым листом. */
+  .shot {
+    display: block;
+    width: 100%;
+    border: 1px solid var(--border-strong);
+    border-radius: 3px;
+  }
+
+  .group:hover .shot,
+  .group:focus-within .shot,
+  .group:active .shot {
+    border-color: var(--accent);
+  }
+}
+
+/* Единственная анимация на сайте: карточка работы отвечает на касание,
+   наведение и фокус — скриншот приподнимается. Всё остальное движение
+   в проекте — смена цвета у кнопок и ссылок за 120 мс. */
+@media (prefers-reduced-motion: no-preference) {
+  .shot {
+    transition: transform 180ms ease, border-color 180ms ease;
+  }
+
+  .group:hover .shot,
+  .group:focus-within .shot,
+  .group:active .shot {
+    transform: translateY(-4px);
   }
 }

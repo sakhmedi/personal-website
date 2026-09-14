@@ -4,91 +4,100 @@ import Cards from '../components/Cards.astro';
 import Form from '../components/Form.astro';
 import { featuredProjects } from '../data/projects';
 import { contacts } from '../data/contacts';
+
+// Секции разделены волосяной линией, а не коробками: единственный
+// прямоугольник на странице — карточка работы.
+const section = "mx-auto max-w-[1120px] px-5 py-14 md:py-16";
+
+// Всё, что можно вбить в адресную строку или в мессенджер, набрано
+// моноширинным. Подпись слева говорит, куда именно это вбивать.
+const links = [
+  { label: "Telegram", href: contacts.telegram, text: "@saliima_s" },
+  { label: "Почта", href: `mailto:${contacts.email}`, text: contacts.email },
+  { label: "GitHub", href: contacts.github, text: "github.com/sakhmedi" },
+];
 ---
 <Layout
   title="Салима — сайты для бизнеса в Астане"
   description="Лендинги, сайты-визитки и доработка существующих сайтов. Астана."
 >
-  <!-- ГЛАВНЫЙ ЭКРАН -->
-  <section class="max-w-5xl mx-auto px-5 pt-16 pb-20">
-    <h1 class="text-3xl sm:text-5xl font-bold leading-tight mb-6">
-      Делаю сайты для бизнеса в Астане
-    </h1>
-    <p class="text-lg text-text-muted max-w-2xl mb-8 leading-relaxed">
+  <!-- ГЛАВНЫЙ ЭКРАН. Держим коротким: герой страницы — работы,
+       и на десктопе первая карточка должна попадать в первый экран. -->
+  <section class="mx-auto max-w-[1120px] px-5 pt-10 pb-14 md:pt-12 md:pb-16">
+    <h1 class="measure mb-5">Делаю сайты для бизнеса в Астане</h1>
+    <p class="measure mb-8 text-[1.0625rem] text-text-muted md:text-[1.1875rem]">
       Ваш клиент заходит с телефона, сразу видит главное и пишет вам в WhatsApp.
       Без долгой загрузки и лишних форм.
     </p>
-    <a
-      href={contacts.whatsapp}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="inline-block px-6 py-3 rounded-xl bg-accent text-on-accent font-semibold hover:bg-accent-hover transition-colors"
-    >
+    <a href={contacts.whatsapp} target="_blank" rel="noopener noreferrer" class="btn">
       Написать в WhatsApp
     </a>
   </section>
 
   <!-- РАБОТЫ -->
-  <section id="works" class="max-w-5xl mx-auto px-5 py-16 scroll-mt-8">
-    <h2 class="text-2xl font-bold mb-6">Работы</h2>
+  <div class="border-t border-border">
+    <section id="works" class={`${section} scroll-mt-4`}>
+      <h2 class="mb-6">Работы</h2>
 
-    <div class="grid gap-6 md:grid-cols-2">
-      {featuredProjects.map((project, index) => (
-        <Cards project={project} eager={index === 0} />
-      ))}
-    </div>
+      <div class="grid gap-6 md:grid-cols-2">
+        {featuredProjects.map((project, index) => (
+          <Cards project={project} eager={index === 0} />
+        ))}
+      </div>
 
-    <a href="/projects" class="inline-block mt-6 text-accent">Все работы →</a>
-  </section>
+      <a href="/projects" class="mt-6 inline-flex min-h-[44px] items-center text-accent underline underline-offset-4 hover:text-accent-hover">
+        Все работы
+      </a>
+    </section>
+  </div>
 
   <!-- ЧТО Я ДЕЛАЮ -->
-  <section id="services" class="max-w-3xl mx-auto px-5 py-16 scroll-mt-8">
-    <h2 class="text-2xl font-bold mb-6">Что я делаю</h2>
+  <div class="border-t border-border">
+    <section id="services" class={`${section} scroll-mt-4`}>
+      <h2 class="mb-6">Что я делаю</h2>
 
-    <div class="flex flex-col gap-4 text-lg leading-relaxed">
-      <p>Нужно, чтобы про вас узнали и написали — сделаю лендинг: одна страница, одно действие.</p>
-      <p>Рассказать надо больше — соберу сайт-визитку на несколько страниц.</p>
-      <p>
-        Сайт уже есть, но вас не устраивает — чаще всего его можно доработать,
-        а не выбрасывать. Посмотрю и скажу честно.
-      </p>
-      <p>Основной язык — Go.</p>
-    </div>
-  </section>
+      <div class="measure flex flex-col gap-4">
+        <p>Нужно, чтобы про вас узнали и написали — сделаю лендинг: одна страница, одно действие.</p>
+        <p>Рассказать надо больше — соберу сайт-визитку на несколько страниц.</p>
+        <p>
+          Сайт уже есть, но вас не устраивает — чаще всего его можно доработать,
+          а не выбрасывать. Посмотрю и скажу честно.
+        </p>
+        <p>Основной язык — Go.</p>
+      </div>
+    </section>
+  </div>
 
   <!-- КОНТАКТЫ -->
-  <section id="contacts" class="max-w-3xl mx-auto px-5 py-16 scroll-mt-8">
-    <h2 class="text-2xl font-bold mb-4">Контакты</h2>
-    <p class="text-lg text-text-muted mb-8">
-      Самый быстрый способ — WhatsApp. Отвечаю в течение дня.
-    </p>
+  <div class="border-t border-border">
+    <section id="contacts" class={`${section} scroll-mt-4`}>
+      <h2 class="mb-4">Контакты</h2>
+      <p class="measure mb-8 text-text-muted">
+        Самый быстрый способ — WhatsApp. Отвечаю в течение дня.
+      </p>
 
-    <a
-      href={contacts.whatsapp}
-      target="_blank"
-      rel="noopener noreferrer"
-      class="inline-block px-6 py-3 rounded-xl bg-accent text-on-accent font-semibold hover:bg-accent-hover transition-colors"
-    >
-      Написать в WhatsApp
-    </a>
+      <a href={contacts.whatsapp} target="_blank" rel="noopener noreferrer" class="btn">
+        Написать в WhatsApp
+      </a>
 
-    <ul class="flex flex-col gap-3 mt-8">
-      <li>
-        <a href={contacts.telegram} target="_blank" rel="noopener noreferrer" class="text-accent">
-          Telegram
-        </a>
-      </li>
-      <li>
-        <a href={`mailto:${contacts.email}`} class="text-accent">{contacts.email}</a>
-      </li>
-      <li>
-        <a href={contacts.github} target="_blank" rel="noopener noreferrer" class="text-accent">
-          github.com/sakhmedi
-        </a>
-      </li>
-    </ul>
+      <ul class="mt-8 flex flex-col">
+        {links.map(({ label, href, text }) => (
+          <li>
+            <a
+              href={href}
+              target={href.startsWith("mailto:") ? undefined : "_blank"}
+              rel={href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
+              class="flex min-h-[44px] flex-wrap items-center gap-x-4"
+            >
+              <span class="w-20 text-sm text-text-muted">{label}</span>
+              <span class="addr text-accent underline underline-offset-4">{text}</span>
+            </a>
+          </li>
+        ))}
+      </ul>
 
-    <p class="mt-10 mb-4 text-text-muted">Или оставьте заявку — напишу сама.</p>
-    <Form />
-  </section>
+      <p class="measure mt-12 mb-5 text-text-muted">Или оставьте заявку — напишу сама.</p>
+      <Form />
+    </section>
+  </div>
 </Layout>
