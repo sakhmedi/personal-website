@@ -25,39 +25,36 @@ const screen = project.image
 // Домен показываем вместо слов "Открыть сайт": адрес можно проверить,
 // обещание — нет. Параметры и www. только мешают читать.
 const host = new URL(project.url).hostname.replace(/^www\./, '');
-
-// Первый тег — статус работы ("Концепт", "Учебный проект"). Он в рамке,
-// остальные — просто подписи: человек должен увидеть статус первым,
-// а не после перехода на сайт.
-const [statusTag, ...otherTags] = project.tags;
 ---
 
-<article class="group relative flex flex-col rounded-md border border-border bg-surface-raised">
+<!-- Работа лежит прямо на листе. Единственная рамка на всю карточку —
+     рамка скриншота: она отделяет светлую чужую страницу от светлого
+     листа и держит вес, который раньше делили коробка, подложка и текст. -->
+<article class="group relative flex flex-col">
   {screen && (
-    <div class="rounded-t-md bg-surface p-2.5">
-      <Image
-        src={screen}
-        alt={project.imageAlt}
-        widths={[440, 880]}
-        sizes="(min-width: 768px) 548px, 92vw"
-        width={880}
-        height={550}
-        loading={eager ? 'eager' : 'lazy'}
-        fetchpriority={eager ? 'high' : 'auto'}
-        class="shot"
-      />
-    </div>
+    <Image
+      src={screen}
+      alt={project.imageAlt}
+      widths={[440, 880]}
+      sizes="(min-width: 768px) 548px, calc(100vw - 2.5rem)"
+      width={880}
+      height={550}
+      loading={eager ? 'eager' : 'lazy'}
+      fetchpriority={eager ? 'high' : 'auto'}
+      class="shot"
+    />
   )}
 
-  <div class="flex grow flex-col gap-2 border-t border-border p-5">
-    <div class="mb-1 flex flex-wrap items-center gap-x-3 gap-y-2">
-      <span class="tag-status">{statusTag}</span>
-      {otherTags.map((tag) => <span class="tag">{tag}</span>)}
-    </div>
-
+  <!-- Подпись под работой: название, следом статус в подзаголовке.
+       Всё, кроме названия, набрано мельче основного текста и приглушённым,
+       чтобы не спорить со скриншотом. -->
+  <div class="flex grow flex-col gap-2 pt-4">
     <h3>{project.title}</h3>
-    <p class="text-[0.9375rem] text-text-muted">{project.subtitle}</p>
-    <p class="measure">{project.description}</p>
+
+    <div class="flex flex-col gap-1.5 text-[0.9375rem] text-text-muted">
+      <p>{project.subtitle}</p>
+      <p class="measure leading-relaxed">{project.description}</p>
+    </div>
 
     <!-- Ссылка растянута на всю карточку через ::after: на телефоне
          промахнуться по адресу в 13px иначе слишком легко. Своей высоты
@@ -66,7 +63,7 @@ const [statusTag, ...otherTags] = project.tags;
       href={project.url}
       target="_blank"
       rel="noopener noreferrer"
-      class="addr mt-auto inline-flex min-h-[44px] items-center pt-3 text-accent underline underline-offset-4 after:absolute after:inset-0 after:rounded-md hover:text-accent-hover"
+      class="addr mt-auto inline-flex min-h-[44px] items-center pt-2 text-accent underline underline-offset-4 after:absolute after:inset-0 hover:text-accent-hover"
     >
       {host}
       <span class="sr-only">(откроется в новой вкладке)</span>

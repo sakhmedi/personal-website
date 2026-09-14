@@ -2,6 +2,12 @@ export interface Project {
   /** Ключ для верстки и для будущего имени файла скриншота. */
   id: string;
   title: string;
+  /**
+   * Рядом с тем, что это за сайт, стоит статус работы: "концепт",
+   * "учебный проект". На самих сайтах об этом написано в подвале,
+   * и человек увидит это через один клик. Значит, слово должно
+   * стоять и здесь.
+   */
   subtitle: string;
   description: string;
   url: string;
@@ -17,13 +23,6 @@ export interface Project {
    */
   image: string;
   imageAlt: string;
-  /**
-   * Первым идёт тег статуса ("Концепт" или "Учебный проект").
-   * Cards.astro подсвечивает его, чтобы никто не принял работу
-   * за реальный клиентский заказ. Остальные теги написаны словами
-   * заказчика, а не разработчика: он читает про пользу, а не про технику.
-   */
-  tags: string[];
   /** Показывать ли работу на главной. Полный список живёт на /projects. */
   featured: boolean;
 }
@@ -32,38 +31,35 @@ export const projects: Project[] = [
   {
     id: "dala-coffee",
     title: "DALA COFFEE",
-    subtitle: "Сайт кофейни",
+    subtitle: "Сайт кофейни, концепт",
     description:
       "В меню можно собрать заказ. На карте две точки с часами работы и ссылками в 2ГИС. Язык переключается одной кнопкой.",
     url: "https://dalacoffee.netlify.app/?lang=ru",
     image: "dala-coffee.png",
     imageAlt: "Главная страница сайта кофейни DALA COFFEE",
-    tags: ["Концепт", "Русский и английский", "Удобно на телефоне"],
     featured: true,
   },
   {
     id: "dental-plus",
     title: "Дентал Плюс",
-    subtitle: "Сайт стоматологии",
+    subtitle: "Сайт стоматологии, концепт",
     description:
       "Шесть услуг с ценами. Рядом врачи с фотографиями. Пациент записывается через форму и сразу выбирает нужную услугу. Кнопка WhatsApp видна на любом экране.",
     url: "https://dental-plus-kz.netlify.app/",
     image: "dental-plus.png",
     imageAlt: "Главная страница сайта стоматологии Дентал Плюс",
-    tags: ["Концепт", "Русский и казахский", "Запись онлайн"],
     featured: true,
   },
   {
     id: "bloom",
     title: "Bloom",
-    subtitle: "Справочник цветов",
+    subtitle: "Справочник цветов, учебный проект",
     description:
       "Собирала его на английском, чтобы научиться делать сайты из нескольких страниц.",
     url: "https://bloomings.netlify.app/",
     screenshotUrl: "https://bloomings.netlify.app/flowers",
     image: "bloom.png",
     imageAlt: "Страница семейства цветов в справочнике Bloom",
-    tags: ["Учебный проект"],
     featured: false,
   },
 ];

@@ -7,10 +7,10 @@ import { projects } from '../data/projects';
   title="Работы"
   description="Сайты, которые я сделала."
 >
-  <section class="mx-auto max-w-[1120px] px-5 py-14 md:py-16">
+  <section class="mx-auto max-w-[1120px] px-5 py-16 md:py-24">
     <h1 class="mb-8">Работы</h1>
 
-    <div class="grid gap-6 md:grid-cols-2">
+    <div class="grid gap-x-6 gap-y-12 md:grid-cols-2">
       {projects.map((project, index) => (
         <Cards project={project} eager={index === 0} />
       ))}
