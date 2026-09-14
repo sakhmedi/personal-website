@@ -7,10 +7,6 @@ export const contacts = {
   city: "Астана",
   whatsapp: "https://wa.me/77072003612",
   telegram: "https://t.me/saliima_s",
-  // TODO: заглушка. Заменить на настоящий адрес до слияния в main.
-  email: "hello@example.com",
+  email: "salimaakhm@gmail.com",
   github: "https://github.com/sakhmedi",
 } as const;
-
-/** Домен example.com зарезервирован под примеры — настоящей почтой быть не может. */
-export const emailIsPlaceholder = contacts.email.endsWith("@example.com");
