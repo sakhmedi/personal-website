@@ -166,12 +166,20 @@
     font-weight: 800;
     text-transform: uppercase;
     letter-spacing: 0.01em;
-    line-height: 0.96;
+    line-height: 1;
     text-wrap: balance;
   }
 
   .sign-xl {
     font-size: clamp(3.25rem, 2rem + 5.4vw, 5.75rem);
+  }
+
+  /* На компьютере дверь занимает 5/12 ширины: надпись в ней меньше,
+     чтобы наклейка "написать" оставалась в первом экране. */
+  @media (min-width: 1024px) {
+    .sign-door {
+      font-size: 4.5rem;
+    }
   }
 
   .sign-lg {

@@ -6,7 +6,7 @@ import Form from '../components/Form.astro';
 import ChatIcon from '../components/ChatIcon.astro';
 import { featuredProjects } from '../data/projects';
 import { contacts } from '../data/contacts';
-import { bio, portrait } from '../data/about';
+import { bio, portrait, showPortraitPlaceholder } from '../data/about';
 
 // Тысячи отделяем узким неразрывным пробелом: "80 000" не разорвётся
 // на две строки и не расползётся, как с обычным пробелом.
@@ -104,9 +104,15 @@ const links = [
   <section class="bg-glass pb-14 lg:pb-20">
     <div class="shell grid gap-10 lg:grid-cols-12 lg:gap-6">
       <!-- Дверь -->
-      <div class="relative flex min-h-[calc(100svh-5rem-var(--sticky-cta))] flex-col justify-between gap-10 overflow-hidden pt-6 pb-2 lg:col-span-5 lg:min-h-0 lg:justify-start lg:rounded-[4px] lg:border-[6px] lg:border-frame lg:px-8 lg:pt-10 lg:pb-8">
+      <!-- На телефоне дверь растягивается на весь экран, только когда за
+           стеклом есть фото: иначе между надписью и наклейкой зиял бы провал. -->
+      <div class:list={[
+        "relative flex flex-col gap-10 overflow-hidden pt-6 pb-2 lg:col-span-5 lg:min-h-0 lg:justify-start lg:rounded-[4px] lg:border-[6px] lg:border-frame lg:px-8 lg:pt-10 lg:pb-8",
+        (portrait || showPortraitPlaceholder) && "min-h-[calc(100svh-5rem-var(--sticky-cta))] justify-between",
+      ]}>
         <!-- За стеклом — Салима. Фото тонировано цветом стекла: человек
              угадывается внутри, надпись на стекле читается поверх. -->
+        {(portrait || showPortraitPlaceholder) && (
         <div class="pointer-events-none absolute top-[10.5rem] right-0 bottom-[21rem] w-[48%] lg:top-6 lg:right-6 lg:bottom-6 lg:w-[46%]" aria-hidden="true">
           {portrait ? (
             <div class="behind-glass relative h-full w-full overflow-hidden">
@@ -119,11 +125,12 @@ const links = [
             </div>
           )}
         </div>
+        )}
 
         <!-- Ручка двери -->
-        <div class="handle absolute top-[52%] right-3 h-24 lg:top-[44%] lg:right-5 lg:h-28" aria-hidden="true"></div>
+        <div class="handle absolute top-[7.5rem] right-3 h-24 lg:top-[44%] lg:right-5 lg:h-28" aria-hidden="true"></div>
 
-        <h1 class="vinyl sign-xl relative max-w-[11ch] lg:text-[4.5rem]">
+        <h1 class="vinyl sign-xl sign-door relative max-w-[11ch]">
           Делаю сайты для бизнеса в Астане
         </h1>
 
@@ -276,7 +283,7 @@ const links = [
     <div class="shell">
       <h2 class="vinyl sign-lg mb-10">Обо мне</h2>
 
-      <div class="plate grid max-w-[60rem] gap-8 md:grid-cols-[16rem_1fr] md:gap-10">
+      <div class:list={["plate grid max-w-[60rem] gap-8 md:gap-10", (portrait || showPortraitPlaceholder) && "md:grid-cols-[16rem_1fr]"]}>
         {portrait ? (
           <Image
             src={portrait}
@@ -285,7 +292,7 @@ const links = [
             sizes="16rem"
             class="aspect-[4/5] w-full max-w-[16rem] rounded-[3px] object-cover"
           />
-        ) : (
+        ) : showPortraitPlaceholder && (
           <div class="flex aspect-[4/5] w-full max-w-[16rem] items-center justify-center rounded-[3px] border-2 border-dashed border-plate-line p-4 text-center text-ink-muted">
             [заглушка: фото в src/assets/portrait.jpg]
           </div>
@@ -293,12 +300,7 @@ const links = [
 
         <div class="flex flex-col gap-4">
           <p class="vinyl text-[2.5rem]">{contacts.name}</p>
-          <p class="font-medium">Делаю сайты для небольшого бизнеса · {contacts.city}</p>
-          {bio ? (
-            bio.map((line) => <p class="measure">{line}</p>)
-          ) : (
-            <p class="measure text-ink-muted">[заглушка: 2–3 строки о себе в src/data/about.ts]</p>
-          )}
+          {bio.map((line) => <p class="measure text-lg">{line}</p>)}
         </div>
       </div>
     </div>

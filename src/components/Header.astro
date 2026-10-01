@@ -22,7 +22,7 @@ const navLinks = [
 
     <nav class="hidden md:flex md:items-center md:gap-7" aria-label="Основное меню">
       {navLinks.map(({ name, href }) => (
-        <a href={href} class="text-vinyl-muted underline-offset-[0.3em] hover:text-vinyl hover:underline hover:decoration-vinyl">
+        <a href={href} class="inline-flex min-h-[44px] items-center text-vinyl-muted underline-offset-[0.3em] hover:text-vinyl hover:underline hover:decoration-vinyl">
           {name}
         </a>
       ))}

@@ -24,13 +24,19 @@ typography:
     fontFamily: "Fira Sans Extra Condensed, Fira Sans, system-ui, sans-serif"
     fontSize: "clamp(3.25rem, 2rem + 5.4vw, 5.75rem)"
     fontWeight: 800
-    lineHeight: 0.96
+    lineHeight: 1
+    letterSpacing: "0.01em"
+  display-door:
+    fontFamily: "Fira Sans Extra Condensed, Fira Sans, system-ui, sans-serif"
+    fontSize: "4.5rem"
+    fontWeight: 800
+    lineHeight: 1
     letterSpacing: "0.01em"
   headline:
     fontFamily: "Fira Sans Extra Condensed, Fira Sans, system-ui, sans-serif"
     fontSize: "clamp(2.25rem, 1.6rem + 2.8vw, 3.5rem)"
     fontWeight: 800
-    lineHeight: 0.96
+    lineHeight: 1
     letterSpacing: "0.01em"
   price:
     fontFamily: "Fira Sans Extra Condensed, Fira Sans, system-ui, sans-serif"
@@ -58,7 +64,7 @@ typography:
     fontFamily: "Fira Sans Extra Condensed, Fira Sans, system-ui, sans-serif"
     fontSize: "1.125rem"
     fontWeight: 800
-    lineHeight: 0.96
+    lineHeight: 1
     letterSpacing: "0.06em"
   sticker-label:
     fontFamily: "Fira Sans Extra Condensed, Fira Sans, system-ui, sans-serif"
@@ -187,8 +193,8 @@ components:
 **Character:** Узкий жирный гротеск прописными — это плёнка, вырезанная по трафарету, вывеска мастерской. Fira Sans того же семейства спокойно несёт длинный текст на табличках. Оба шрифта подключены через @fontsource с набором cyrillic-ext, поэтому казахские ә ғ қ ң ө ұ ү һ набираются тем же шрифтом.
 
 ### Hierarchy
-- **Display** (800, `clamp(3.25rem, 2rem + 5.4vw, 5.75rem)`, 0.96, прописные, `text-wrap: balance`): надпись на двери, «Напишите мне», заголовок /projects и 404. На двери на ≥1024px ограничена 4.5rem и шириной 11ch.
-- **Headline** (800, `clamp(2.25rem, 1.6rem + 2.8vw, 3.5rem)`, 0.96, прописные): заголовки разделов «Работы», «Цены и сроки», «Как я работаю», «Обо мне».
+- **Display** (800, `clamp(3.25rem, 2rem + 5.4vw, 5.75rem)`, 1, прописные, `text-wrap: balance`): надпись на двери, «Напишите мне», заголовок /projects и 404. На двери на ≥1024px ограничена 4.5rem и шириной 11ch.
+- **Headline** (800, `clamp(2.25rem, 1.6rem + 2.8vw, 3.5rem)`, 1, прописные): заголовки разделов «Работы», «Цены и сроки», «Как я работаю», «Обо мне».
 - **Price** (800, `clamp(1.75rem, 1.3rem + 1.8vw, 2.5rem)`, 1): цены и суммы оплаты; «от» и «₸» — в 0.55em прописными с разрядкой 0.04em. Тысячи разделяет узкий неразрывный пробел.
 - **Title** (700, 1.25rem → 1.5rem на ≥768px, 1.25): названия услуг и шагов на табличках; на бирке — 1.125rem.
 - **Body** (400, 1.0625rem → 1.125rem на ≥768px, 1.55, табличные цифры): основной текст; длина строки `measure` 36rem ≈ 65 знаков кириллицы. Вводные абзацы на стекле — 1.125rem → 1.25rem.
@@ -269,7 +275,7 @@ components:
 Глубокое стекло, 0.9375rem `vinyl-muted`: имя · город · год и ссылка GitHub.
 
 ### Плейсхолдеры (временные)
-Фото и строки о себе пока не заполнены: на двери пунктирная рамка 2px `frame` «здесь будет фото», в разделе «Обо мне» — пунктирная рамка `plate-line` и строка в квадратных скобках. `src/data/about.ts` бросает ошибку в production-сборке, пока нет `src/assets/portrait.*` и `bio`. Это не элемент системы, а предохранитель; после заполнения фото на двери тонируется: ч/б + слой `glass` 70%.
+Фото пока нет: при разработке на двери пунктирная рамка 2px `frame` «здесь будет фото», в разделе «Обо мне» — пунктирная рамка `plate-line`. В production-сборке без `src/assets/portrait.*` места под фото нет вовсе (флаг `showPortraitPlaceholder` в `src/data/about.ts`), табличка «Обо мне» становится одноколоночной. Это не элемент системы, а временное состояние; после заполнения фото на двери тонируется: ч/б + слой `glass` 70%.
 
 ## Do's and Don'ts
 
