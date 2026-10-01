@@ -8,7 +8,13 @@ import { projects } from '../data/projects';
   description="Сайты, которые я сделала."
 >
   <section class="mx-auto max-w-[1120px] px-5 py-16 md:py-24">
-    <h1 class="mb-8">Работы</h1>
+    <h1 class="mb-4">Работы</h1>
+    <p class="measure mb-8 text-text-muted">
+      Под каждой работой написано, что это. Концепт — сайт, который я сделала
+      не по заказу, а чтобы показать, каким может быть сайт такого бизнеса.
+      Демо — образец, который показывает, как всё работает, на заранее
+      подготовленных примерах. Учебный проект — сайт, на котором я училась.
+    </p>
 
     <div class="grid gap-x-6 gap-y-12 md:grid-cols-2">
       {projects.map((project, index) => (

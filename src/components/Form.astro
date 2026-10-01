@@ -33,7 +33,7 @@ const errorClass = "mt-2 text-sm text-danger";
         required
         autocomplete="tel"
         inputmode="tel"
-        placeholder="+7 701 123 45 67"
+        placeholder="+7 ___ ___ __ __"
         class={fieldClass}
       />
       <p id="field-phone-error" class={errorClass} hidden></p>
@@ -94,11 +94,14 @@ const errorClass = "mt-2 text-sm text-danger";
     },
     {
       id: "field-phone",
+      // Пустое поле и ошибку в номере различаем: если человек ничего
+      // не ввёл, "проверьте" звучит так, будто он ошибся.
       validate: (value) => {
         const digits = value.replace(/\D/g, "");
-        return digits.length >= 10 && digits.length <= 15
-          ? ""
-          : "Проверьте номер. Например, +7 701 123 45 67";
+        if (digits.length === 0) return "Укажите номер.";
+        if (digits.length < 10) return "Проверьте номер: в нём не хватает цифр.";
+        if (digits.length > 15) return "Проверьте номер: в нём лишние цифры.";
+        return "";
       },
     },
     {
