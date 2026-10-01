@@ -1,16 +1,82 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Cards from '../components/Cards.astro';
 import Form from '../components/Form.astro';
 import { featuredProjects } from '../data/projects';
-import { contacts } from '../data/contacts';
+import { contacts, whatsapp } from '../data/contacts';
+import salima from '../assets/salima.jpg';
+import dentalPlus from '../assets/screens/dental-plus.png';
 
-// Секции разделены волосяной линией, а не коробками: единственный
-// прямоугольник на странице — карточка работы.
-const section = "mx-auto max-w-[1120px] px-5 py-16 md:py-24";
+// Неразрывный пробел внутри цены: «80 000» не должно разъезжаться по строкам.
+const nb = " ";
 
-// Всё, что можно вбить в адресную строку или в мессенджер, набрано
-// моноширинным. Подпись слева говорит, куда именно это вбивать.
+// То, что одинаково для любого заказа, вынесено из тарифов в одну полосу:
+// в карточках остаётся только то, чем тарифы отличаются.
+const terms = [
+  "Цену и срок называю до начала работы",
+  "Предоплата 50%, остальное — после приёмки",
+  "Два круга правок входят в цену",
+  "Сайт и все доступы остаются у вас",
+];
+
+const plans = [
+  {
+    name: "Одна страница",
+    for: "Чтобы про вас узнали и написали",
+    price: `80${nb}000`,
+    features: [
+      "Рассказ о вас и ваших услугах на одной странице",
+      "Удобно читать с телефона",
+      "Кнопка WhatsApp видна на любом экране",
+    ],
+    cta: "Обсудить сайт",
+    message: "Здравствуйте, Салима! Хочу одностраничный сайт для своего бизнеса.",
+    featured: false,
+  },
+  {
+    name: "Сайт с разделами",
+    for: "Когда нужно рассказать больше, чем помещается на одну страницу",
+    price: `150${nb}000`,
+    features: [
+      "Всё, что есть в одностраничном",
+      "Свои разделы для услуг, цен и фотографий",
+      "Меню, по которому клиент сразу найдёт нужное",
+    ],
+    cta: "Обсудить сайт",
+    message: "Здравствуйте, Салима! Хочу сайт с разделами для своего бизнеса.",
+    featured: true,
+  },
+];
+
+// Шаги — настоящая последовательность, поэтому номера здесь уместны.
+// Метка у шага показывает, когда и сколько вы платите.
+const steps = [
+  {
+    title: "Разговор",
+    money: "Бесплатно",
+    text: "Вы рассказываете про свой бизнес, я задаю несколько вопросов. В конце разговора называю срок и цену.",
+  },
+  {
+    title: "Предоплата и работа",
+    money: "50%",
+    text: "Если цена и срок подходят, беру предоплату в половину суммы и начинаю. Если понадобятся тексты или фотографии, напишу вам.",
+  },
+  {
+    title: "Показ до запуска",
+    text: "Готовый сайт вы видите до запуска: открываете со своего телефона и говорите, что поправить. Тексты и фотографии ещё можно поменять.",
+  },
+  {
+    title: "Правки и оплата",
+    money: "Ещё 50%",
+    text: "Два круга правок входят в цену, дальше — по договорённости. Когда сайт вас устраивает, вы платите вторую половину.",
+  },
+  {
+    title: "Запуск",
+    text: "Запускаю сайт и отдаю вам все доступы. Если когда-нибудь уйдёте к другому разработчику, просить что-то у меня не придётся.",
+  },
+];
+
 const links = [
   { label: "Telegram", href: contacts.telegram, text: "@saliima_s" },
   { label: "Почта", href: `mailto:${contacts.email}`, text: contacts.email },
@@ -21,140 +87,248 @@ const links = [
   title="Сайты для бизнеса в Астане"
   description="Сайты для небольшого бизнеса в Астане. Сделаю новый или доработаю тот, что уже есть."
 >
-  <!-- ГЛАВНЫЙ ЭКРАН. Держим коротким: герой страницы — работы,
-       и на десктопе первая карточка должна попадать в первый экран. -->
-  <section class="mx-auto max-w-[1120px] px-5 pt-12 pb-16 md:pt-16 md:pb-24">
-    <h1 class="measure mb-5">Делаю сайты для бизнеса в Астане</h1>
-    <p class="measure mb-8 text-[1.0625rem] text-text-muted md:text-[1.1875rem]">
-      Ваш клиент открывает сайт с телефона, за пару секунд находит то, что искал,
-      и пишет вам в WhatsApp.
-    </p>
-    <a href={contacts.whatsapp} target="_blank" rel="noopener noreferrer" class="btn">
-      Написать в WhatsApp
-    </a>
+  <!-- ГЛАВНЫЙ ЭКРАН. Продолжает ночную полосу шапки. Справа — то, ради
+       чего заказывают сайт: страница работы и сообщение от клиента. -->
+  <section class="band relative overflow-hidden">
+    <div
+      aria-hidden="true"
+      class="pointer-events-none absolute -right-40 -top-40 h-[36rem] w-[36rem] rounded-full bg-[radial-gradient(closest-side,rgb(43_76_196/0.45),transparent)]"
+    ></div>
+
+    <div class="wrap relative grid items-center gap-14 pt-14 pb-20 md:pt-20 md:pb-28 lg:grid-cols-[1.05fr_1fr] lg:gap-16">
+      <div>
+        <p class="eyebrow">{contacts.name} · сайты для малого бизнеса в Астане</p>
+        <h1 class="mb-6">
+          Делаю сайты, с&nbsp;которых клиенты пишут вам в&nbsp;<span class="text-sun">WhatsApp</span>
+        </h1>
+        <p class="lead measure mb-9">
+          Клиент открывает сайт с телефона, за пару секунд находит то, что искал,
+          и нажимает «Написать». Сделаю новый сайт или доработаю тот, что уже есть.
+        </p>
+
+        <div class="flex flex-col gap-3 sm:flex-row">
+          <a href={whatsapp("Здравствуйте, Салима! Хочу обсудить сайт.")} target="_blank" rel="noopener noreferrer" class="btn">
+            Написать в WhatsApp
+          </a>
+          <a href="#services" class="btn-ghost">Цены</a>
+        </div>
+
+        <ul class="checklist mt-10 gap-y-2 text-sm text-text-muted sm:flex-row sm:flex-wrap sm:gap-x-8">
+          <li>Цена известна до начала</li>
+          <li>Предоплата 50%</li>
+          <li>Доступы остаются у вас</li>
+        </ul>
+      </div>
+
+      <figure class="relative mx-1 mb-6 lg:mx-0 lg:mb-0">
+        <div class="browser border-transparent">
+          <div class="browser-bar" aria-hidden="true">
+            <span class="browser-dots"><i></i><i></i><i></i></span>
+            <span class="browser-url">dental-plus-kz.netlify.app</span>
+          </div>
+          <Image
+            src={dentalPlus}
+            alt="Раздел услуг с ценами на сайте стоматологии Дентал Плюс"
+            widths={[600, 1200]}
+            sizes="(min-width: 1024px) 540px, calc(100vw - 2.5rem)"
+            width={1200}
+            height={750}
+            loading="eager"
+            fetchpriority="high"
+          />
+        </div>
+
+        <!-- Пример того, что приходит владельцу. Сообщение придумано
+             для иллюстрации, поэтому скринридеру его не читаем. -->
+        <div class="bubble" aria-hidden="true">
+          <p class="bubble-head">Новое сообщение <time>10:42</time></p>
+          <p class="text-[0.9375rem] leading-snug">
+            Здравствуйте! Увидела цены на сайте. Можно записаться на чистку в субботу?
+          </p>
+        </div>
+
+        <figcaption class="mt-14 text-right text-sm text-text-muted sm:mt-4 sm:pl-[20rem] lg:pl-[16rem]">
+          Дентал Плюс — концепт сайта стоматологии
+        </figcaption>
+      </figure>
+    </div>
   </section>
 
   <!-- РАБОТЫ -->
-  <section id="works" class={`${section} scroll-mt-4`}>
-    <h2 class="mb-6">Работы</h2>
-
-    <div class="grid gap-x-6 gap-y-12 md:grid-cols-2">
-      {featuredProjects.map((project, index) => (
-        <Cards project={project} eager={index === 0} />
-      ))}
-    </div>
-
-    <a href="/projects" class="mt-10 inline-flex min-h-[44px] items-center text-accent underline underline-offset-4 hover:text-accent-hover">
-      Все работы
-    </a>
-  </section>
-
-  <!-- ЧТО Я ДЕЛАЮ. Цена стоит сразу под услугой и набрана моноширинным:
-       это данные, а не проза. У доработки цены нет, она зависит от объёма,
-       и придумывать "от" там нечестно. -->
-  <section id="services" class={`${section} scroll-mt-4`}>
-    <h2 class="mb-6">Что я делаю</h2>
-
-    <!-- Услуга: подзаголовок с ценой, под ним абзац. Между услугами
-         воздуха в пять раз больше, чем внутри, поэтому границы видно
-         без единой линии и без коробок. -->
-    <div class="measure flex flex-col gap-10">
-      <div class="flex flex-col gap-2">
-        <h3>Чтобы вам написали, <span class="price">от <span class="num">80 000</span> ₸</span></h3>
-        <p>
-          Когда про вас должны узнать и написать, этого достаточно.
-          Вы рассказываете о себе, а клиент нажимает кнопку и пишет вам.
-        </p>
+  <section id="works" class="section scroll-mt-16">
+    <div class="wrap">
+      <div class="mb-12 flex flex-col gap-6 md:mb-16 md:flex-row md:items-end md:justify-between">
+        <div>
+          <p class="eyebrow">Работы</p>
+          <h2 class="measure">Как это выглядит у&nbsp;кофейни и&nbsp;стоматологии</h2>
+        </div>
+        <a href="/projects" class="link inline-flex min-h-11 items-center font-semibold">Все работы →</a>
       </div>
 
-      <div class="flex flex-col gap-2">
-        <h3>Сайт с разделами, <span class="price">от <span class="num">150 000</span> ₸</span></h3>
-        <p>
-          Нужно рассказать больше, чем помещается на одну страницу.
-          У услуг, цен и фотографий будет своё место.
-        </p>
-      </div>
-
-      <div class="flex flex-col gap-2">
-        <h3>Доработка сайта, <span class="price">цена по объёму</span></h3>
-        <p>
-          Сайт уже есть, но вам в нём что-то не нравится. Чаще всего его
-          можно доработать, а не делать заново. Я посмотрю и честно скажу,
-          что с ним стоит сделать.
-        </p>
+      <div class="grid gap-x-8 gap-y-16 md:grid-cols-2">
+        {featuredProjects.map((project) => (
+          <Cards project={project} />
+        ))}
       </div>
     </div>
-
   </section>
 
-  <!-- КАК Я РАБОТАЮ. Список нумерованный по смыслу (это порядок, а не
-       набор), но номера не показываем: последовательность держат слова
-       "сначала", "когда", "потом". Скринридер порядок всё равно объявит. -->
-  <section id="process" class={`${section} scroll-mt-4`}>
-    <h2 class="mb-4">Как я работаю</h2>
-    <p class="measure mb-8 text-text-muted">
-      Если вы раньше не заказывали сайт, вот как это обычно проходит.
-    </p>
+  <!-- ЦЕНЫ. Два тарифа на новый сайт рядом, доработка отдельной строкой:
+       это другая задача, а не третий уровень того же. Под ними — условия,
+       общие для любого заказа. -->
+  <section id="services" class="section scroll-mt-16 border-t border-border">
+    <div class="wrap">
+      <div class="mb-12 md:mb-16">
+        <p class="eyebrow">Что я делаю и сколько это стоит</p>
+        <h2 class="measure mb-4">Цены</h2>
+        <p class="lead measure">
+          Точную цену назову после короткого разговора: она зависит от того,
+          сколько у вас услуг и что должно быть на сайте.
+        </p>
+      </div>
 
-    <ol class="measure flex flex-col gap-5">
-      <li>
-        Сначала поговорим. Вы расскажете про свой бизнес, я задам несколько
-        вопросов. В конце разговора я называю срок и цену. Платить на этом
-        шаге ещё ничего не нужно.
-      </li>
-      <li>
-        Если цена и срок подходят, беру предоплату в половину суммы и начинаю
-        работу. Если по ходу понадобятся тексты или фотографии, напишу вам.
-      </li>
-      <li>
-        Готовый сайт вы увидите до запуска. Откроете со своего телефона,
-        посмотрите и скажете, что поправить. На этом шаге ещё можно поменять
-        тексты и фотографии.
-      </li>
-      <li>
-        Два круга правок входят в цену, дальше по договорённости. Когда сайт
-        вас устраивает, вы платите вторую половину.
-      </li>
-      <li>
-        Запускаю сайт и отдаю вам все доступы. Сайт остаётся вашим. Если вы
-        когда-нибудь уйдёте к другому разработчику, просить что-то у меня
-        не придётся.
-      </li>
-    </ol>
-  </section>
+      <div class="grid gap-5 lg:grid-cols-2">
+        {plans.map((plan) => (
+          <article class:list={["plan", plan.featured && "band plan-featured"]}>
+            <div class="mb-8 lg:min-h-[7rem]">
+              <div>
+                <h3 class="mb-2 text-xl md:text-2xl">{plan.name}</h3>
+                <p class="text-text-muted">{plan.for}</p>
+              </div>
+            </div>
 
-  <!-- КОНТАКТЫ. Единственная залитая секция на странице: лист
-       заканчивается плотной полосой, и вместе с подвалом она читается
-       как одно основание страницы, а не как полоска посередине. -->
-  <div class="band bg-surface">
-    <section id="contacts" class={`${section} scroll-mt-4`}>
-      <h2 class="mb-4">Контакты</h2>
-      <p class="measure mb-8 text-text-muted">
-        Быстрее всего написать в WhatsApp. Отвечаю в течение дня.
-      </p>
+            <p class="price mb-8">
+              <small>от </small>{plan.price}<small> ₸</small>
+            </p>
 
-      <a href={contacts.whatsapp} target="_blank" rel="noopener noreferrer" class="btn">
-        Написать в WhatsApp
-      </a>
+            <ul class="checklist mb-10 border-t border-border pt-8">
+              {plan.features.map((feature) => <li>{feature}</li>)}
+            </ul>
 
-      <ul class="mt-8 flex flex-col">
-        {links.map(({ label, href, text }) => (
-          <li>
             <a
-              href={href}
-              target={href.startsWith("mailto:") ? undefined : "_blank"}
-              rel={href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
-              class="flex min-h-[44px] flex-wrap items-center gap-x-4"
+              href={whatsapp(plan.message)}
+              target="_blank"
+              rel="noopener noreferrer"
+              class:list={[plan.featured ? "btn" : "btn-ghost", "mt-auto self-stretch sm:self-start"]}
             >
-              <span class="w-20 text-sm text-text-muted">{label}</span>
-              <span class="addr text-accent underline underline-offset-4">{text}</span>
+              {plan.cta}
+              <span class="sr-only">«{plan.name}» в WhatsApp</span>
             </a>
+          </article>
+        ))}
+      </div>
+
+      <article class="plan mt-5 gap-6 border-dashed border-border-strong md:flex-row md:items-center md:justify-between">
+        <div class="measure">
+          <h3 class="mb-2 text-xl md:text-2xl">Доработка сайта</h3>
+          <p class="text-text-muted">
+            Сайт уже есть, но в нём что-то не нравится. Чаще всего его можно
+            доработать, а не делать заново. Посмотрю и честно скажу, что с ним
+            стоит сделать.
+          </p>
+        </div>
+        <div class="flex shrink-0 flex-col gap-4 md:items-end">
+          <p class="font-display text-lg font-semibold">Цена по объёму</p>
+          <a
+            href={whatsapp("Здравствуйте, Салима! У меня уже есть сайт, хочу его доработать. Вот ссылка: ")}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="btn-ghost"
+          >
+            Показать свой сайт
+          </a>
+        </div>
+      </article>
+
+      <div class="mt-12">
+        <h3 class="mb-5 text-base">В любую цену входит</h3>
+        <ul class="checklist grid gap-x-8 sm:grid-cols-2 lg:grid-cols-4">
+          {terms.map((term) => <li class="text-[0.9375rem]">{term}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <!-- КАК Я РАБОТАЮ -->
+  <section id="process" class="section scroll-mt-16 border-t border-border bg-surface-raised">
+    <div class="wrap grid gap-12 lg:grid-cols-[1fr_1.6fr] lg:gap-20">
+      <div class="lg:sticky lg:top-28 lg:self-start">
+        <p class="eyebrow">Как я работаю</p>
+        <h2 class="mb-4">Пять шагов от&nbsp;разговора до&nbsp;запуска</h2>
+        <p class="lead">
+          Если вы раньше не заказывали сайт, вот как это обычно проходит.
+          Платите вы дважды, и каждый раз — понимая, за что.
+        </p>
+      </div>
+
+      <ol class="flex flex-col">
+        {steps.map((step, index) => (
+          <li class="grid grid-cols-[3rem_1fr] gap-x-4 border-t border-border py-7 first:border-t-0 first:pt-0 md:grid-cols-[4rem_1fr]">
+            <span class="font-display text-2xl font-semibold text-accent md:text-3xl" aria-hidden="true">
+              {index + 1}
+            </span>
+            <div>
+              <div class="mb-2 flex flex-wrap items-center gap-3">
+                <h3>{step.title}</h3>
+                {step.money && <span class="tag tag-sun">{step.money}</span>}
+              </div>
+              <p class="text-text-muted">{step.text}</p>
+            </div>
           </li>
         ))}
-      </ul>
+      </ol>
+    </div>
+  </section>
 
-      <p class="measure mt-12 mb-5 text-text-muted">Или оставьте заявку, и я напишу вам сама.</p>
-      <Form />
-    </section>
-  </div>
+  <!-- КОНТАКТЫ. Ночная полоса замыкает страницу вместе с подвалом. -->
+  <section id="contacts" class="band section scroll-mt-16">
+    <div class="wrap grid gap-14 lg:grid-cols-[1fr_1fr] lg:gap-20">
+      <div>
+        <p class="eyebrow">Контакты</p>
+        <h2 class="mb-5">Расскажите о&nbsp;своём бизнесе — я&nbsp;назову цену и&nbsp;срок</h2>
+        <p class="lead mb-9">Быстрее всего — в WhatsApp. Это ни к чему не обязывает.</p>
+
+        <a href={whatsapp("Здравствуйте, Салима! Хочу обсудить сайт.")} target="_blank" rel="noopener noreferrer" class="btn">
+          Написать в WhatsApp
+        </a>
+
+        <div class="mt-12 flex items-center gap-4">
+          <Image
+            src={salima}
+            alt="Салима"
+            width={128}
+            height={128}
+            densities={[1, 2]}
+            class="h-16 w-16 rounded-full object-cover ring-2 ring-sun"
+          />
+          <p class="text-text-muted">
+            <span class="block font-semibold text-text">{contacts.name}, {contacts.city}</span>
+            Отвечаю сама, в течение дня
+          </p>
+        </div>
+
+        <ul class="mt-8 flex flex-col">
+          {links.map(({ label, href, text }) => (
+            <li class="border-t border-border last:border-b">
+              <a
+                href={href}
+                target={href.startsWith("mailto:") ? undefined : "_blank"}
+                rel={href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
+                class="group flex min-h-13 flex-wrap items-center gap-x-4 py-2"
+              >
+                <span class="w-20 text-sm text-text-muted">{label}</span>
+                <span class="break-all text-accent group-hover:text-accent-hover group-hover:underline">{text}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="sheet rounded-3xl p-6 md:p-10">
+        <h3 class="mb-2 text-xl">Оставить заявку</h3>
+        <p class="mb-8 text-text-muted">Не любите мессенджеры? Напишите здесь, и я свяжусь с вами сама.</p>
+        <Form />
+      </div>
+    </div>
+  </section>
 </Layout>

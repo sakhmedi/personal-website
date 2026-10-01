@@ -22,51 +22,49 @@ const screen = project.image
   ? screens[`../assets/screens/${project.image}`]?.default
   : undefined;
 
-// Домен показываем вместо слов "Открыть сайт": адрес можно проверить,
-// обещание — нет. Параметры и www. только мешают читать.
+// Домен стоит в адресной строке окна: адрес можно проверить, обещание — нет.
 const host = new URL(project.url).hostname.replace(/^www\./, '');
 ---
 
-<!-- Работа лежит прямо на листе. Единственная рамка на всю карточку —
-     рамка скриншота: она отделяет светлую чужую страницу от светлого
-     листа и держит вес, который раньше делили коробка, подложка и текст. -->
-<article class="group relative flex flex-col">
-  {screen && (
-    <Image
-      src={screen}
-      alt={project.imageAlt}
-      widths={[440, 880]}
-      sizes="(min-width: 768px) 548px, calc(100vw - 2.5rem)"
-      width={880}
-      height={550}
-      loading={eager ? 'eager' : 'lazy'}
-      fetchpriority={eager ? 'high' : 'auto'}
-      class="shot"
-    />
-  )}
+<!-- Работа в окне браузера. Ссылка растянута на всю карточку через
+     ::after, так что попасть по ней можно в любом месте. -->
+<article class="work group relative flex flex-col">
+  <div class="browser">
+    <div class="browser-bar" aria-hidden="true">
+      <span class="browser-dots"><i></i><i></i><i></i></span>
+      <span class="browser-url">{host}</span>
+    </div>
+    {screen && (
+      <Image
+        src={screen}
+        alt={project.imageAlt}
+        widths={[560, 1120]}
+        sizes="(min-width: 768px) 540px, calc(100vw - 2.5rem)"
+        width={1120}
+        height={700}
+        loading={eager ? 'eager' : 'lazy'}
+        fetchpriority={eager ? 'high' : 'auto'}
+      />
+    )}
+  </div>
 
-  <!-- Подпись под работой: название, следом статус в подзаголовке.
-       Всё, кроме названия, набрано мельче основного текста и приглушённым,
-       чтобы не спорить со скриншотом. -->
-  <div class="flex grow flex-col gap-2 pt-4">
-    <h3>{project.title}</h3>
-
-    <div class="flex flex-col gap-1.5 text-[0.9375rem] text-text-muted">
-      <p>{project.subtitle}</p>
-      <p class="measure leading-relaxed">{project.description}</p>
+  <div class="flex grow flex-col gap-3 pt-6">
+    <div class="flex flex-wrap items-center gap-x-3 gap-y-2">
+      <h3 class="text-xl">{project.title}</h3>
+      <span class="tag">{project.subtitle}</span>
     </div>
 
-    <!-- Ссылка растянута на всю карточку через ::after: на телефоне
-         промахнуться по адресу в 13px иначе слишком легко. Своей высоты
-         у неё тоже хватает — 44px вместе с отступами. -->
+    <p class="measure text-text-muted">{project.description}</p>
+
     <a
       href={project.url}
       target="_blank"
       rel="noopener noreferrer"
-      class="addr mt-auto inline-flex min-h-[44px] items-center pt-2 text-accent underline underline-offset-4 after:absolute after:inset-0 hover:text-accent-hover"
+      class="mt-auto inline-flex min-h-11 items-center gap-2 pt-1 font-semibold text-accent after:absolute after:inset-0 group-hover:text-accent-hover"
     >
-      {host}
-      <span class="sr-only">(откроется в новой вкладке)</span>
+      Открыть сайт
+      <span aria-hidden="true" class="transition-transform group-hover:translate-x-1">→</span>
+      <span class="sr-only">{host} (откроется в новой вкладке)</span>
     </a>
   </div>
 </article>

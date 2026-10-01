@@ -2,18 +2,37 @@
 import Layout from '../layouts/Layout.astro';
 import Cards from '../components/Cards.astro';
 import { projects } from '../data/projects';
+import { whatsapp } from '../data/contacts';
 ---
 <Layout
   title="Работы"
   description="Сайты, которые я сделала."
 >
-  <section class="mx-auto max-w-[1120px] px-5 py-16 md:py-24">
-    <h1 class="mb-8">Работы</h1>
+  <section class="band">
+    <div class="wrap pt-14 pb-16 md:pt-20 md:pb-20">
+      <p class="eyebrow">Все работы</p>
+      <h1 class="measure mb-5">Сайты, которые я сделала</h1>
+      <p class="lead measure">
+        У каждой работы подписано, что это: концепт, демо или учебный проект.
+        Любой сайт можно открыть и проверить с телефона.
+      </p>
+    </div>
+  </section>
 
-    <div class="grid gap-x-6 gap-y-12 md:grid-cols-2">
-      {projects.map((project, index) => (
-        <Cards project={project} eager={index === 0} />
-      ))}
+  <section class="section">
+    <div class="wrap">
+      <div class="grid gap-x-8 gap-y-16 md:grid-cols-2">
+        {projects.map((project, index) => (
+          <Cards project={project} eager={index === 0} />
+        ))}
+      </div>
+
+      <div class="mt-20 flex flex-col items-start gap-6 border-t border-border pt-12 md:flex-row md:items-center md:justify-between">
+        <h2 class="measure text-2xl md:text-3xl">Хотите такой же для своего бизнеса?</h2>
+        <a href={whatsapp("Здравствуйте, Салима! Хочу сайт для своего бизнеса.")} target="_blank" rel="noopener noreferrer" class="btn">
+          Написать в WhatsApp
+        </a>
+      </div>
     </div>
   </section>
 </Layout>

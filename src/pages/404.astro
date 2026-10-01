@@ -5,14 +5,17 @@ import Layout from '../layouts/Layout.astro';
   title="Страница не найдена"
   description="Такой страницы на сайте нет."
 >
-  <!-- Страница ошибки выровнена по левому краю, как и всё остальное:
-       отдельной вёрстки под неё нет, есть та же колонка. -->
-  <section class="mx-auto max-w-[1120px] px-5 py-16 md:py-24">
-    <p class="addr mb-4 text-text-muted">404</p>
-    <h1 class="measure mb-4">Такой страницы нет</h1>
-    <p class="measure mb-8 text-text-muted">
-      Возможно, в адресе опечатка или страница переехала.
-    </p>
-    <a href="/" class="btn">На главную</a>
+  <section class="band">
+    <div class="wrap py-24 md:py-32">
+      <p class="eyebrow">Ошибка 404</p>
+      <h1 class="measure mb-5">Такой страницы нет</h1>
+      <p class="lead measure mb-9">
+        Возможно, в адресе опечатка или страница переехала.
+      </p>
+      <div class="flex flex-col gap-3 sm:flex-row">
+        <a href="/" class="btn">На главную</a>
+        <a href="/projects" class="btn-ghost">Посмотреть работы</a>
+      </div>
+    </div>
   </section>
 </Layout>

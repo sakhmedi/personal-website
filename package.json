@@ -11,8 +11,8 @@
     "screens": "node scripts/screenshots.mjs"
   },
   "dependencies": {
-    "@fontsource-variable/golos-text": "^5.3.0",
-    "@fontsource/jetbrains-mono": "^5.3.0",
+    "@fontsource-variable/onest": "^5.3.1",
+    "@fontsource-variable/unbounded": "^5.3.0",
     "@tailwindcss/vite": "^4.1.17",
     "astro": "^5.16.4",
     "tailwindcss": "^4.1.17"

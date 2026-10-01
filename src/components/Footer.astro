@@ -4,8 +4,9 @@ import { contacts } from '../data/contacts';
 // Год берётся из даты сборки — в январе не придётся вспоминать про подвал.
 const year = new Date().getFullYear();
 ---
-<footer class="band bg-surface">
-  <div class="mx-auto flex max-w-[1120px] px-5 py-6 text-sm text-text-muted">
-    <p>{contacts.name} · {contacts.city} · {year}</p>
+<footer class="band border-t border-border">
+  <div class="wrap flex flex-col gap-2 py-8 text-sm text-text-muted sm:flex-row sm:items-center sm:justify-between">
+    <p>{contacts.name} · сайты для бизнеса · {contacts.city}</p>
+    <p>© {year}</p>
   </div>
 </footer>

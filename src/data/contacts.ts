@@ -10,3 +10,10 @@ export const contacts = {
   email: "salimaakhm@gmail.com",
   github: "https://github.com/sakhmedi",
 } as const;
+
+/**
+ * Ссылка в WhatsApp с уже набранным первым сообщением. Человеку не нужно
+ * придумывать, с чего начать: он видит текст и нажимает «отправить».
+ */
+export const whatsapp = (text?: string) =>
+  text ? `${contacts.whatsapp}?text=${encodeURIComponent(text)}` : contacts.whatsapp;

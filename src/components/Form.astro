@@ -12,11 +12,11 @@ if (!formspreeId) {
 const endpoint = `https://formspree.io/f/${formspreeId}`;
 
 const fieldClass = "field";
-const labelClass = "mb-2 block font-medium";
+const labelClass = "mb-2 block text-[0.9375rem] font-medium";
 const errorClass = "mt-2 text-sm text-danger";
 ---
 
-<div class="w-full max-w-[34rem]">
+<div class="w-full">
   <form id="contactForm" action={endpoint} method="POST" class="flex flex-col gap-5">
     <div>
       <label for="field-name" class={labelClass}>Как вас зовут</label>
@@ -61,9 +61,9 @@ const errorClass = "mt-2 text-sm text-danger";
     <button
       id="formSubmit"
       type="submit"
-      class="btn self-stretch disabled:opacity-60 md:self-start"
+      class="btn mt-2 self-stretch disabled:opacity-60 sm:self-start"
     >
-      Отправить
+      Отправить заявку
     </button>
   </form>
 
@@ -72,9 +72,9 @@ const errorClass = "mt-2 text-sm text-danger";
     hidden
     tabindex="-1"
     role="status"
-    class="border-l-2 border-accent py-1 pl-4"
+    class="rounded-2xl bg-surface p-6"
   >
-    <p class="text-lg font-semibold">Спасибо, отвечу в течение дня.</p>
+    <p class="text-lg font-semibold">Заявка отправлена. Отвечу в течение дня.</p>
   </div>
 </div>
 

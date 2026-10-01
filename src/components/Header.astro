@@ -1,21 +1,23 @@
 ---
 import { Image } from 'astro:assets';
 import salima from '../assets/salima.jpg';
-import { contacts } from '../data/contacts';
+import { contacts, whatsapp } from '../data/contacts';
 
 // Якоря пишем от корня, чтобы ссылки работали и с /projects, и со страницы 404.
 const navLinks = [
   { name: "Работы", href: "/#works" },
-  { name: "Что я делаю", href: "/#services" },
+  { name: "Цены", href: "/#services" },
   { name: "Как я работаю", href: "/#process" },
   { name: "Контакты", href: "/#contacts" },
 ];
 
 const iconButton =
-  "flex h-11 w-11 items-center justify-center rounded-md border border-border text-text hover:border-border-strong";
+  "flex h-11 w-11 items-center justify-center rounded-full border border-border text-text hover:border-border-strong";
 ---
-<header class="bg-surface-raised">
-  <div class="mx-auto flex max-w-[1120px] flex-row items-center justify-between gap-6 px-5 py-3">
+<!-- Шапка — часть ночной полосы и липнет к верху: кнопка «написать»
+     на десктопе всегда под рукой. -->
+<header class="band sticky top-0 z-40 border-b border-border">
+  <div class="wrap flex items-center justify-between gap-6 py-3">
     <a href="/" class="flex items-center gap-3" aria-label="На главную">
       <Image
         src={salima}
@@ -24,14 +26,17 @@ const iconButton =
         height={96}
         densities={[1, 2]}
         loading="eager"
-        class="h-11 w-11 rounded-full border border-border object-cover"
+        class="h-10 w-10 rounded-full object-cover ring-2 ring-sun"
       />
-      <span class="font-bold">{contacts.name}</span>
+      <span class="flex flex-col leading-tight">
+        <span class="font-display text-[0.9375rem] font-semibold">{contacts.name}</span>
+        <span class="text-xs text-text-muted">сайты для бизнеса</span>
+      </span>
     </a>
 
-    <nav class="hidden md:flex md:flex-row md:items-center md:gap-7" aria-label="Основное меню">
+    <nav class="hidden md:flex md:items-center md:gap-8" aria-label="Основное меню">
       {navLinks.map(({ name, href }) => (
-        <a href={href} class="text-text underline-offset-4 hover:text-accent hover:underline">
+        <a href={href} class="text-[0.9375rem] text-text-muted transition-colors hover:text-text">
           {name}
         </a>
       ))}
@@ -39,10 +44,10 @@ const iconButton =
 
     <div class="flex items-center gap-2">
       <a
-        href={contacts.whatsapp}
+        href={whatsapp()}
         target="_blank"
         rel="noopener noreferrer"
-        class="btn hidden lg:inline-flex"
+        class="btn hidden min-h-11 py-2 text-[0.9375rem] lg:inline-flex"
       >
         Написать в WhatsApp
       </a>
@@ -74,30 +79,28 @@ const iconButton =
     </div>
   </div>
 
-  <!-- Выпадающее меню: отдельный блок под строкой шапки, а не внутри неё.
-       Видимостью на десктопе управляет только CSS (md:hidden), состоянием
+  <!-- Видимостью на десктопе управляет только CSS (md:hidden), состоянием
        на телефоне — атрибут hidden. Они не конфликтуют. -->
   <nav
     id="mobileNav"
     hidden
-    class="flex flex-col px-5 pb-3 md:hidden"
+    class="wrap flex flex-col pb-3 md:hidden"
     aria-label="Мобильное меню"
   >
     {navLinks.map(({ name, href }) => (
-      <a href={href} class="flex min-h-[44px] items-center text-text">{name}</a>
+      <a href={href} class="flex min-h-12 items-center border-t border-border text-text">{name}</a>
     ))}
   </nav>
 </header>
 
-<!-- Липкая кнопка: на телефоне человек читает с прокруткой, и связаться
-     должно быть можно в любой момент, не возвращаясь наверх. Высота и
-     запас под жест "домой" на айфоне учтены в отступе body (--sticky-cta).
-     Рамка фокуса уходит внутрь: снаружи её срезал бы край экрана. -->
+<!-- Липкая кнопка: на телефоне связаться можно в любой момент, не
+     возвращаясь наверх. Высота и запас под жест «домой» на айфоне учтены
+     в отступе body (--sticky-cta). -->
 <a
-  href={contacts.whatsapp}
+  href={whatsapp()}
   target="_blank"
   rel="noopener noreferrer"
-  class="fixed inset-x-0 bottom-0 z-50 flex min-h-[var(--sticky-cta)] items-center justify-center bg-accent pb-[env(safe-area-inset-bottom,0px)] text-center font-medium text-on-accent focus-visible:outline-offset-[-4px] lg:hidden"
+  class="fixed inset-x-0 bottom-0 z-50 flex min-h-[var(--sticky-cta)] items-center justify-center bg-sun pb-[env(safe-area-inset-bottom,0px)] text-center font-semibold text-on-sun shadow-[0_-8px_24px_-12px_rgb(0_0_0/0.3)] focus-visible:outline-offset-[-4px] lg:hidden"
 >
   Написать в WhatsApp
 </a>
@@ -132,21 +135,20 @@ const iconButton =
       }
     });
 
-    // Ушли на десктопную ширину — сбрасываем состояние, чтобы при возврате
-    // на узкий экран меню не оказалось открытым само по себе.
     desktop.addEventListener("change", (event) => {
       if (event.matches) setOpen(false);
     });
   }
 
   // === ПЕРЕКЛЮЧАТЕЛЬ ТЕМЫ ===
-  // Светлая тема — по умолчанию, в localStorage попадает только выбор
-  // "dark". Тема уже применена скриптом в <head>, здесь только переключение.
+  // Светлая тема — по умолчанию, тема уже применена скриптом в <head>.
   const themeToggle = document.getElementById("themeToggle");
   const root = document.documentElement;
 
   themeToggle?.addEventListener("click", () => {
     const isDark = root.classList.toggle("dark");
-    localStorage.setItem("theme", isDark ? "dark" : "light");
+    try {
+      localStorage.setItem("theme", isDark ? "dark" : "light");
+    } catch {}
   });
 </script>
