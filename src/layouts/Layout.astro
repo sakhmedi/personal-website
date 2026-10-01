@@ -18,7 +18,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 // её видно размером с ноготь.
 const ogImage = new URL("/og.png", Astro.site ?? Astro.url);
 const ogImageAlt =
-  "Надпись «Делаю сайты для бизнеса в Астане», под ней подпись «Салима · Астана»";
+  "Надпись «Делаю сайты для бизнеса в Астане» на тёмном стекле двери, под ней «Салима · Астана» и жёлтая наклейка «Написать в WhatsApp»";
 ---
 
 <!doctype html>
@@ -48,14 +48,11 @@ const ogImageAlt =
 		<meta name="twitter:image:alt" content={ogImageAlt} />
 
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+		<meta name="theme-color" content="#0e2a2f" />
 		<script is:inline>
-			// Ставим тему до первой отрисовки, иначе тёмная тема мигает светлым.
-			// По умолчанию светлая; в хранилище попадает только осознанный выбор.
-			try {
-				if (localStorage.getItem("theme") === "dark") {
-					document.documentElement.classList.add("dark");
-				}
-			} catch (e) {}
+			// Метка для CSS: JavaScript работает, створкам витрины можно
+			// появиться и разъехаться. Без неё створок нет вовсе.
+			document.documentElement.classList.add("js");
 		</script>
 	</head>
 	<body>

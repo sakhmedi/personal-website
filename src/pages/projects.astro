@@ -5,21 +5,27 @@ import { projects } from '../data/projects';
 ---
 <Layout
   title="Работы"
-  description="Сайты, которые я сделала."
+  description="Сайты, которые я сделала: концепты, демо и учебные проекты."
 >
-  <section class="mx-auto max-w-[1120px] px-5 py-16 md:py-24">
-    <h1 class="mb-4">Работы</h1>
-    <p class="measure mb-8 text-text-muted">
-      Под каждой работой написано, что это. Концепт — сайт, который я сделала
-      не по заказу, а чтобы показать, каким может быть сайт такого бизнеса.
-      Демо — образец, который показывает, как всё работает, на заранее
-      подготовленных примерах. Учебный проект — сайт, на котором я училась.
-    </p>
+  <!-- Витрина целиком: все работы на экранах телефонов. Створок здесь нет,
+       человек пришёл сюда именно смотреть. -->
+  <section class="bg-glass pt-6 pb-16 md:pb-24">
+    <div class="shell">
+      <h1 class="vinyl sign-xl mb-6">Работы</h1>
+      <p class="measure mb-10 text-vinyl-muted">
+        Под каждой работой написано, что это. Концепт — сайт, который я сделала
+        не по заказу, а чтобы показать, каким может быть сайт такого бизнеса.
+        Демо — образец, который показывает, как всё работает, на заранее
+        подготовленных примерах. Учебный проект — сайт, на котором я училась.
+      </p>
 
-    <div class="grid gap-x-6 gap-y-12 md:grid-cols-2">
-      {projects.map((project, index) => (
-        <Cards project={project} eager={index === 0} />
-      ))}
+      <div class="window px-4 pt-10 pb-10 md:px-8">
+        <div class="grid gap-x-6 gap-y-14 sm:grid-cols-2 xl:grid-cols-4">
+          {projects.map((project, index) => (
+            <Cards project={project} eager={index < 2} />
+          ))}
+        </div>
+      </div>
     </div>
   </section>
 </Layout>

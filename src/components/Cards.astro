@@ -5,7 +5,7 @@ import type { Project } from '../data/projects';
 
 interface Props {
   project: Project;
-  /** Первая карточка на главной видна сразу — её картинку грузим не лениво. */
+  /** Первая работа видна сразу — её картинку грузим не лениво. */
   eager?: boolean;
 }
 
@@ -22,50 +22,40 @@ const screen = project.image
   ? screens[`../assets/screens/${project.image}`]?.default
   : undefined;
 
-// Домен показываем вместо слов "Открыть сайт": адрес можно проверить,
-// обещание — нет. Параметры и www. только мешают читать.
+// Домен показываем рядом со словами "Открыть сайт": адрес можно
+// проверить, обещание — нет. Параметры и www. только мешают читать.
 const host = new URL(project.url).hostname.replace(/^www\./, '');
 ---
 
-<!-- Работа лежит прямо на листе. Единственная рамка на всю карточку —
-     рамка скриншота: она отделяет светлую чужую страницу от светлого
-     листа и держит вес, который раньше делили коробка, подложка и текст. -->
-<article class="group relative flex flex-col">
+<!-- Работа в витрине: сайт на экране телефона, как его увидит клиент,
+     под ним на нитке бумажная бирка с названием и статусом. Ссылка
+     растянута на всю работу через ::after: на телефоне так не промахнуться. -->
+<article class="group relative flex flex-col items-center self-start">
   {screen && (
-    <Image
-      src={screen}
-      alt={project.imageAlt}
-      widths={[440, 880]}
-      sizes="(min-width: 768px) 548px, calc(100vw - 2.5rem)"
-      width={880}
-      height={550}
-      loading={eager ? 'eager' : 'lazy'}
-      fetchpriority={eager ? 'high' : 'auto'}
-      class="shot"
-    />
+    <div class="phone w-full max-w-[17rem] transition-transform duration-200 group-hover:-translate-y-1 motion-reduce:transition-none motion-reduce:group-hover:translate-y-0">
+      <Image
+        src={screen}
+        alt={project.imageAlt}
+        widths={[320, 640]}
+        sizes="17rem"
+        loading={eager ? 'eager' : 'lazy'}
+        fetchpriority={eager ? 'high' : 'auto'}
+      />
+    </div>
   )}
 
-  <!-- Подпись под работой: название, следом статус в подзаголовке.
-       Всё, кроме названия, набрано мельче основного текста и приглушённым,
-       чтобы не спорить со скриншотом. -->
-  <div class="flex grow flex-col gap-2 pt-4">
-    <h3>{project.title}</h3>
+  <div class="tag mt-6 flex w-full max-w-[19rem] flex-col gap-1.5">
+    <h3 class="text-lg font-bold leading-tight">{project.title}</h3>
+    <p class="text-[0.9375rem] font-medium text-ink-muted">{project.subtitle}</p>
+    <p class="text-[0.9375rem] leading-relaxed">{project.description}</p>
 
-    <div class="flex flex-col gap-1.5 text-[0.9375rem] text-text-muted">
-      <p>{project.subtitle}</p>
-      <p class="measure leading-relaxed">{project.description}</p>
-    </div>
-
-    <!-- Ссылка растянута на всю карточку через ::after: на телефоне
-         промахнуться по адресу в 13px иначе слишком легко. Своей высоты
-         у неё тоже хватает — 44px вместе с отступами. -->
     <a
       href={project.url}
       target="_blank"
       rel="noopener noreferrer"
-      class="addr mt-auto inline-flex min-h-[44px] items-center pt-2 text-accent underline underline-offset-4 after:absolute after:inset-0 hover:text-accent-hover"
+      class="inline-flex min-h-[44px] flex-wrap items-center gap-x-1.5 pt-2 text-[0.9375rem] font-medium text-link underline underline-offset-[0.2em] after:absolute after:inset-0 group-hover:decoration-2"
     >
-      {host}
+      Открыть сайт <span class="font-normal text-ink-muted no-underline">{host}</span>
       <span class="sr-only">(откроется в новой вкладке)</span>
     </a>
   </div>

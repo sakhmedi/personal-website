@@ -1,292 +1,522 @@
 @import "tailwindcss";
-@import "@fontsource-variable/golos-text";
 
 /* ------------------------------------------------------------------
-   JetBrains Mono — один файл: латиница, начертание 400.
-   Моноширинным набраны только веб-адреса, поэтому и кириллический
-   поднабор, и вариативная версия пакета (40 КБ против 21 КБ) здесь
-   лишние. Подключаем нужный файл руками, а не через index.css.
+   Шрифты. Fira Sans — текст, Fira Sans Extra Condensed 800 — надписи
+   плёнкой на стекле и цены. У обоих есть набор cyrillic-ext, то есть
+   казахские ә ғ қ ң ө ұ ү һ: казахская версия сайта не потребует
+   другого шрифта. Каждый файл подключён с unicode-range, браузер
+   скачивает только те наборы, буквы из которых есть на странице.
    ------------------------------------------------------------------ */
-@font-face {
-  font-family: "JetBrains Mono";
-  font-style: normal;
-  font-display: swap;
-  font-weight: 400;
-  src: url("@fontsource/jetbrains-mono/files/jetbrains-mono-latin-400-normal.woff2")
-    format("woff2");
-  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
-    U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+20AC, U+2122, U+2191, U+2193,
-    U+2212, U+2215, U+FEFF, U+FFFD;
-}
+@import "@fontsource/fira-sans/400.css";
+@import "@fontsource/fira-sans/500.css";
+@import "@fontsource/fira-sans/700.css";
+@import "@fontsource/fira-sans-extra-condensed/800.css";
 
 /* ------------------------------------------------------------------
-   Дизайн-токены.
-   Имена говорят о назначении, а не о цвете. Значения меняются только
-   здесь; в разметке цвета не пишем.
+   Витрина. Сайт устроен как фасад небольшой мастерской: тёмное стекло
+   двери и витрины, белая плёнка на нём, светлые алюминиевые таблички
+   с текстом и одна жёлтая наклейка — только для "написать".
 
-   Светлая тема — основная: сайт открывают днём, с телефона, и светлый
-   лист читается как документ. Тёмная включается кнопкой в шапке.
+   Всё плоское: ни теней, ни градиентов, ни размытия под стекло.
+   Глубину дают материалы: стекло темнее таблички, табличка светлее
+   стекла, наклейка ярче всего.
 
-   Лист заметно плотнее белого: линий на странице нет, и шапка обязана
-   отделяться от него сама. Разница по светлоте L* — 9.6 в светлой теме
-   и 8.5 в тёмной (было 5.5 и 3.6, на дешёвом экране это не читалось).
-
-   Контраст (норма AA — 4.5, целимся в 5):
-     текст / фон            14.44   тёмная 14.51
-     приглушённый / фон      5.55   тёмная  6.85
-     акцент / фон            6.85   тёмная  8.54
-     текст на кнопке         7.92   тёмная  9.61
-     ошибка / фон            6.38   тёмная  8.04
-     рамка скриншота / фон   4.85   тёмная  3.67  (норма для не-текста 3)
+   Контраст (норма AA — 4.5):
+     плёнка / стекло                15.10
+     приглушённая плёнка / стекло    8.19   / глубокое стекло 9.76
+     текст / табличка               14.31
+     приглушённый / табличка         5.98
+     ссылка / табличка               7.45
+     текст на наклейке              12.36
+     ошибка / табличка               6.13
+     рамка поля / белое поле         4.46   (норма для не-текста 3)
+     рама витрины / стекло           3.48
    ------------------------------------------------------------------ */
 
 :root {
-  color-scheme: light;
-
-  --surface: #e3e3e9;
-  --surface-raised: #ffffff;
-  --text: #16131e;
-  --text-muted: #545065;
-  --accent: #4f27b0;
-  --accent-hover: #3b1c89;
-  --on-accent: #ffffff;
-  --border: #bcbbc8;
-  --border-strong: #5e5a70;
-  --danger: #a81c1c;
-
-  /* Высота липкой кнопки на телефоне. Отступ снизу у body считается
-     отсюда же, чтобы подвал и последнее поле формы не уезжали под неё. */
-  --sticky-cta: 3.5rem;
-}
-
-:root.dark {
   color-scheme: dark;
 
-  --surface: #17161c;
-  --surface-raised: #282730;
-  --text: #edecf2;
-  --text-muted: #a5a2b2;
-  --accent: #b49cff;
-  --accent-hover: #cdbbff;
-  --on-accent: #130f1e;
-  --border: #373544;
-  --border-strong: #77748a;
-  --danger: #ff9a93;
-}
+  --glass: #0e2a2f;
+  --glass-deep: #09191c;
+  --frame: #5d7f84;
+  --vinyl: #ffffff;
+  --vinyl-muted: #a9c4c6;
 
-/* ------------------------------------------------------------------
-   Полоса (.band). Секция во всю ширину, залитая плотным индиго.
-   Новых имён не заводим: внутри полосы те же десять токенов получают
-   другие значения, поэтому кнопки, ссылки, поля формы и чипы работают
-   там без единой правки в разметке. Значения одни для обеих тем:
-   полоса — предмет на листе, а не часть листа, и меняться вместе с
-   бумагой ей незачем.
+  --plate: #e4e8ea;
+  --plate-line: #8d9a9e;
+  --ink: #121a1c;
+  --ink-muted: #4b585b;
+  --link: #0e4f5a;
+  --field: #ffffff;
+  --field-border: #6b7a7e;
 
-   Контраст внутри полосы: текст 11.42, приглушённый 6.69, ссылка 7.13,
-   текст на кнопке 9.79, ошибка 6.31, рамка поля 3.47.
-   ------------------------------------------------------------------ */
-.band {
-  --surface: #332961;
-  --surface-raised: #3d3170;
-  --text: #f2f0fa;
-  --text-muted: #bdb7d6;
-  --accent: #c9b6ff;
-  --accent-hover: #dcd0ff;
-  --on-accent: #1a1430;
-  --border: #55498f;
-  --border-strong: #918ab3;
-  --danger: #ff9a93;
+  --sticker: #ffd31a;
+  --sticker-hover: #f2c400;
+  --on-sticker: #1c1800;
 
-  color-scheme: dark;
+  --danger-plate: #a3201a;
 
-  /* Заголовки и абзацы цвет не назначают, а наследуют его от body,
-     где var(--text) уже посчитан. Поэтому полоса обязана назначить
-     цвет сама, иначе внутри неё останутся чернила светлой темы. */
-  background-color: var(--surface);
-  color: var(--text);
+  /* Корпус телефона в витрине. */
+  --phone: #030a0b;
+
+  /* Высота липкой наклейки на телефоне. Отступ снизу у body считается
+     отсюда же, чтобы подвал не уезжал под неё. */
+  --sticky-cta: 3.75rem;
 }
 
 @theme {
-  --font-sans: "Golos Text Variable", system-ui, sans-serif;
-  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo,
-    monospace;
+  --font-sans: "Fira Sans", system-ui, sans-serif;
+  --font-sign: "Fira Sans Extra Condensed", "Fira Sans", system-ui, sans-serif;
 }
 
-/* inline = Tailwind подставляет var(--surface) прямо в утилиту bg-surface,
-   поэтому смена темы работает без пересборки CSS. */
 @theme inline {
-  --color-surface: var(--surface);
-  --color-surface-raised: var(--surface-raised);
-  --color-text: var(--text);
-  --color-text-muted: var(--text-muted);
-  --color-accent: var(--accent);
-  --color-accent-hover: var(--accent-hover);
-  --color-on-accent: var(--on-accent);
-  --color-border: var(--border);
-  --color-border-strong: var(--border-strong);
-  --color-danger: var(--danger);
+  --color-glass: var(--glass);
+  --color-glass-deep: var(--glass-deep);
+  --color-frame: var(--frame);
+  --color-vinyl: var(--vinyl);
+  --color-vinyl-muted: var(--vinyl-muted);
+  --color-plate: var(--plate);
+  --color-plate-line: var(--plate-line);
+  --color-ink: var(--ink);
+  --color-ink-muted: var(--ink-muted);
+  --color-link: var(--link);
+  --color-sticker: var(--sticker);
+  --color-on-sticker: var(--on-sticker);
 }
 
 @layer base {
+  html {
+    background-color: var(--glass-deep);
+    scrollbar-color: var(--frame) var(--glass-deep);
+  }
+
   body {
-    background-color: var(--surface);
-    color: var(--text);
+    /* Под подвалом остаётся место для липкой наклейки: пусть оно будет
+       продолжением подвала, а не полосой другого стекла. */
+    background-color: var(--glass-deep);
+    color: var(--vinyl);
     font-family: var(--font-sans);
-    font-size: 1rem;
-    line-height: 1.6;
-    /* Место под липкую кнопку. env() на не-айфонах равен нулю. */
+    font-size: 1.0625rem;
+    line-height: 1.55;
+    font-variant-numeric: tabular-nums;
     padding-bottom: calc(var(--sticky-cta) + env(safe-area-inset-bottom, 0px));
   }
 
   @media (min-width: 768px) {
     body {
-      font-size: 1.0625rem;
+      font-size: 1.125rem;
     }
   }
 
-  /* Липкая кнопка живёт до 1024px — до тех пор, пока её не
-     сменит кнопка в шапке. Отступ снизу убирается вместе с ней. */
+  /* Липкая наклейка живёт до 1024px: дальше её сменяет наклейка в шапке. */
   @media (min-width: 1024px) {
     body {
       padding-bottom: 0;
     }
   }
 
-  h1 {
-    font-size: clamp(1.875rem, 1.2rem + 3vw, 2.875rem);
-    font-weight: 800;
-    line-height: 1.12;
-    letter-spacing: -0.02em;
-    text-wrap: balance;
-  }
-
-  h2 {
-    font-size: clamp(1.375rem, 1.15rem + 1vw, 1.625rem);
-    font-weight: 700;
-    line-height: 1.2;
-    letter-spacing: -0.01em;
-  }
-
-  h3 {
-    font-size: 1.1875rem;
-    font-weight: 700;
-    line-height: 1.25;
-  }
-
-  @media (min-width: 768px) {
-    h3 {
-      font-size: 1.25rem;
-    }
-  }
-
   ::selection {
-    background-color: var(--accent);
-    color: var(--on-accent);
+    background-color: var(--sticker);
+    color: var(--on-sticker);
   }
 
-  /* Видимая рамка фокуса на всём, по чему можно ходить с клавиатуры. */
+  /* Рамка фокуса — жёлтая на стекле, тёмная на табличке. */
   :focus-visible {
-    outline: 2px solid var(--accent);
-    outline-offset: 2px;
+    outline: 3px solid var(--sticker);
+    outline-offset: 3px;
     border-radius: 2px;
+  }
+
+  .plate :focus-visible,
+  .tag :focus-visible {
+    outline-color: var(--glass);
+  }
+
+  input,
+  textarea {
+    caret-color: var(--glass);
   }
 }
 
 @layer components {
-  /* Длина строки. 34rem — это 60–68 знаков кириллицы, до 80 не доходит. */
+  /* Колонка страницы. */
+  .shell {
+    margin-inline: auto;
+    max-width: 1200px;
+    padding-inline: 1.25rem;
+  }
+
+  @media (min-width: 768px) {
+    .shell {
+      padding-inline: 2rem;
+    }
+  }
+
+  /* Длина строки: 36rem — около 65 знаков кириллицы. */
   .measure {
-    max-width: 34rem;
+    max-width: 36rem;
   }
 
-  /* Адрес: всё, что можно вбить в адресную строку или мессенджер. */
-  .addr {
-    font-family: var(--font-mono);
-    font-size: 0.8125rem;
-    line-height: 1.45;
-    word-break: break-all;
+  /* ---------------------------------------------------------------
+     Плёнка: надписи, вырезанные из белой плёнки и наклеенные на стекло.
+     Узкий жирный гротеск прописными, как на дверях магазинов.
+     --------------------------------------------------------------- */
+  .vinyl {
+    font-family: var(--font-sign);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.01em;
+    line-height: 0.96;
+    text-wrap: balance;
   }
 
-  /* Цена. Моноширинным идёт только число: в нашем поднаборе
-     JetBrains Mono нет ни кириллицы ("от" рисовал бы системный
-     моноширинный шрифт, разный на каждой ос), ни знака тенге — его
-     нет и в Golos, его всегда рисует система. Переносы запрещены:
-     на 375px "от 80 000 ₸" остаётся одной строкой целиком. */
+  .sign-xl {
+    font-size: clamp(3.25rem, 2rem + 5.4vw, 5.75rem);
+  }
+
+  .sign-lg {
+    font-size: clamp(2.25rem, 1.6rem + 2.8vw, 3.5rem);
+  }
+
+  .sign-sm {
+    font-size: 1.125rem;
+    letter-spacing: 0.06em;
+  }
+
+  /* ---------------------------------------------------------------
+     Табличка: светлый алюминий на двух винтах. На ней живёт всё, что
+     читают подолгу: цены, шаги, текст о себе, форма.
+     --------------------------------------------------------------- */
+  .plate {
+    position: relative;
+    background-color: var(--plate);
+    color: var(--ink);
+    border-radius: 4px;
+    padding: 2rem 1.25rem 1.5rem;
+  }
+
+  @media (min-width: 768px) {
+    .plate {
+      padding: 2.5rem 2.5rem 2rem;
+    }
+  }
+
+  /* Винты в верхних углах. */
+  .plate::before,
+  .plate::after {
+    content: "";
+    position: absolute;
+    top: 0.625rem;
+    width: 0.625rem;
+    height: 0.625rem;
+    border-radius: 50%;
+    background-color: var(--plate-line);
+  }
+
+  .plate::before {
+    left: 0.75rem;
+  }
+
+  .plate::after {
+    right: 0.75rem;
+  }
+
+  .plate-title {
+    font-family: var(--font-sign);
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    font-size: 1rem;
+    color: var(--ink-muted);
+  }
+
+  .plate a:not(.btn-glass) {
+    color: var(--link);
+    text-decoration: underline;
+    text-underline-offset: 0.2em;
+  }
+
+  /* Строка прайса: название, пунктир до цены, цена. */
+  .price-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: baseline;
+    gap: 0.75rem;
+  }
+
+  .price-row .leader {
+    border-bottom: 2px dotted var(--plate-line);
+    transform: translateY(-0.3em);
+  }
+
   .price {
-    font-size: 0.9375rem;
-    /* Цена стоит внутри жирного подзаголовка, а в нашем поднаборе
-       JetBrains Mono только начертание 400: без этой строки браузер
-       подделал бы жирный сам и цифры поплыли бы. */
-    font-weight: 400;
+    font-family: var(--font-sign);
+    font-weight: 800;
+    font-size: clamp(1.75rem, 1.3rem + 1.8vw, 2.5rem);
+    line-height: 1;
     white-space: nowrap;
   }
 
-  .price .num {
-    font-family: var(--font-mono);
+  .price small {
+    font-size: 0.55em;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
   }
 
-  .btn {
+  /* Список "что входит": квадратные метки вместо точек. */
+  .ticks > li {
+    position: relative;
+    padding-left: 1.25rem;
+  }
+
+  .ticks > li::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0.6em;
+    width: 0.45rem;
+    height: 0.45rem;
+    background-color: var(--glass);
+  }
+
+  /* ---------------------------------------------------------------
+     Наклейка: единственное яркое пятно на сайте и единственная
+     главная кнопка — "написать". Белая вырубка по краю, как у
+     настоящей наклейки на стекле.
+     --------------------------------------------------------------- */
+  .sticker {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.625rem;
+    min-height: 3.5rem;
+    padding: 0.75rem 1.5rem;
+    border: 3px solid var(--vinyl);
+    border-radius: 12px;
+    background-color: var(--sticker);
+    color: var(--on-sticker);
+    font-family: var(--font-sign);
+    font-weight: 800;
+    font-size: 1.375rem;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    line-height: 1;
+    transition: background-color 140ms ease, transform 140ms ease;
+  }
+
+  .sticker:hover {
+    background-color: var(--sticker-hover);
+  }
+
+  .sticker:active {
+    transform: translateY(1px);
+  }
+
+  .sticker svg {
+    flex: none;
+  }
+
+  /* Обычная кнопка — стекло: для всего, что не "написать". */
+  .btn-glass {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     min-height: 3rem;
-    padding: 0.75rem 1.25rem;
-    border-radius: 6px;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    background-color: var(--glass);
+    color: var(--vinyl);
     font-weight: 500;
-    background-color: var(--accent);
-    color: var(--on-accent);
-    transition: background-color 120ms ease;
+    transition: background-color 140ms ease;
   }
 
-  .btn:hover {
-    background-color: var(--accent-hover);
+  .btn-glass:hover {
+    background-color: var(--glass-deep);
   }
 
+  .btn-glass:disabled {
+    opacity: 0.6;
+  }
+
+  /* Ссылка на стекле. */
+  .vinyl-link {
+    color: var(--vinyl);
+    text-decoration: underline;
+    text-decoration-color: var(--vinyl-muted);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 0.25em;
+  }
+
+  .vinyl-link:hover {
+    text-decoration-color: var(--vinyl);
+  }
+
+  /* ---------------------------------------------------------------
+     Витрина: стекло с алюминиевой рамой, в нём работы на экранах
+     телефонов, у каждой бумажная бирка.
+     --------------------------------------------------------------- */
+  .window {
+    position: relative;
+    overflow: hidden;
+    border: 6px solid var(--frame);
+    border-radius: 4px;
+    background-color: var(--glass-deep);
+  }
+
+  .phone {
+    border-radius: 2.25rem;
+    background-color: var(--phone);
+    padding: 0.5rem;
+    border: 1px solid var(--frame);
+  }
+
+  .phone img {
+    display: block;
+    width: 100%;
+    height: auto;
+    border-radius: 1.75rem;
+  }
+
+  /* Бирка: бумага на нитке, с пробитой дыркой. */
+  .tag {
+    position: relative;
+    background-color: var(--field);
+    color: var(--ink);
+    border-radius: 3px 3px 6px 6px;
+    padding: 1.5rem 1rem 1rem;
+  }
+
+  .tag::before {
+    content: "";
+    position: absolute;
+    top: 0.5rem;
+    left: 50%;
+    width: 0.5rem;
+    height: 0.5rem;
+    margin-left: -0.25rem;
+    border-radius: 50%;
+    background-color: var(--glass-deep);
+  }
+
+  /* Нитка от телефона к бирке. */
+  .tag::after {
+    content: "";
+    position: absolute;
+    bottom: 100%;
+    left: 50%;
+    width: 1px;
+    height: 1.5rem;
+    background-color: var(--vinyl-muted);
+  }
+
+  /* Ручка двери: вертикальная алюминиевая труба на двух стойках,
+     отнесённая от стекла. Стойки — то, что отличает её от полосы
+     прокрутки. */
+  .handle {
+    width: 0.75rem;
+    border-radius: 0.375rem;
+    background-color: var(--frame);
+  }
+
+  .handle::before,
+  .handle::after {
+    content: "";
+    position: absolute;
+    right: 100%;
+    width: 0.75rem;
+    height: 0.375rem;
+    background-color: var(--frame);
+  }
+
+  .handle::before {
+    top: 0.75rem;
+  }
+
+  .handle::after {
+    bottom: 0.75rem;
+  }
+
+  /* Фото за стеклом: левый край растворяется в стекле, чтобы фото
+     читалось как человек внутри, а не как вставленная рамка. */
+  .behind-glass {
+    mask-image: linear-gradient(to right, transparent, #000 45%);
+  }
+
+  /* ---------------------------------------------------------------
+     Форма на табличке.
+     --------------------------------------------------------------- */
   .field {
     width: 100%;
     min-height: 3rem;
     padding: 0.75rem;
     border-radius: 6px;
-    border: 1px solid var(--border-strong);
-    background-color: var(--surface-raised);
-    color: var(--text);
+    border: 1px solid var(--field-border);
+    background-color: var(--field);
+    color: var(--ink);
     transition: border-color 120ms ease;
   }
 
   .field::placeholder {
-    color: var(--text-muted);
+    color: var(--ink-muted);
   }
 
   .field:hover {
-    border-color: var(--accent);
+    border-color: var(--glass);
   }
 
-  /* Скриншот работы: волосяная рамка поверх подложки цвета страницы.
-     Без неё светлый скриншот сливается со светлым листом. */
-  .shot {
-    display: block;
-    width: 100%;
-    border: 1px solid var(--border-strong);
-    border-radius: 3px;
-  }
-
-  .group:hover .shot,
-  .group:focus-within .shot,
-  .group:active .shot {
-    border-color: var(--accent);
+  .field[aria-invalid="true"] {
+    border-color: var(--danger-plate);
+    border-width: 2px;
   }
 }
 
-/* Единственная анимация на сайте: карточка работы отвечает на касание,
-   наведение и фокус — скриншот приподнимается. Всё остальное движение
-   в проекте — смена цвета у кнопок и ссылок за 120 мс. */
+/* ------------------------------------------------------------------
+   Движение. Одно на весь сайт: створки витрины разъезжаются один раз,
+   когда витрина попадает на экран. Створки полупрозрачные, работы
+   видно сквозь них с самого начала, и ссылки под ними нажимаются:
+   движение ничего не прячет. Без JavaScript и при "уменьшить
+   движение" створок нет вовсе.
+   ------------------------------------------------------------------ */
+.leaf {
+  display: none;
+}
+
 @media (prefers-reduced-motion: no-preference) {
-  .shot {
-    transition: transform 180ms ease, border-color 180ms ease;
+  .js .leaf {
+    display: block;
+    position: absolute;
+    inset-block: 0;
+    width: 50%;
+    z-index: 2;
+    pointer-events: none;
+    background-color: rgb(14 42 47 / 0.82);
+    transition: transform 1100ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
-  .group:hover .shot,
-  .group:focus-within .shot,
-  .group:active .shot {
-    transform: translateY(-4px);
+  .js .leaf-left {
+    left: 0;
+    border-right: 3px solid var(--frame);
   }
+
+  .js .leaf-right {
+    right: 0;
+    border-left: 3px solid var(--frame);
+  }
+
+  .js .is-open .leaf-left {
+    transform: translateX(-101%);
+  }
+
+  .js .is-open .leaf-right {
+    transform: translateX(101%);
+  }
+
+  .sticky-cta {
+    transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  }
+}
+
+/* Липкая наклейка уезжает вниз, пока на экране уже есть другая. */
+.sticky-cta.is-hidden {
+  transform: translateY(110%);
 }

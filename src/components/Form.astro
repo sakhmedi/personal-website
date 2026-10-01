@@ -13,10 +13,10 @@ const endpoint = `https://formspree.io/f/${formspreeId}`;
 
 const fieldClass = "field";
 const labelClass = "mb-2 block font-medium";
-const errorClass = "mt-2 text-sm text-danger";
+const errorClass = "mt-2 text-[0.9375rem] font-medium text-[var(--danger-plate)]";
 ---
 
-<div class="w-full max-w-[34rem]">
+<div class="w-full">
   <form id="contactForm" action={endpoint} method="POST" class="flex flex-col gap-5">
     <div>
       <label for="field-name" class={labelClass}>Как вас зовут</label>
@@ -41,7 +41,7 @@ const errorClass = "mt-2 text-sm text-danger";
 
     <div>
       <label for="field-email" class={labelClass}>
-        Почта<span class="text-text-muted">, если так удобнее</span>
+        Почта<span class="font-normal text-ink-muted">, если так удобнее</span>
       </label>
       <input id="field-email" name="email" type="email" autocomplete="email" class={fieldClass} />
       <p id="field-email-error" class={errorClass} hidden></p>
@@ -56,12 +56,12 @@ const errorClass = "mt-2 text-sm text-danger";
     <!-- Ловушка для спам-ботов: люди это поле не видят и не заполняют. -->
     <input type="text" name="_gotcha" tabindex="-1" autocomplete="off" hidden />
 
-    <p id="formError" class="text-sm text-danger" hidden></p>
+    <p id="formError" class="font-medium text-[var(--danger-plate)]" hidden></p>
 
     <button
       id="formSubmit"
       type="submit"
-      class="btn self-stretch disabled:opacity-60 md:self-start"
+      class="btn-glass self-stretch md:self-start"
     >
       Отправить
     </button>
@@ -72,9 +72,10 @@ const errorClass = "mt-2 text-sm text-danger";
     hidden
     tabindex="-1"
     role="status"
-    class="border-l-2 border-accent py-1 pl-4"
+    class="py-1"
   >
-    <p class="text-lg font-semibold">Спасибо, отвечу в течение дня.</p>
+    <p class="text-lg font-bold">Спасибо, отвечу в течение дня.</p>
+    <p class="mt-1 text-ink-muted">Если вспомните что-то ещё, напишите в WhatsApp.</p>
   </div>
 </div>
 

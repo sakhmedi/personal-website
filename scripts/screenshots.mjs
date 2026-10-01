@@ -7,7 +7,7 @@
 //
 // Запуск: npm run screens
 
-import { chromium } from 'playwright';
+import { chromium, devices } from 'playwright';
 import { mkdir } from 'node:fs/promises';
 import path from 'node:path';
 
@@ -15,7 +15,10 @@ import path from 'node:path';
 // из того же файла, что и сайт. Второго списка адресов не существует.
 import { projects } from '../src/data/projects.ts';
 
-const VIEWPORT = { width: 1440, height: 900 };
+// Снимаем так, как сайт видит клиент: с телефона. Профиль iPhone 13
+// задаёт не только размер 390x844, но и мобильный user agent и касания,
+// поэтому сайты работ отдают свою телефонную вёрстку, а не сжатую десктопную.
+const PHONE = devices['iPhone 13'];
 const DEVICE_SCALE_FACTOR = 2;
 const TIMEOUT = 45_000;
 
@@ -24,8 +27,8 @@ await mkdir(outDir, { recursive: true });
 
 const browser = await chromium.launch();
 const context = await browser.newContext({
-  viewport: VIEWPORT,
-  // 2 означает, что снимок выйдет 2880x1800: с запасом для экранов
+  ...PHONE,
+  // 2 означает, что снимок выйдет 780x1688: с запасом для экранов
   // с высокой плотностью пикселей. Размер под вёрстку подберёт Astro.
   deviceScaleFactor: DEVICE_SCALE_FACTOR,
   locale: 'ru-RU',
@@ -77,6 +80,10 @@ for (const project of projects) {
     // Шрифты приезжают отдельно от разметки; без этой строки текст
     // на снимке может оказаться системным.
     await page.evaluate(() => document.fonts.ready);
+
+    // Плашку "Powered by Netlify" хостинг вставляет поверх сайта
+    // отдельным iframe. Это не часть работы, а низ кадра она закрывала бы.
+    await page.evaluate(() => document.getElementById('nl-badge-frame')?.remove());
     // Если у работы задано смещение, прокручиваем до нужного блока.
     // Шапки у сайтов липкие, поэтому в кадр они попадают всё равно.
     if (project.screenshotScroll) {

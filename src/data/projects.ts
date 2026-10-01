@@ -18,8 +18,8 @@ export interface Project {
   screenshotUrl?: string;
   /**
    * На сколько пикселей прокрутить страницу перед снимком, если работу
-   * показывает не первый экран, а блок ниже. Без этого поля
-   * снимается первый экран.
+   * показывает не первый экран, а блок ниже. Считается по телефонной
+   * вёрстке сайта (390 px в ширину). Без этого поля снимается первый экран.
    */
   screenshotScroll?: number;
   /**
@@ -29,7 +29,7 @@ export interface Project {
    */
   screenshotStorage?: Record<string, string>;
   /**
-   * Имя файла скриншота в src/assets/projects (например "dala-coffee.png").
+   * Имя файла скриншота в src/assets/screens (например "dala-coffee.png").
    * Пустая строка означает, что скриншота ещё нет, и карточка просто
    * отрисуется без картинки.
    */
@@ -58,7 +58,7 @@ export const projects: Project[] = [
     description:
       "Шесть услуг, у каждой своя цена и кнопка записи. Записаться можно через форму, выбрав в ней нужную услугу. Ниже на странице карточки врачей, а кнопка WhatsApp видна на любом экране.",
     url: "https://dental-plus-kz.netlify.app/",
-    screenshotScroll: 605,
+    screenshotScroll: 890,
     screenshotStorage: { lang: "ru" },
     image: "dental-plus.png",
     imageAlt: "Раздел услуг с ценами на сайте стоматологии Дентал Плюс",
@@ -71,10 +71,10 @@ export const projects: Project[] = [
     description:
       "Сотрудник компании загружает рабочие файлы и задаёт по ним вопросы, а ответ собирается из содержимого документов. Понимает сканы и распознаёт речь. По ссылке открывается сама страница с заранее подготовленными ответами, а та часть, что читает документы, написана, но сейчас не запущена.",
     url: "https://shartai.netlify.app/",
-    screenshotScroll: 1526,
+    screenshotScroll: 2170,
     image: "shart-ai.png",
     imageAlt:
-      "Раздел возможностей на сайте Shart AI с тремя карточками",
+      "Раздел «Всё, что нужно вашей команде» на сайте Shart AI",
     featured: false,
   },
   {

@@ -1,0 +1,18 @@
+---
+// Значок "сообщение" для наклеек "написать". Свой, а не логотип WhatsApp:
+// чужой знак на собственной кнопке выглядел бы как реклама мессенджера.
+interface Props {
+  size?: number;
+}
+
+const { size = 24 } = Astro.props;
+---
+<svg viewBox="0 0 24 24" width={size} height={size} aria-hidden="true" fill="none">
+  <path
+    d="M4 5.5A1.5 1.5 0 0 1 5.5 4h13A1.5 1.5 0 0 1 20 5.5v9a1.5 1.5 0 0 1-1.5 1.5H10l-4.2 3.6c-.3.3-.8 0-.8-.4V16h0a1.5 1.5 0 0 1-1-1.4z"
+    stroke="currentColor"
+    stroke-width="2.25"
+    stroke-linejoin="round"
+  />
+  <path d="M8.5 9h7M8.5 12h4.5" stroke="currentColor" stroke-width="2.25" stroke-linecap="round" />
+</svg>

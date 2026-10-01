@@ -1,205 +1,391 @@
 ---
+import { Image } from 'astro:assets';
 import Layout from '../layouts/Layout.astro';
 import Cards from '../components/Cards.astro';
 import Form from '../components/Form.astro';
+import ChatIcon from '../components/ChatIcon.astro';
 import { featuredProjects } from '../data/projects';
 import { contacts } from '../data/contacts';
+import { bio, portrait } from '../data/about';
 
-// Секции разделены волосяной линией, а не коробками: единственный
-// прямоугольник на странице — карточка работы.
-const section = "mx-auto max-w-[1120px] px-5 py-16 md:py-24";
+// Тысячи отделяем узким неразрывным пробелом: "80 000" не разорвётся
+// на две строки и не расползётся, как с обычным пробелом.
+const thin = " ";
 
-// Всё, что можно вбить в адресную строку или в мессенджер, набрано
-// моноширинным. Подпись слева говорит, куда именно это вбивать.
+// Прайс. Цена "от" стоит только там, где нижняя граница честно известна;
+// у доработки её нет, она зависит от объёма.
+const services = [
+  {
+    name: "Сайт на одну страницу",
+    price: `80${thin}000`,
+    time: "обычно 2–3 дня",
+    about:
+      "Когда про вас должны узнать и написать, этого достаточно. Вы рассказываете о себе, а клиент нажимает кнопку и пишет вам.",
+    includes: [
+      "страница о вас и о том, что вы предлагаете",
+      "кнопка, чтобы клиент написал вам",
+      "сайт удобно открывать с телефона",
+      "два круга правок",
+      "домен и хостинг оформлены на вас",
+    ],
+  },
+  {
+    name: "Сайт из нескольких страниц",
+    price: `150${thin}000`,
+    time: "обычно около 7 дней",
+    about:
+      "Нужно рассказать больше, чем помещается на одну страницу. У услуг, цен и фотографий будет своё место.",
+    includes: [
+      "отдельные страницы для услуг, цен и фотографий",
+      "кнопка, чтобы клиент написал вам",
+      "сайт удобно открывать с телефона",
+      "два круга правок",
+      "домен и хостинг оформлены на вас",
+    ],
+  },
+  {
+    name: "Доработка сайта",
+    price: null,
+    time: null,
+    about:
+      "Сайт уже есть, но вам в нём что-то не нравится. Чаще всего его можно доработать, а не делать заново. Я посмотрю и честно скажу, что с ним стоит сделать.",
+    includes: [
+      "срок и цену назову, когда посмотрю сайт и мы договоримся, что в нём менять",
+      "если домен и хостинг у вас уже есть, работаю с ними",
+      "все аккаунты и доступы остаются у вас",
+    ],
+  },
+];
+
+// Режим работы: что происходит и сколько вы платите на каждом шаге.
+// Правая колонка, прочитанная сверху вниз, и есть вся схема оплаты.
+const steps = [
+  {
+    title: "Разговор",
+    pay: "0 ₸",
+    text: "Платить ничего не нужно. Вы расскажете про свой бизнес, я задам несколько вопросов. В конце разговора я называю срок и цену.",
+  },
+  {
+    title: "Предоплата",
+    pay: "50%",
+    text: `Если цена и срок подходят, вы платите половину, и я начинаю работу. Например, если сайт стоит 80${thin}000 ₸, сейчас вы платите 40${thin}000 ₸. Если по ходу понадобятся тексты или фотографии, напишу вам.`,
+  },
+  {
+    title: "Работа",
+    pay: "—",
+    payLabel: "без оплаты",
+    text: "Готовый сайт вы увидите до запуска. Откроете со своего телефона, посмотрите и скажете, что поправить. На этом шаге ещё можно поменять тексты и фотографии.",
+  },
+  {
+    title: "Правки",
+    pay: "50%",
+    text: "Два круга правок входят в цену, дальше по договорённости. Когда сайт вас устраивает, вы платите вторую половину.",
+  },
+  {
+    title: "Запуск",
+    pay: "Доступы у вас",
+    text: "Доступы — это логины и пароли от домена, хостинга и всего, на чём работает сайт. Я отдаю их вам, и сайт остаётся вашим. Если вы когда-нибудь уйдёте к другому разработчику, просить что-то у меня не придётся.",
+  },
+];
+
 const links = [
   { label: "Telegram", href: contacts.telegram, text: "@saliima_s" },
   { label: "Почта", href: `mailto:${contacts.email}`, text: contacts.email },
-  { label: "GitHub", href: contacts.github, text: "github.com/sakhmedi" },
 ];
 ---
 <Layout
   title="Сайты для бизнеса в Астане"
   description="Сайты для небольшого бизнеса в Астане. Сделаю новый или доработаю тот, что уже есть."
 >
-  <!-- ГЛАВНЫЙ ЭКРАН. Держим коротким: герой страницы — работы,
-       и на десктопе первая карточка должна попадать в первый экран. -->
-  <section class="mx-auto max-w-[1120px] px-5 pt-12 pb-16 md:pt-16 md:pb-24">
-    <h1 class="measure mb-5">Делаю сайты для бизнеса в Астане</h1>
-    <p class="measure mb-8 text-[1.0625rem] text-text-muted md:text-[1.1875rem]">
-      Ваш клиент открывает сайт с телефона, за пару секунд находит то, что искал,
-      и пишет вам в WhatsApp.
-    </p>
-    <a href={contacts.whatsapp} target="_blank" rel="noopener noreferrer" class="btn">
-      Написать в WhatsApp
-    </a>
-  </section>
+  <!-- ДВЕРЬ И ВИТРИНА. На телефоне первый экран — дверь: надпись плёнкой,
+       табличка "на связи" и наклейка "написать" в зоне большого пальца.
+       Витрина с работами идёт следом. На компьютере дверь и витрина стоят
+       рядом, как на фасаде. -->
+  <section class="bg-glass pb-14 lg:pb-20">
+    <div class="shell grid gap-10 lg:grid-cols-12 lg:gap-6">
+      <!-- Дверь -->
+      <div class="relative flex min-h-[calc(100svh-5rem-var(--sticky-cta))] flex-col justify-between gap-10 overflow-hidden pt-6 pb-2 lg:col-span-5 lg:min-h-0 lg:justify-start lg:rounded-[4px] lg:border-[6px] lg:border-frame lg:px-8 lg:pt-10 lg:pb-8">
+        <!-- За стеклом — Салима. Фото тонировано цветом стекла: человек
+             угадывается внутри, надпись на стекле читается поверх. -->
+        <div class="pointer-events-none absolute top-[10.5rem] right-0 bottom-[21rem] w-[48%] lg:top-6 lg:right-6 lg:bottom-6 lg:w-[46%]" aria-hidden="true">
+          {portrait ? (
+            <div class="behind-glass relative h-full w-full overflow-hidden">
+              <Image src={portrait} alt="" widths={[300, 600]} sizes="(min-width: 1024px) 13rem, 48vw" class="h-full w-full object-cover grayscale" loading="eager" />
+              <div class="absolute inset-0 bg-glass/70"></div>
+            </div>
+          ) : (
+            <div class="flex h-full w-full items-end justify-center rounded-[3px] border-2 border-dashed border-frame p-3 text-center text-sm text-vinyl-muted">
+              здесь будет фото
+            </div>
+          )}
+        </div>
 
-  <!-- РАБОТЫ -->
-  <section id="works" class={`${section} scroll-mt-4`}>
-    <h2 class="mb-4">Работы</h2>
-    <p class="measure mb-8 text-text-muted">
-      Под каждой работой написано, что это. Концепт — сайт, который я сделала
-      не по заказу, а чтобы показать, каким может быть сайт такого бизнеса.
-    </p>
+        <!-- Ручка двери -->
+        <div class="handle absolute top-[52%] right-3 h-24 lg:top-[44%] lg:right-5 lg:h-28" aria-hidden="true"></div>
 
-    <div class="grid gap-x-6 gap-y-12 md:grid-cols-2">
-      {featuredProjects.map((project, index) => (
-        <Cards project={project} eager={index === 0} />
-      ))}
-    </div>
+        <h1 class="vinyl sign-xl relative max-w-[11ch] lg:text-[4.5rem]">
+          Делаю сайты для бизнеса в Астане
+        </h1>
 
-    <a href="/projects" class="mt-10 inline-flex min-h-[44px] items-center text-accent underline underline-offset-4 hover:text-accent-hover">
-      Все работы
-    </a>
-  </section>
+        <div class="relative flex flex-col gap-6">
+          <p class="measure text-lg text-vinyl-muted md:text-xl">
+            Ваш клиент открывает сайт с телефона, за пару секунд находит то,
+            что искал, и пишет вам в WhatsApp.
+          </p>
 
-  <!-- ЧТО Я ДЕЛАЮ. Цена стоит сразу под услугой и набрана моноширинным:
-       это данные, а не проза. У доработки цены нет, она зависит от объёма,
-       и придумывать "от" там нечестно. -->
-  <section id="services" class={`${section} scroll-mt-4`}>
-    <h2 class="mb-4">Что я делаю</h2>
-    <p class="measure mb-8 text-text-muted">
-      «От» значит, что дешевле не бывает. Точную цену и срок я назову после
-      первого разговора, и он ничего не стоит.
-    </p>
+          <p class="plate !pt-6 !pb-3 !px-5 self-start font-medium">
+            <span class="font-bold">На связи:</span> отвечаю в течение дня
+          </p>
 
-    <!-- Услуга: подзаголовок с ценой, под ним что это, что входит и срок.
-         Между услугами воздуха в пять раз больше, чем внутри, поэтому
-         границы видно без единой линии и без коробок. -->
-    <div class="measure flex flex-col gap-10">
-      <div class="flex flex-col gap-2">
-        <h3>Сайт на одну страницу, <span class="price">от <span class="num">80 000</span> ₸</span></h3>
-        <p>
-          Когда про вас должны узнать и написать, этого достаточно.
-          Вы рассказываете о себе, а клиент нажимает кнопку и пишет вам.
-        </p>
-        <p>
-          <span class="font-medium">Что входит:</span> страница о вас и о том,
-          что вы предлагаете; кнопка, чтобы клиент написал вам; сайт удобно
-          открывать с телефона; два круга правок; домен и хостинг оформлены на вас.
-        </p>
-        <p><span class="font-medium">Срок:</span> обычно 2–3 дня.</p>
+          <a
+            href={contacts.whatsapp}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="sticker self-stretch sm:self-start"
+            data-cta
+          >
+            <ChatIcon size={26} />
+            Написать в WhatsApp
+            <span class="sr-only">(откроется в новой вкладке)</span>
+          </a>
+        </div>
       </div>
 
-      <div class="flex flex-col gap-2">
-        <h3>Сайт из нескольких страниц, <span class="price">от <span class="num">150 000</span> ₸</span></h3>
-        <p>
-          Нужно рассказать больше, чем помещается на одну страницу.
-          У услуг, цен и фотографий будет своё место.
-        </p>
-        <p>
-          <span class="font-medium">Что входит:</span> отдельные страницы для
-          услуг, цен и фотографий; кнопка, чтобы клиент написал вам; сайт удобно
-          открывать с телефона; два круга правок; домен и хостинг оформлены на вас.
-        </p>
-        <p><span class="font-medium">Срок:</span> обычно около 7 дней.</p>
-      </div>
+      <!-- Витрина -->
+      <div id="works" class="window js-window scroll-mt-4 px-4 pt-6 pb-8 lg:col-span-7 lg:px-8">
+        <div class="mb-6 flex flex-col gap-4">
+          <h2 class="vinyl sign-lg">Работы</h2>
+          <p class="measure text-[0.9375rem] text-vinyl-muted">
+            Под каждой работой написано, что это. Концепт — сайт, который
+            я сделала не по заказу, а чтобы показать, каким может быть сайт
+            такого бизнеса.
+          </p>
+        </div>
 
-      <div class="flex flex-col gap-2">
-        <h3>Доработка сайта, <span class="price">цена по объёму</span></h3>
-        <p>
-          Сайт уже есть, но вам в нём что-то не нравится. Чаще всего его
-          можно доработать, а не делать заново. Я посмотрю и честно скажу,
-          что с ним стоит сделать.
+        <div class="grid gap-x-6 gap-y-12 sm:grid-cols-2">
+          {featuredProjects.map((project, index) => (
+            <Cards project={project} eager={index === 0} />
+          ))}
+        </div>
+
+        <p class="mt-10 text-center">
+          <a href="/projects" class="vinyl-link inline-flex min-h-[44px] items-center font-medium">
+            Все работы в витрине
+          </a>
         </p>
-        <p>
-          <span class="font-medium">Срок и цена:</span> назову, когда посмотрю
-          сайт и мы договоримся, что в нём менять.
-        </p>
-        <p>
-          Если домен и хостинг у вас уже есть, работаю с ними. Все аккаунты
-          и доступы остаются у вас.
-        </p>
+
+        <!-- Створки: разъезжаются один раз, когда витрина на экране. -->
+        <div class="leaf leaf-left" aria-hidden="true"></div>
+        <div class="leaf leaf-right" aria-hidden="true"></div>
       </div>
     </div>
-
-    <!-- Цену домена и хостинга не называем: она зависит от того, что
-         выберет клиент, а придумывать "примерно" нечестно. -->
-    <p class="measure mt-10 text-text-muted">
-      Домен и хостинг вы оплачиваете отдельно, их цена зависит от того,
-      какие вы выберете. Оформляются они на ваше имя, и все логины и пароли
-      от этих аккаунтов у вас.
-    </p>
   </section>
 
-  <!-- КАК Я РАБОТАЮ. Список нумерованный по смыслу (это порядок, а не
-       набор), но номера не показываем: последовательность держат слова
-       "сначала", "когда", "потом". Скринридер порядок всё равно объявит.
-       Каждый шаг начинается с жирного итога: что происходит и сколько
-       вы платите. Пробежав глазами только их, человек видит всю оплату. -->
-  <section id="process" class={`${section} scroll-mt-4`}>
-    <h2 class="mb-4">Как я работаю</h2>
-    <p class="measure mb-4 text-text-muted">
-      Если вы раньше не заказывали сайт, вот как это обычно проходит.
-      Платите вы два раза, по половине.
-    </p>
-    <p class="measure mb-8 font-medium">
-      <span class="whitespace-nowrap">Разговор, 0 ₸</span> → <span class="whitespace-nowrap">предоплата 50%</span> → <span class="whitespace-nowrap">работа</span> → <span class="whitespace-nowrap">вторые 50%</span> → <span class="whitespace-nowrap">все доступы у вас</span>
-    </p>
-
-    <ol class="measure flex flex-col gap-5">
-      <li>
-        <strong>Разговор. Платить ничего не нужно.</strong> Вы расскажете про
-        свой бизнес, я задам несколько вопросов. В конце разговора я называю
-        срок и цену.
-      </li>
-      <li>
-        <strong>Предоплата 50%, и я начинаю работу.</strong> Например, если сайт
-        стоит <span class="whitespace-nowrap">80 000 ₸</span>, сейчас вы платите
-        <span class="whitespace-nowrap">40 000 ₸</span>. Если по ходу понадобятся
-        тексты или фотографии, напишу вам.
-      </li>
-      <li>
-        <strong>Вы смотрите сайт до запуска.</strong> Откроете со своего телефона,
-        посмотрите и скажете, что поправить. На этом шаге ещё можно поменять
-        тексты и фотографии.
-      </li>
-      <li>
-        <strong>Правки, потом вторые 50%.</strong> Два круга правок входят в цену,
-        дальше по договорённости. Когда сайт вас устраивает, вы платите вторую
-        половину.
-      </li>
-      <li>
-        <strong>Запуск. Все доступы у вас.</strong> Доступы — это логины и пароли
-        от домена, хостинга и всего, на чём работает сайт. Я отдаю их вам, и сайт
-        остаётся вашим. Если вы когда-нибудь уйдёте к другому разработчику,
-        просить что-то у меня не придётся.
-      </li>
-    </ol>
-  </section>
-
-  <!-- КОНТАКТЫ. Единственная залитая секция на странице: лист
-       заканчивается плотной полосой, и вместе с подвалом она читается
-       как одно основание страницы, а не как полоска посередине. -->
-  <div class="band bg-surface">
-    <section id="contacts" class={`${section} scroll-mt-4`}>
-      <h2 class="mb-4">Контакты</h2>
-      <p class="measure mb-8 text-text-muted">
-        Быстрее всего написать в WhatsApp. Отвечаю в течение дня.
+  <!-- ЦЕНЫ. Прайс у кассы: одна большая табличка. Цена — самое крупное
+       на строке, сразу под ней срок, ниже что это и что входит. -->
+  <section id="services" class="scroll-mt-4 bg-glass-deep py-16 md:py-24">
+    <div class="shell">
+      <h2 class="vinyl sign-lg mb-4">Цены и сроки</h2>
+      <p class="measure mb-10 text-vinyl-muted">
+        «От» значит, что дешевле не бывает. Точную цену и срок я назову после
+        первого разговора, и он ничего не стоит.
       </p>
 
-      <a href={contacts.whatsapp} target="_blank" rel="noopener noreferrer" class="btn">
-        Написать в WhatsApp
-      </a>
+      <div class="plate max-w-[60rem]">
+        <ul class="flex flex-col">
+          {services.map((service) => (
+            <li class="flex flex-col gap-4 border-t border-plate-line py-8 first:border-t-0 first:pt-0 last:pb-6">
+              <div class="price-row">
+                <h3 class="text-xl font-bold leading-tight md:text-2xl">{service.name}</h3>
+                <span class="leader" aria-hidden="true"></span>
+                {service.price ? (
+                  <p class="price"><small>от </small>{service.price}<small> ₸</small></p>
+                ) : (
+                  <p class="price"><small>по объёму</small></p>
+                )}
+              </div>
 
-      <ul class="mt-8 flex flex-col">
-        {links.map(({ label, href, text }) => (
-          <li>
-            <a
-              href={href}
-              target={href.startsWith("mailto:") ? undefined : "_blank"}
-              rel={href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
-              class="flex min-h-[44px] flex-wrap items-center gap-x-4"
-            >
-              <span class="w-20 text-sm text-text-muted">{label}</span>
-              <span class="addr text-accent underline underline-offset-4">{text}</span>
-            </a>
-          </li>
-        ))}
-      </ul>
+              {service.time && (
+                <p class="font-medium">Срок: {service.time}</p>
+              )}
 
-      <p class="measure mt-12 mb-5 text-text-muted">Или оставьте заявку, и я напишу вам сама.</p>
-      <Form />
-    </section>
-  </div>
+              <div class="grid gap-4 md:grid-cols-2 md:gap-10">
+                <p>{service.about}</p>
+                <div>
+                  {service.price && <p class="mb-2 font-medium">Что входит</p>}
+                  <ul class="ticks flex flex-col gap-1.5">
+                    {service.includes.map((item) => <li>{item}</li>)}
+                  </ul>
+                </div>
+              </div>
+            </li>
+          ))}
+        </ul>
+
+        <!-- Цену домена и хостинга не называем: она зависит от того, что
+             выберет клиент, а придумывать "примерно" нечестно. -->
+        <p class="border-t border-plate-line pt-6 text-[0.9375rem] text-ink-muted">
+          Домен и хостинг вы оплачиваете отдельно, их цена зависит от того,
+          какие вы выберете. Оформляются они на ваше имя, и все логины и пароли
+          от этих аккаунтов у вас.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- КАК Я РАБОТАЮ. Табличка "режим работы", только вместо часов — шаги.
+       Справа на каждой строке то, что вы платите: 0 ₸, 50%, ничего, 50%,
+       и в конце доступы у вас. Список нумерованный по смыслу, номера
+       не показываем: порядок держат строки таблички. -->
+  <section id="process" class="scroll-mt-4 bg-glass py-16 md:py-24">
+    <div class="shell">
+      <h2 class="vinyl sign-lg mb-4">Как я работаю</h2>
+      <p class="measure mb-10 text-vinyl-muted">
+        Если вы раньше не заказывали сайт, вот как это обычно проходит.
+        Платите вы два раза, по половине.
+      </p>
+
+      <div class="plate max-w-[60rem]">
+        <!-- Заголовок колонки, а не ярлык над табличкой: подписывает цифры справа. -->
+        <p class="plate-title mb-4 text-right" aria-hidden="true">Вы платите</p>
+
+        <ol class="flex flex-col">
+          {steps.map((step) => (
+            <li class="grid grid-cols-[1fr_auto] gap-x-6 gap-y-2 border-t border-plate-line py-6 first:border-t-0 first:pt-0 last:pb-0">
+              <h3 class="text-xl font-bold leading-tight md:text-2xl">{step.title}</h3>
+              <p class="price max-w-[7ch] text-right [text-wrap:balance] md:row-span-2 md:max-w-none">
+                <span class="sr-only">Оплата: </span>
+                {step.payLabel ? (
+                  <>
+                    <span aria-hidden="true">{step.pay}</span>
+                    <span class="sr-only">{step.payLabel}</span>
+                  </>
+                ) : step.pay}
+              </p>
+              <p class="measure col-span-2 md:col-span-1">{step.text}</p>
+            </li>
+          ))}
+        </ol>
+      </div>
+    </div>
+  </section>
+
+  <!-- ОБО МНЕ. Табличка у входа: кто здесь работает. Без отзывов и
+       клиентов главное доверие перед предоплатой — сам человек. -->
+  <section id="about" class="scroll-mt-4 bg-glass-deep py-16 md:py-24">
+    <div class="shell">
+      <h2 class="vinyl sign-lg mb-10">Обо мне</h2>
+
+      <div class="plate grid max-w-[60rem] gap-8 md:grid-cols-[16rem_1fr] md:gap-10">
+        {portrait ? (
+          <Image
+            src={portrait}
+            alt="Салима"
+            widths={[320, 640]}
+            sizes="16rem"
+            class="aspect-[4/5] w-full max-w-[16rem] rounded-[3px] object-cover"
+          />
+        ) : (
+          <div class="flex aspect-[4/5] w-full max-w-[16rem] items-center justify-center rounded-[3px] border-2 border-dashed border-plate-line p-4 text-center text-ink-muted">
+            [заглушка: фото в src/assets/portrait.jpg]
+          </div>
+        )}
+
+        <div class="flex flex-col gap-4">
+          <p class="vinyl text-[2.5rem]">{contacts.name}</p>
+          <p class="font-medium">Делаю сайты для небольшого бизнеса · {contacts.city}</p>
+          {bio ? (
+            bio.map((line) => <p class="measure">{line}</p>)
+          ) : (
+            <p class="measure text-ink-muted">[заглушка: 2–3 строки о себе в src/data/about.ts]</p>
+          )}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- КОНТАКТЫ. Снова дверь: страница заканчивается там же, где началась,
+       наклейкой "написать". Форма — записка на табличке для тех, кому
+       удобнее, чтобы написали им. -->
+  <section id="contacts" class="scroll-mt-4 bg-glass py-16 md:py-24">
+    <div class="shell grid gap-12 lg:grid-cols-12 lg:gap-6">
+      <div class="flex flex-col gap-6 lg:col-span-5">
+        <h2 class="vinyl sign-xl">Напишите мне</h2>
+        <p class="measure text-lg text-vinyl-muted">
+          Быстрее всего в WhatsApp. Отвечаю в течение дня.
+        </p>
+
+        <a
+          href={contacts.whatsapp}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="sticker self-stretch sm:self-start"
+          data-cta
+        >
+          <ChatIcon size={26} />
+          Написать в WhatsApp
+          <span class="sr-only">(откроется в новой вкладке)</span>
+        </a>
+
+        <ul class="flex flex-col">
+          {links.map(({ label, href, text }) => (
+            <li>
+              <a
+                href={href}
+                target={href.startsWith("mailto:") ? undefined : "_blank"}
+                rel={href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
+                class="group flex min-h-[48px] flex-wrap items-center gap-x-4"
+              >
+                <span class="w-20 text-[0.9375rem] text-vinyl-muted">{label}</span>
+                <span class="vinyl-link break-all">{text}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      <div class="plate lg:col-span-7">
+        <p class="mb-6 text-lg font-medium">Или оставьте заявку, и я напишу вам сама.</p>
+        <Form />
+      </div>
+    </div>
+  </section>
 </Layout>
+
+<script>
+  // Створки витрины разъезжаются один раз: после первой прокрутки, когда
+  // витрина видна хотя бы на четверть. На компьютере витрина видна сразу,
+  // и створки ждут, пока человек начнёт листать, а не играют заставку при
+  // загрузке. Если человек не листает, через секунду они открываются
+  // сами: работы не должны оставаться за тонированным стеклом.
+  // Фокус с клавиатуры внутри витрины открывает их сразу.
+  // Без JavaScript и при "уменьшить движение" створок нет.
+  const shop = document.querySelector(".js-window");
+  if (shop && "IntersectionObserver" in window) {
+    let scrolled = false;
+    let inView = false;
+    const open = () => {
+      shop.classList.add("is-open");
+      observer.disconnect();
+      window.removeEventListener("scroll", onScroll);
+    };
+    const onScroll = () => {
+      scrolled = true;
+      if (inView) open();
+    };
+    let timer = 0;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        inView = entries.some((entry) => entry.isIntersecting);
+        if (inView && scrolled) open();
+        else if (inView && !timer) timer = window.setTimeout(open, 1000);
+      },
+      { threshold: 0.25 }
+    );
+    observer.observe(shop);
+    window.addEventListener("scroll", onScroll, { passive: true });
+    shop.addEventListener("focusin", open, { once: true });
+  } else {
+    shop?.classList.add("is-open");
+  }
+</script>
