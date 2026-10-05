@@ -16,7 +16,9 @@ const labelClass = "mb-2 block font-medium";
 const errorClass = "mt-2 text-[0.9375rem] font-medium text-[var(--danger-plate)]";
 ---
 
-<div class="w-full">
+<!-- data-hides-sticky: пока форма на экране, липкая наклейка внизу
+     уезжает, чтобы не спорить с "Отправить" и не закрывать поля. -->
+<div class="w-full" data-hides-sticky>
   <form id="contactForm" action={endpoint} method="POST" class="flex flex-col gap-5">
     <div>
       <label for="field-name" class={labelClass}>Как вас зовут</label>
