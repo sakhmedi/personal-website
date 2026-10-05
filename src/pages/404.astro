@@ -1,15 +1,13 @@
 ---
 import Layout from '../layouts/Layout.astro';
-import Tesserae from '../components/Tesserae.astro';
 ---
 <Layout
   title="Страница не найдена"
   description="Такой страницы на сайте нет."
 >
-  <!-- Панно с выпавшей плиткой: что случилось и куда идти. -->
+  <!-- Что случилось и куда идти. -->
   <section class="screen screen-cobalt" data-screen="1" aria-labelledby="missing-title">
     <div class="shell screen-body items-start">
-      <Tesserae cols={4} rows={1} offset={5} class="w-40" />
       <h1 id="missing-title" class="display display-xl max-w-[14ch]">Такой страницы нет</h1>
       <div class="tile max-w-[32rem]">
         <p class="mb-6">

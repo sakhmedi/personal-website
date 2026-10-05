@@ -231,10 +231,16 @@
       grid-column: 6 / 13;
     }
 
-    /* Колонку держит сам экран: внутренние колонки без своих полей. */
+    /* Колонку держит сам экран: внутренние колонки без своих полей.
+       Заголовок "Напишите мне" стоит в 5 колонках рядом с формой: он
+       мельче, чем на телефоне, и отделён от формы двойным зазором. */
     .contacts {
-      column-gap: 2rem;
+      column-gap: 4rem;
       padding-inline: max(2rem, calc((100vw - 1240px) / 2 + 2rem));
+    }
+
+    .contacts .display-xl {
+      font-size: clamp(2.25rem, 0.75rem + 2.9vw, 3.5rem);
     }
 
     .contacts-part > .shell,
@@ -342,17 +348,6 @@
   .mosaic {
     display: grid;
     gap: var(--seam);
-  }
-
-  /* Тессеры: мелкие плитки кромки панно. */
-  .tesserae {
-    display: grid;
-    gap: var(--seam);
-  }
-
-  .tessera {
-    aspect-ratio: 1;
-    border-radius: 2px;
   }
 
   .price {

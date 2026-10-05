@@ -5,7 +5,6 @@ import Form from '../components/Form.astro';
 import Footer from '../components/Footer.astro';
 import ChatIcon from '../components/ChatIcon.astro';
 import Pager from '../components/Pager.astro';
-import Tesserae from '../components/Tesserae.astro';
 import { featuredProjects } from '../data/projects';
 import { contacts } from '../data/contacts';
 import { bio } from '../data/about';
@@ -13,6 +12,8 @@ import { bio } from '../data/about';
 // Тысячи отделяем узким неразрывным пробелом: "80 000" не разорвётся
 // на две строки и не расползётся, как с обычным пробелом.
 const thin = " ";
+// Перед ₸ неразрывный пробел: знак валюты не уезжает на новую строку.
+const nbsp = "\u00A0";
 
 // Прайс. Цена "от" стоит только там, где нижняя граница честно известна;
 // у доработки её нет, она зависит от объёма.
@@ -66,17 +67,17 @@ const services = [
 const steps = [
   {
     title: "Разговор",
-    pay: "0 ₸",
+    pay: `0${nbsp}₸`,
     text: "Платить ничего не нужно. Вы расскажете про свой бизнес, я задам несколько вопросов. В конце разговора я называю срок и цену.",
   },
   {
     title: "Предоплата",
     pay: "50%",
-    text: `Если цена и срок подходят, вы платите половину, и я начинаю работу. Например, если сайт стоит 80${thin}000 ₸, сейчас вы платите 40${thin}000 ₸. Вторую половину — только когда увидите готовый сайт и он вас устроит. Если по ходу понадобятся тексты или фотографии, напишу вам.`,
+    text: `Если цена и срок подходят, вы платите половину, и я начинаю работу. Например, если сайт стоит 80${thin}000${nbsp}₸, сейчас вы платите 40${thin}000${nbsp}₸. Вторую половину — только когда увидите готовый сайт и он вас устроит. Если по ходу понадобятся тексты или фотографии, напишу вам.`,
   },
   {
     title: "Работа",
-    pay: "0 ₸",
+    pay: `0${nbsp}₸`,
     text: "Готовый сайт вы увидите до запуска. Откроете со своего телефона, посмотрите и скажете, что поправить. На этом шаге ещё можно поменять тексты и фотографии.",
   },
   {
@@ -86,7 +87,7 @@ const steps = [
   },
   {
     title: "Запуск",
-    pay: "0 ₸",
+    pay: `0${nbsp}₸`,
     text: "Я отдаю вам все доступы — логины и пароли от домена, хостинга и всего, на чём работает сайт. Сайт остаётся вашим: если вы когда-нибудь уйдёте к другому разработчику, просить что-то у меня не придётся.",
   },
 ];
@@ -184,17 +185,14 @@ const links = [
        на компьютере стоят рядом. Цена — самое крупное на плитке. -->
   <section id="services" class="screen screen-cobalt" data-screen="3" aria-labelledby="services-title">
     <div class="shell screen-body">
-      <div class="flex items-center justify-between gap-4">
-        <h2 id="services-title" class="display display-lg">Цены и сроки</h2>
-        <Tesserae cols={4} rows={1} offset={6} class="hidden w-36 flex-none sm:grid" />
-      </div>
+      <h2 id="services-title" class="display display-lg">Цены и сроки</h2>
 
       <Pager label="Тарифы и оплата домена" item="Плитка" cols={3}>
         {services.map((service, index) => (
           <article class="tile flex flex-col gap-2.5" data-lay style={`--i: ${index}`}>
             <h3 class="display display-md lg:min-h-[3.12em]">{service.name}</h3>
             {service.price ? (
-              <p class="price"><small>от </small>{service.price}<small> ₸</small></p>
+              <p class="price"><small>от </small>{service.price}<small>{nbsp}₸</small></p>
             ) : (
               <p class="price"><small>по объёму</small></p>
             )}
@@ -242,7 +240,7 @@ const links = [
               <h3 class="display display-md lg:!text-[1.25rem]">{step.title}</h3>
               <p class="flex flex-col gap-1">
                 <span class="label text-ink-muted">Вы платите мне</span>
-                <span class:list={["price self-start", step.pay !== "0 ₸" && "rounded-[2px] bg-terracotta px-2 py-1.5 text-on-cobalt"]}>{step.pay}</span>
+                <span class:list={["price self-start", step.pay !== `0${nbsp}₸` && "rounded-[2px] bg-terracotta px-2 py-1.5 text-on-cobalt"]}>{step.pay}</span>
               </p>
             </div>
             <p class="text-[0.9375rem]">{step.text}</p>
@@ -307,7 +305,6 @@ const links = [
           ))}
         </ul>
 
-        <Tesserae cols={6} rows={2} offset={7} on="deep" class="mt-auto w-full max-w-[18rem]" />
       </div>
     </div>
 

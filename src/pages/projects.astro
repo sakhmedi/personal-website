@@ -2,7 +2,6 @@
 import Layout from '../layouts/Layout.astro';
 import Cards from '../components/Cards.astro';
 import Pager from '../components/Pager.astro';
-import Tesserae from '../components/Tesserae.astro';
 import { projects } from '../data/projects';
 ---
 <Layout
@@ -13,17 +12,14 @@ import { projects } from '../data/projects';
        стоят в ряд. Человек пришёл сюда именно смотреть. -->
   <section class="screen screen-deep" data-screen="1" aria-labelledby="projects-title">
     <div class="shell screen-body">
-      <div class="flex items-start justify-between gap-6">
-        <div class="flex flex-col gap-3">
-          <h1 id="projects-title" class="display display-xl">Работы</h1>
-          <p class="measure text-[0.9375rem] text-on-cobalt-muted md:text-base">
-            Под каждой работой написано, что это. Концепт — сайт, который я сделала
-            не по заказу, а чтобы показать, каким может быть сайт такого бизнеса.
-            Демо — образец, который показывает, как всё работает, на заранее
-            подготовленных примерах. Учебный проект — сайт, на котором я училась.
-          </p>
-        </div>
-        <Tesserae cols={3} rows={2} offset={2} on="deep" class="hidden w-28 flex-none md:grid" />
+      <div class="flex flex-col gap-3">
+        <h1 id="projects-title" class="display display-xl">Работы</h1>
+        <p class="measure text-[0.9375rem] text-on-cobalt-muted md:text-base">
+          Под каждой работой написано, что это. Концепт — сайт, который я сделала
+          не по заказу, а чтобы показать, каким может быть сайт такого бизнеса.
+          Демо — образец, который показывает, как всё работает, на заранее
+          подготовленных примерах. Учебный проект — сайт, на котором я училась.
+        </p>
       </div>
 
       <Pager label="Работы" item="Работа" cols={4}>
