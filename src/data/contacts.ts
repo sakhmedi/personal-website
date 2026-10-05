@@ -8,5 +8,4 @@ export const contacts = {
   whatsapp: "https://wa.me/77072003612",
   telegram: "https://t.me/saliima_s",
   email: "salimaakhm@gmail.com",
-  github: "https://github.com/sakhmedi",
 } as const;

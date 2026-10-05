@@ -4,15 +4,10 @@ import { contacts } from '../data/contacts';
 // Год берётся из даты сборки — в январе не придётся вспоминать про подвал.
 const year = new Date().getFullYear();
 ---
-<!-- Подвал — нижняя кромка панно: имя и ссылка на GitHub для тех, кому
-     интересен код. Клиенту она не нужна, поэтому живёт здесь, а не
-     в контактах. На главной подвал стоит внутри последнего экрана. -->
+<!-- Подвал — нижняя кромка панно: имя, город и год. На главной подвал
+     стоит внутри последнего экрана. -->
 <footer class="border-t-[var(--seam)] border-cobalt">
-  <div class="shell flex flex-wrap items-center justify-between gap-x-6 gap-y-1 py-4 text-[0.9375rem] text-on-cobalt-muted">
+  <div class="shell flex min-h-[3.75rem] items-center py-4 text-[0.9375rem] text-on-cobalt-muted">
     <p>{contacts.name} · {contacts.city} · {year}</p>
-    <a href={contacts.github} target="_blank" rel="noopener noreferrer" class="inline-flex min-h-[44px] items-center underline underline-offset-[0.25em] hover:text-on-cobalt">
-      GitHub
-      <span class="sr-only">(откроется в новой вкладке)</span>
-    </a>
   </div>
 </footer>

@@ -287,6 +287,11 @@
     text-wrap: balance;
   }
 
+  /* Главный заголовок первого экрана: он один занимает верх экрана. */
+  .display-hero {
+    font-size: clamp(2.75rem, 1.4rem + 5.6vw, 6rem);
+  }
+
   .display-xl {
     font-size: clamp(2.25rem, 1.35rem + 4.2vw, 4.5rem);
   }

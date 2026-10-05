@@ -12,8 +12,7 @@ const navLinks = [
 ];
 ---
 <!-- Шапка — верхний ряд панно: полоса ночного кобальта поверх экранов.
-     Справа адрес экрана: какой он по счёту и сколько их всего, чтобы
-     было видно, далеко ли до контактов. -->
+     У пунктов меню номера экранов: видно, где вы и далеко ли до контактов. -->
 <header class="fixed inset-x-0 top-0 z-40 bg-cobalt-deep">
   <div class="shell flex h-[var(--header-h)] items-center justify-between gap-4">
     <a href="/" class="display flex min-h-[44px] items-center gap-2 text-[0.9375rem] font-bold" aria-label="Салима, Астана — на главную">
@@ -29,10 +28,7 @@ const navLinks = [
       ))}
     </nav>
 
-    <!-- На компьютере плитка адреса встаёт на место спрятанной жёлтой
-         кнопки, а не рядом с ней: ширина шапки не меняется, меню не прыгает. -->
-    <div class="relative flex items-center gap-2">
-      <p class="label hidden h-11 items-center rounded-[2px] bg-cobalt px-3 text-on-cobalt lg:absolute lg:top-1/2 lg:right-0 lg:-translate-y-1/2" data-counter aria-hidden="true"></p>
+    <div class="flex items-center gap-2">
 
       <a
         href={contacts.whatsapp}
@@ -119,23 +115,13 @@ const navLinks = [
   }
 
   // === АДРЕС ЭКРАНА ===
-  // Какой экран сейчас стоит в окне: номер в шапке и отмеченный пункт меню.
+  // Какой экран сейчас стоит в окне: отмеченный пункт меню.
   // Заодно экран, впервые вставший на место, укладывает свои плитки.
   const screens = Array.from(document.querySelectorAll<HTMLElement>("[data-screen]"));
-  const counter = document.querySelector<HTMLElement>("[data-counter]");
-  const total = Number(document.querySelector<HTMLElement>("[data-screen-count]")?.dataset.screenCount ?? 0);
 
   if (screens.length > 0) {
     const setCurrent = (screen: HTMLElement) => {
       const number = Number(screen.dataset.screen);
-      if (counter && total > 1) {
-        counter.textContent = `${number} / ${total}`;
-        counter.classList.add("flex");
-        counter.classList.remove("hidden");
-        // На компьютере адрес экранов 2–6 стоит на пунктах меню; у первого
-        // экрана пункта нет, и его адрес показывает эта плитка.
-        counter.classList.toggle("lg:hidden", number !== 1);
-      }
       document.querySelectorAll<HTMLElement>("[data-nav]").forEach((link) => {
         link.setAttribute("aria-current", String(Number(link.dataset.nav) === number));
       });

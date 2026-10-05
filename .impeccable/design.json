@@ -276,9 +276,13 @@
       }
     },
     "typographyMeta": {
+      "display-hero": {
+        "displayName": "Display Hero",
+        "purpose": "Только заголовок первого экрана, самая крупная надпись сайта."
+      },
       "display-xl": {
         "displayName": "Display XL",
-        "purpose": "Заголовок первого экрана, «Напишите мне», /projects, 404."
+        "purpose": "«Напишите мне», заголовки /projects и 404."
       },
       "display-lg": {
         "displayName": "Display LG",
@@ -444,9 +448,9 @@
       "name": "Шапка с адресом экрана",
       "kind": "nav",
       "refersTo": "nav-link",
-      "description": "Полоса ночного кобальта: имя, пункты с номером экрана (пунктир / сплошная плитка), счётчик.",
-      "html": "<header class=\"ds-head\"><a href=\"#\" class=\"ds-word\">Салима<span class=\"ds-m\">·</span><span class=\"ds-m\">Астана</span></a><nav class=\"ds-nav\"><a href=\"#\" class=\"ds-link\"><span class=\"ds-num\">2</span>Работы</a><a href=\"#\" class=\"ds-link\" aria-current=\"true\"><span class=\"ds-num\">3</span>Цены</a><a href=\"#\" class=\"ds-link\"><span class=\"ds-num\">4</span>Как я работаю</a></nav><span class=\"ds-counter\">3 / 6</span></header>",
-      "css": ":host{--cobalt:#1b3a8a;--cobalt-deep:#0f2459;--terracotta:#c4532d;--terracotta-ink:#9b3b1b;--on-cobalt:#fff;--on-cobalt-muted:#c3cdea;--stone:#eef0f2;--stone-line:#9aa2b1;--ink:#141821;--ink-muted:#4a5263;--link:#1b3a8a;--field:#fff;--field-border:#6b7384;--smalt:#ffd31a;--smalt-hover:#f2c400;--on-smalt:#1c1800;--danger:#a3201a;--seam:6px} .ds-head{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;height:4rem;padding:0 2rem;background:var(--cobalt-deep);color:var(--on-cobalt);font-family:'Onest Variable',system-ui,sans-serif;} .ds-word{display:flex;gap:.5rem;font-family:'Unbounded Variable','Onest Variable',system-ui,sans-serif;font-weight:700;font-size:.9375rem;color:var(--on-cobalt);text-decoration:none} .ds-m{color:var(--on-cobalt-muted);font-weight:600} .ds-nav{display:flex;gap:1.5rem} .ds-link{display:inline-flex;align-items:center;gap:.5rem;min-height:44px;color:var(--on-cobalt-muted);text-decoration:none} .ds-link:hover,.ds-link[aria-current=\"true\"]{color:var(--on-cobalt)} .ds-link:focus-visible{outline:3px solid var(--smalt);outline-offset:3px;border-radius:2px} .ds-num{display:grid;place-items:center;width:1.5rem;height:1.5rem;border-radius:2px;border:2px dashed var(--on-cobalt-muted);box-sizing:border-box;font-family:'Unbounded Variable','Onest Variable',system-ui,sans-serif;font-weight:600;font-size:.6875rem;letter-spacing:.08em} .ds-link[aria-current=\"true\"] .ds-num{border-style:solid;border-color:var(--on-cobalt);background:var(--on-cobalt);color:var(--cobalt-deep)} .ds-counter{display:flex;align-items:center;height:2.75rem;padding:0 .75rem;border-radius:2px;background:var(--cobalt);font-family:'Unbounded Variable','Onest Variable',system-ui,sans-serif;font-weight:600;font-size:.75rem;letter-spacing:.08em}"
+      "description": "Полоса ночного кобальта: имя и пункты с номером экрана (пунктир / сплошная плитка). Отдельного счётчика нет.",
+      "html": "<header class=\"ds-head\"><a href=\"#\" class=\"ds-word\">Салима<span class=\"ds-m\">·</span><span class=\"ds-m\">Астана</span></a><nav class=\"ds-nav\"><a href=\"#\" class=\"ds-link\"><span class=\"ds-num\">2</span>Работы</a><a href=\"#\" class=\"ds-link\" aria-current=\"true\"><span class=\"ds-num\">3</span>Цены</a><a href=\"#\" class=\"ds-link\"><span class=\"ds-num\">4</span>Как я работаю</a></nav></header>",
+      "css": ":host{--cobalt:#1b3a8a;--cobalt-deep:#0f2459;--terracotta:#c4532d;--terracotta-ink:#9b3b1b;--on-cobalt:#fff;--on-cobalt-muted:#c3cdea;--stone:#eef0f2;--stone-line:#9aa2b1;--ink:#141821;--ink-muted:#4a5263;--link:#1b3a8a;--field:#fff;--field-border:#6b7384;--smalt:#ffd31a;--smalt-hover:#f2c400;--on-smalt:#1c1800;--danger:#a3201a;--seam:6px} .ds-head{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;height:4rem;padding:0 2rem;background:var(--cobalt-deep);color:var(--on-cobalt);font-family:'Onest Variable',system-ui,sans-serif;} .ds-word{display:flex;gap:.5rem;font-family:'Unbounded Variable','Onest Variable',system-ui,sans-serif;font-weight:700;font-size:.9375rem;color:var(--on-cobalt);text-decoration:none} .ds-m{color:var(--on-cobalt-muted);font-weight:600} .ds-nav{display:flex;gap:1.5rem} .ds-link{display:inline-flex;align-items:center;gap:.5rem;min-height:44px;color:var(--on-cobalt-muted);text-decoration:none} .ds-link:hover,.ds-link[aria-current=\"true\"]{color:var(--on-cobalt)} .ds-link:focus-visible{outline:3px solid var(--smalt);outline-offset:3px;border-radius:2px} .ds-num{display:grid;place-items:center;width:1.5rem;height:1.5rem;border-radius:2px;border:2px dashed var(--on-cobalt-muted);box-sizing:border-box;font-family:'Unbounded Variable','Onest Variable',system-ui,sans-serif;font-weight:600;font-size:.6875rem;letter-spacing:.08em} .ds-link[aria-current=\"true\"] .ds-num{border-style:solid;border-color:var(--on-cobalt);background:var(--on-cobalt);color:var(--cobalt-deep)}"
     },
     {
       "name": "Листание вбок",

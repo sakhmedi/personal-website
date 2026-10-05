@@ -22,7 +22,7 @@ saliima.dev (live at https://saliima.netlify.app/) is Salima's storefront as a f
 ## Operating Context
 
 - Visitors arrive mostly on phones, from links shared in messengers. The link preview (`public/og.png`) is part of the first impression.
-- WhatsApp is the main way to get in touch. Telegram, email, GitHub, and the Formspree request form are the alternatives.
+- WhatsApp is the main way to get in touch. Telegram, email, and the Formspree request form are the alternatives. The site does not link to GitHub.
 - How the work goes, as the site states it: a free first conversation, then a 50% prepayment. The client reviews the site on their own phone before launch, and two rounds of edits are included. The other 50% is paid on approval, then the site launches and every login is handed over.
 
 ## Capabilities and Constraints
@@ -44,7 +44,7 @@ saliima.dev (live at https://saliima.netlify.app/) is Salima's storefront as a f
 ## Evidence on Hand
 
 - Works: DALA COFFEE (coffee shop, concept), Дентал Плюс (dental clinic, concept), Shart AI (document assistant, demo with prepared answers), Bloom (flower guide, study project). Screenshots are in `src/assets/screens/`.
-- Portrait: not provided yet. When it exists it goes to `src/assets/portrait.jpg` (or .jpeg/.png/.webp) and the site picks it up; the published build shows no placeholder. Link preview image: `public/og.png`, rendered by `npm run og`.
+- Portrait: none. The site has no photo slot; «Обо мне» is the name, two lines about Salima and four promises. Link preview image: `public/og.png`, rendered by `npm run og`.
 - None of the works are for paying clients, and there are no testimonials, client logos, or numbers. Future work must never invent them or present a concept as client work.
 
 ## Product Principles
