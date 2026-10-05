@@ -66,6 +66,12 @@ typography:
     fontWeight: 800
     lineHeight: 1
     letterSpacing: "0.06em"
+  plate-title:
+    fontFamily: "Fira Sans Extra Condensed, Fira Sans, system-ui, sans-serif"
+    fontSize: "1rem"
+    fontWeight: 800
+    lineHeight: 1
+    letterSpacing: "0.06em"
   sticker-label:
     fontFamily: "Fira Sans Extra Condensed, Fira Sans, system-ui, sans-serif"
     fontSize: "1.375rem"
@@ -200,7 +206,7 @@ components:
 - **Body** (400, 1.0625rem → 1.125rem на ≥768px, 1.55, табличные цифры): основной текст; длина строки `measure` 36rem ≈ 65 знаков кириллицы. Вводные абзацы на стекле — 1.125rem → 1.25rem.
 - **Body small** (0.9375rem): бирки, подвал, сноски, ошибки формы, подписи контактов.
 - **Sign label** (800, 1.125rem, 0.06em, прописные): имя «Салима · Астана» в шапке.
-- **Plate title** (800, 1rem, 0.06em, прописные, `ink-muted`): заголовок колонки на табличке («Вы платите») — подписывает данные, а не стоит над разделом.
+- **Plate title** (800, 1rem, 0.06em, прописные, `ink-muted`): заголовок колонки на табличке («Вы платите мне») — подписывает данные, а не стоит над разделом.
 
 ### Named Rules
 **The Vinyl Is For Signs Rule.** Плёночный шрифт — только для заголовков, имени, цен и наклейки. Абзацы, пункты списков, подписи полей и кнопки на стекле набраны Fira Sans.

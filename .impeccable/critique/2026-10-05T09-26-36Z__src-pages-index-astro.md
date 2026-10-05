@@ -10,6 +10,7 @@ target_fingerprint: "sha256:81c9c8582b4c2faebc5b715a4165100d56f0b301505f8c704496
 target_path: "C:\\Users\\Windows 11\\personal-website\\src\\pages\\index.astro"
 timestamp: 2026-10-05T09-26-36Z
 slug: src-pages-index-astro
+closed: true
 ---
 # Critique: главная (src/pages/index.astro), витрина
 Method: dual-agent (A: design review · B: detector + browser)

@@ -56,8 +56,13 @@ const ogImageAlt =
 		</script>
 	</head>
 	<body>
+		<!-- Для тех, кто ходит по сайту клавишей Tab: сразу к содержанию,
+		     мимо логотипа и меню. Видна только в фокусе. -->
+		<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:rounded-[8px] focus:bg-sticker focus:px-4 focus:py-3 focus:font-bold focus:text-on-sticker">
+			К содержанию
+		</a>
 		<Header/>
-		<main class="min-h-screen">
+		<main id="main" tabindex="-1" class="min-h-screen focus:outline-none">
 			<slot />
 		</main>
 		<Footer/>

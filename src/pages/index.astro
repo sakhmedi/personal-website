@@ -241,11 +241,13 @@ const links = [
 
         <!-- Цену домена и хостинга не называем: она зависит от того, что
              выберет клиент, а придумывать "примерно" нечестно. -->
-        <p class="border-t border-plate-line pt-6 text-[0.9375rem] text-ink-muted">
-          Домен и хостинг вы оплачиваете отдельно, их цена зависит от того,
-          какие вы выберете. Оформляются они на ваше имя, и все логины и пароли
-          от этих аккаунтов у вас.
-        </p>
+        <div class="border-t border-plate-line pt-6">
+          <p class="measure text-[0.9375rem] text-ink-muted">
+            Домен и хостинг вы оплачиваете отдельно, их цена зависит от того,
+            какие вы выберете. Оформляются они на ваше имя, и все логины и пароли
+            от этих аккаунтов у вас.
+          </p>
+        </div>
       </div>
     </div>
   </section>
@@ -369,9 +371,22 @@ const links = [
   // загрузке. Если человек не листает, через секунду они открываются
   // сами: работы не должны оставаться за тонированным стеклом.
   // Фокус с клавиатуры внутри витрины открывает их сразу.
+  // Если при загрузке витрина только выглядывает из-под края экрана
+  // (так бывает на телефоне), створки открыты сразу и без анимации:
+  // затемнённый край выглядел бы как выключенный раздел.
   // Без JavaScript и при "уменьшить движение" створок нет.
-  const shop = document.querySelector(".js-window");
-  if (shop && "IntersectionObserver" in window) {
+  const shop = document.querySelector<HTMLElement>(".js-window");
+  const peeking = (el: HTMLElement) => {
+    const { top, height } = el.getBoundingClientRect();
+    return top < innerHeight && (innerHeight - top) / height < 0.25;
+  };
+  if (shop && peeking(shop)) {
+    const leaves = shop.querySelectorAll<HTMLElement>(".leaf");
+    leaves.forEach((leaf) => (leaf.style.transition = "none"));
+    shop.classList.add("is-open");
+    shop.offsetHeight; // применить без перехода, потом вернуть переход
+    leaves.forEach((leaf) => (leaf.style.transition = ""));
+  } else if (shop && "IntersectionObserver" in window) {
     let scrolled = false;
     let inView = false;
     const open = () => {
