@@ -1,9 +1,13 @@
 ---
 import { Image } from 'astro:assets';
+import type { ImageMetadata } from 'astro';
 import Layout from '../layouts/Layout.astro';
 import Cards from '../components/Cards.astro';
 import Form from '../components/Form.astro';
+import Footer from '../components/Footer.astro';
 import ChatIcon from '../components/ChatIcon.astro';
+import Pager from '../components/Pager.astro';
+import Tesserae from '../components/Tesserae.astro';
 import { featuredProjects } from '../data/projects';
 import { contacts } from '../data/contacts';
 import { bio, portrait, showPortraitPlaceholder } from '../data/about';
@@ -98,6 +102,13 @@ const promises = [
   "все логины и пароли отдаю вам",
 ];
 
+// Две избранные работы ещё и плитками панно на первом экране компьютера:
+// не иллюстрация, а сами сайты, обрезанные по верху.
+const screens = import.meta.glob<{ default: ImageMetadata }>('../assets/screens/*.png', { eager: true });
+const heroShots = featuredProjects
+  .map((project) => screens[`../assets/screens/${project.image}`]?.default)
+  .filter((shot): shot is ImageMetadata => Boolean(shot));
+
 const links = [
   { label: "Telegram", href: contacts.telegram, text: "@saliima_s" },
   { label: "Почта", href: `mailto:${contacts.email}`, text: contacts.email },
@@ -106,224 +117,222 @@ const links = [
 <Layout
   title="Сайты для бизнеса в Астане"
   description="Сайты для небольшого бизнеса в Астане. Сделаю новый или доработаю тот, что уже есть."
+  footer={false}
 >
-  <!-- ДВЕРЬ И ВИТРИНА. На телефоне первый экран — дверь: надпись плёнкой,
-       табличка "на связи" и наклейка "написать" в зоне большого пальца.
-       Витрина с работами идёт следом. На компьютере дверь и витрина стоят
-       рядом, как на фасаде. -->
-  <section class="bg-glass pb-14 lg:pb-20">
-    <div class="shell grid gap-10 lg:grid-cols-12 lg:gap-6">
-      <!-- Дверь -->
-      <!-- На телефоне дверь растягивается на весь экран, только когда за
-           стеклом есть фото: иначе между надписью и наклейкой зиял бы провал. -->
-      <div class:list={[
-        "relative flex flex-col gap-10 overflow-hidden pt-6 pb-2 lg:col-span-5 lg:min-h-0 lg:justify-start lg:rounded-[4px] lg:border-[6px] lg:border-frame lg:px-8 lg:pt-10 lg:pb-8",
-        (portrait || showPortraitPlaceholder) && "min-h-[calc(100svh-5rem-var(--sticky-cta))] justify-between",
-      ]}>
-        <!-- За стеклом — Салима. Фото тонировано цветом стекла: человек
-             угадывается внутри, надпись на стекле читается поверх. -->
-        {(portrait || showPortraitPlaceholder) && (
-        <div class="pointer-events-none absolute top-[10.5rem] right-0 bottom-[21rem] w-[48%] lg:top-6 lg:right-6 lg:bottom-6 lg:w-[46%]" aria-hidden="true">
-          {portrait ? (
-            <div class="behind-glass relative h-full w-full overflow-hidden">
-              <Image src={portrait} alt="" widths={[300, 600]} sizes="(min-width: 1024px) 13rem, 48vw" class="h-full w-full object-cover grayscale" loading="eager" />
-              <div class="absolute inset-0 bg-glass/70"></div>
-            </div>
-          ) : (
-            <div class="flex h-full w-full items-end justify-center rounded-[3px] border-2 border-dashed border-frame p-3 text-center text-sm text-vinyl-muted">
-              здесь будет фото
-            </div>
-          )}
-        </div>
-        )}
+  <div data-screen-count="6" hidden></div>
 
-        <!-- Ручка двери -->
-        <div class="handle absolute top-[7.5rem] right-3 h-24 lg:top-[44%] lg:right-5 lg:h-28" aria-hidden="true"></div>
-
-        <h1 class="vinyl sign-xl sign-door relative max-w-[11ch]">
+  <!-- 1. КТО И ЧТО. Кобальтовое поле, заголовок крупно, справа кромка
+       панно. Жёлтая плитка "написать" — внизу, в зоне большого пальца. -->
+  <section class="screen screen-cobalt" data-screen="1" aria-labelledby="hero-title">
+    <div class="shell screen-body lg:grid lg:grid-cols-12 lg:items-center lg:gap-x-8">
+      <!-- На телефоне колонка растворяется в экране: панно встаёт между
+           табличкой и жёлтой плиткой и занимает оставшуюся высоту. -->
+      <div class="contents lg:col-span-7 lg:flex lg:flex-col lg:gap-8">
+        <h1 id="hero-title" class="display display-xl">
           Делаю сайты для бизнеса в Астане
         </h1>
 
-        <div class="relative flex flex-col gap-6">
-          <p class="measure text-lg text-vinyl-muted md:text-xl">
-            Ваш клиент открывает сайт с телефона, за пару секунд находит то,
-            что искал, и пишет вам в WhatsApp.
-          </p>
-
-          <p class="plate !pt-6 !pb-3 !px-5 self-start font-medium">
-            <span class="font-bold">На связи:</span> отвечаю в течение дня
-          </p>
-
-          <a
-            href={contacts.whatsapp}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="sticker self-stretch sm:self-start"
-            data-cta
-          >
-            <ChatIcon size={26} />
-            Написать в WhatsApp
-            <span class="sr-only">(откроется в новой вкладке)</span>
-          </a>
-        </div>
-      </div>
-
-      <!-- Витрина -->
-      <div id="works" class="window js-window scroll-mt-4 px-4 pt-6 pb-8 lg:col-span-7 lg:px-8">
-        <div class="mb-6 flex flex-col gap-4">
-          <h2 class="vinyl sign-lg">Работы</h2>
-          <p class="measure text-[0.9375rem] text-vinyl-muted">
-            Под каждой работой написано, что это. Концепт — сайт, который
-            я сделала не по заказу, а чтобы показать, каким может быть сайт
-            такого бизнеса.
-          </p>
-        </div>
-
-        <div class="grid gap-x-6 gap-y-12 sm:grid-cols-2">
-          {featuredProjects.map((project, index) => (
-            <Cards project={project} eager={index === 0} />
-          ))}
-        </div>
-
-        <p class="mt-10 text-center">
-          <a href="/projects" class="vinyl-link inline-flex min-h-[44px] items-center font-medium">
-            Все работы в витрине
-          </a>
+        <p class="measure text-lg text-on-cobalt-muted md:text-xl">
+          Ваш клиент открывает сайт с телефона, за пару секунд находит то,
+          что искал, и пишет вам в WhatsApp.
         </p>
 
-        <!-- Створки: разъезжаются один раз, когда витрина на экране. -->
-        <div class="leaf leaf-left" aria-hidden="true"></div>
-        <div class="leaf leaf-right" aria-hidden="true"></div>
+        <p class="tile self-start !px-4 !py-3 font-medium">
+          <span class="font-bold">На связи:</span> отвечаю в течение дня
+        </p>
+
+        <a
+          href={contacts.whatsapp}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="smalt order-last self-stretch sm:self-start lg:order-none lg:mt-2"
+          data-cta
+        >
+          <ChatIcon size={24} />
+          Написать в WhatsApp
+          <span class="sr-only">(откроется в новой вкладке)</span>
+        </a>
+      </div>
+
+      <!-- Панно: две работы плитками среди тессер. На низком телефоне ему
+           не хватает места, и оно уступает его тексту и кнопке. -->
+      <div class="mosaic min-h-0 flex-1 grid-cols-6 grid-rows-6 max-lg:[@media(max-height:700px)]:hidden lg:col-span-5 lg:h-[min(70svh,40rem)] lg:flex-none" aria-hidden="true">
+        {heroShots[0] && (
+          <div class="relative col-span-3 row-span-4 overflow-hidden rounded-[2px] bg-stone" data-lay style="--i: 0">
+            <Image src={heroShots[0]} alt="" widths={[400, 800]} sizes="20rem" class="absolute inset-0 h-full w-full object-cover object-top" loading="eager" />
+          </div>
+        )}
+        <div class="col-span-3 row-span-2 rounded-[2px] bg-terracotta" data-lay style="--i: 1"></div>
+        {heroShots[1] && (
+          <div class="relative col-span-3 row-span-4 overflow-hidden rounded-[2px] bg-stone" data-lay style="--i: 2">
+            <Image src={heroShots[1]} alt="" widths={[400, 800]} sizes="20rem" class="absolute inset-0 h-full w-full object-cover object-top" loading="eager" />
+          </div>
+        )}
+        <div class="col-span-2 row-span-2 rounded-[2px] bg-stone" data-lay style="--i: 3"></div>
+        <div class="col-span-1 row-span-2 rounded-[2px] bg-cobalt-deep" data-lay style="--i: 4"></div>
       </div>
     </div>
   </section>
 
-  <!-- ЦЕНЫ. Прайс у кассы: одна большая табличка. Цена — самое крупное
-       на строке, сразу под ней срок, ниже что это и что входит. -->
-  <section id="services" class="scroll-mt-4 bg-glass-deep py-16 md:py-24">
-    <div class="shell">
-      <h2 class="vinyl sign-lg mb-4">Цены и сроки</h2>
-      <p class="measure mb-10 text-vinyl-muted">
-        «От» значит, что меньше этой суммы не будет. Точную цену и срок
-        я назову после первого разговора, и он ничего не стоит.
-      </p>
+  <!-- 2. РАБОТЫ. Ночной кобальт. Работы — плитки, на телефоне листаются
+       вбок, у каждой честно написано, что это. -->
+  <section id="works" class="screen screen-deep" data-screen="2" aria-labelledby="works-title">
+    <div class="shell screen-body lg:grid lg:grid-cols-12 lg:items-center lg:gap-x-8">
+      <div class="flex flex-col gap-4 lg:col-span-4">
+        <!-- На телефоне ссылка на все работы стоит в строке заголовка:
+             отдельной строкой под плитками экран не помещался в окно. -->
+        <div class="flex items-baseline justify-between gap-4">
+          <h2 id="works-title" class="display display-lg">Работы</h2>
+          <a href="/projects" class="field-link inline-flex min-h-[44px] items-center font-semibold lg:hidden">
+            Все работы
+          </a>
+        </div>
+        <p class="measure text-[0.9375rem] text-on-cobalt-muted md:text-base">
+          Под каждой работой написано, что это. Концепт — сайт, который
+          я сделала не по заказу, а чтобы показать, каким может быть сайт
+          такого бизнеса.
+        </p>
+        <a href="/projects" class="field-link hidden min-h-[44px] items-center self-start font-semibold lg:inline-flex">
+          Все работы
+        </a>
+      </div>
 
-      <div class="plate max-w-[60rem]">
-        <ul class="flex flex-col">
-          {services.map((service) => (
-            <li class="flex flex-col gap-4 border-t border-plate-line py-8 first:border-t-0 first:pt-0 last:pb-6">
-              <div class="price-row">
-                <h3 class="text-xl font-bold leading-tight md:text-2xl">{service.name}</h3>
-                <span class="leader" aria-hidden="true"></span>
-                {service.price ? (
-                  <p class="price"><small>от </small>{service.price}<small> ₸</small></p>
-                ) : (
-                  <p class="price"><small>по объёму</small></p>
-                )}
-              </div>
+      <Pager label="Работы" item="Работа" cols={2} class="lg:col-span-8">
+        {featuredProjects.map((project, index) => (
+          <Cards project={project} eager={index === 0} index={index} />
+        ))}
+      </Pager>
+    </div>
+  </section>
 
-              {service.time && (
-                <p class="font-medium">Срок: {service.time}</p>
-              )}
+  <!-- 3. ЦЕНЫ. Кобальт. Три тарифа — три плитки: на телефоне листаются,
+       на компьютере стоят рядом. Цена — самое крупное на плитке. -->
+  <section id="services" class="screen screen-cobalt" data-screen="3" aria-labelledby="services-title">
+    <div class="shell screen-body">
+      <div class="flex flex-col gap-3">
+        <div class="flex items-center justify-between gap-4">
+          <h2 id="services-title" class="display display-lg">Цены и сроки</h2>
+          <Tesserae cols={4} rows={1} offset={6} class="hidden w-36 flex-none sm:grid" />
+        </div>
+        <p class="measure text-[0.9375rem] text-on-cobalt-muted md:text-base">
+          «От» значит, что меньше этой суммы не будет. Точную цену и срок
+          я назову после первого разговора, и он ничего не стоит.
+        </p>
+      </div>
 
-              <div class="grid gap-4 md:grid-cols-2 md:gap-10">
-                <p>{service.about}</p>
-                <div>
-                  {service.price && <p class="mb-2 font-medium">Что входит</p>}
-                  <ul class="ticks flex flex-col gap-1.5">
-                    {service.includes.map((item) => <li>{item}</li>)}
-                  </ul>
-                </div>
-              </div>
-            </li>
-          ))}
-        </ul>
-
+      <Pager label="Тарифы и оплата домена" item="Плитка" cols={3}>
+        {services.map((service, index) => (
+          <article class="tile flex flex-col gap-2.5" data-lay style={`--i: ${index}`}>
+            <h3 class="display display-md lg:min-h-[3.12em]">{service.name}</h3>
+            {service.price ? (
+              <p class="price"><small>от </small>{service.price}<small> ₸</small></p>
+            ) : (
+              <p class="price"><small>по объёму</small></p>
+            )}
+            {service.time && <p class="font-semibold">Срок: {service.time}</p>}
+            <p class="text-[0.9375rem]">{service.about}</p>
+            <div class="mt-1 border-t border-stone-line pt-3">
+              {service.price && <p class="label mb-2 text-ink-muted">Что входит</p>}
+              <ul class="ticks flex flex-col gap-1 text-[0.9375rem]">
+                {service.includes.map((item) => <li>{item}</li>)}
+              </ul>
+            </div>
+          </article>
+        ))}
         <!-- Цену домена и хостинга не называем: она зависит от того, что
-             выберет клиент, а придумывать "примерно" нечестно. -->
-        <div class="border-t border-plate-line pt-6">
-          <p class="measure text-[0.9375rem] text-ink-muted">
+             выберет клиент, а придумывать "примерно" нечестно. На телефоне
+             это последняя плитка ряда, на компьютере — полоса под тарифами. -->
+        <div class="tile flex items-center lg:col-span-3 lg:!py-4" data-lay style="--i: 3">
+          <p class="measure text-[0.9375rem] text-ink-muted lg:max-w-none">
             Домен и хостинг вы оплачиваете отдельно, их цена зависит от того,
             какие вы выберете. Оформляются они на ваше имя, и все логины и пароли
             от этих аккаунтов у вас.
           </p>
         </div>
-      </div>
+      </Pager>
     </div>
   </section>
 
-  <!-- КАК Я РАБОТАЮ. Табличка "режим работы", только вместо часов — шаги.
-       Справа на каждой строке то, что вы платите мне: 0 ₸, 50%, 0 ₸, 50%,
-       0 ₸. Список нумерованный по смыслу, номера не показываем: порядок
-       держат строки таблички. -->
-  <section id="process" class="scroll-mt-4 bg-glass py-16 md:py-24">
-    <div class="shell">
-      <h2 class="vinyl sign-lg mb-4">Как я работаю</h2>
-      <p class="measure mb-10 text-vinyl-muted">
-        Если вы раньше не заказывали сайт, вот как это обычно проходит.
-        Платите вы два раза, по половине: в начале работы и когда готовый
-        сайт вас устроит.
-      </p>
+  <!-- 4. КАК Я РАБОТАЮ. Ночной кобальт. Пять шагов — пять плиток. На каждой
+       крупно то, что вы платите мне на этом шаге: 0 ₸, 50%, 0 ₸, 50%, 0 ₸. -->
+  <section id="process" class="screen screen-deep" data-screen="4" aria-labelledby="process-title">
+    <div class="shell screen-body">
+      <div class="flex flex-col gap-3">
+        <h2 id="process-title" class="display display-lg">Как я работаю</h2>
+        <p class="measure text-[0.9375rem] text-on-cobalt-muted md:text-base">
+          Если вы раньше не заказывали сайт, вот как это обычно проходит.
+          Платите вы два раза, по половине: в начале работы и когда готовый
+          сайт вас устроит.
+        </p>
+      </div>
 
-      <div class="plate max-w-[60rem]">
-        <!-- Заголовок колонки, а не ярлык над табличкой: подписывает цифры справа. -->
-        <p class="plate-title mb-4 text-right" aria-hidden="true">Вы платите мне</p>
-
-        <ol class="flex flex-col">
-          {steps.map((step) => (
-            <li class="grid grid-cols-[1fr_auto] gap-x-6 gap-y-2 border-t border-plate-line py-6 first:border-t-0 first:pt-0 last:pb-0">
-              <h3 class="text-xl font-bold leading-tight md:text-2xl">{step.title}</h3>
-              <p class="price text-right md:row-span-2">
-                <span class="sr-only">Вы платите мне: </span>{step.pay}
+      <Pager label="Шаги работы" item="Шаг" cols={5}>
+        {steps.map((step, index) => (
+          <article class="tile flex flex-col gap-3" data-lay style={`--i: ${index}`}>
+            <div class="flex flex-col gap-2">
+              <h3 class="display display-md lg:!text-[1.25rem]">{step.title}</h3>
+              <p class="flex flex-col gap-1">
+                <span class="label text-ink-muted">Вы платите мне</span>
+                <span class:list={["price self-start", step.pay !== "0 ₸" && "rounded-[2px] bg-terracotta px-2 py-1.5 text-on-cobalt"]}>{step.pay}</span>
               </p>
-              <p class="measure col-span-2 md:col-span-1">{step.text}</p>
-            </li>
-          ))}
-        </ol>
-      </div>
+            </div>
+            <p class="text-[0.9375rem]">{step.text}</p>
+          </article>
+        ))}
+      </Pager>
     </div>
   </section>
 
-  <!-- ОБО МНЕ. Табличка у входа: кто здесь работает. Без отзывов и
-       клиентов главное доверие перед предоплатой — сам человек. -->
-  <section id="about" class="scroll-mt-4 bg-glass-deep py-16 md:py-24">
-    <div class="shell">
-      <h2 class="vinyl sign-lg mb-10">Обо мне</h2>
+  <!-- 5. ОБО МНЕ. Терракота — единственный тёплый экран: здесь человек.
+       Пока портрета нет, плитка держится на имени и обещаниях; фото,
+       когда появится, встанет в мозаику плиткой. -->
+  <section id="about" class="screen screen-terracotta" data-screen="5" aria-labelledby="about-title">
+    <div class="shell screen-body">
+      <h2 id="about-title" class="display display-lg">Обо мне</h2>
 
-      <div class:list={["plate grid max-w-[60rem] gap-8 md:gap-10", (portrait || showPortraitPlaceholder) && "md:grid-cols-[16rem_1fr]"]}>
-        {portrait ? (
-          <Image
-            src={portrait}
-            alt="Салима"
-            widths={[320, 640]}
-            sizes="16rem"
-            class="aspect-[4/5] w-full max-w-[16rem] rounded-[3px] object-cover"
-          />
-        ) : showPortraitPlaceholder && (
-          <div class="flex aspect-[4/5] w-full max-w-[16rem] items-center justify-center rounded-[3px] border-2 border-dashed border-plate-line p-4 text-center text-ink-muted">
-            [заглушка: фото в src/assets/portrait.jpg]
+      <div class="mosaic lg:grid-cols-12">
+        {(portrait || showPortraitPlaceholder) && (
+          <div class="hidden lg:col-span-3 lg:block" data-lay style="--i: 0">
+            {portrait ? (
+              <Image src={portrait} alt="Салима" widths={[320, 640]} sizes="16rem" class="aspect-[4/5] h-full w-full rounded-[2px] object-cover" />
+            ) : (
+              <div class="flex aspect-[4/5] h-full w-full items-center justify-center rounded-[2px] border-2 border-dashed border-stone p-4 text-center text-sm">
+                [заглушка: фото в src/assets/portrait.jpg]
+              </div>
+            )}
           </div>
         )}
 
-        <div class="flex flex-col gap-4">
-          <p class="vinyl text-[2.5rem]">{contacts.name}</p>
-          {bio.map((line) => <p class="measure text-lg">{line}</p>)}
-          <ul class="ticks mt-2 flex flex-col gap-1.5 border-t border-plate-line pt-5">
+        <div class:list={["tile flex flex-col gap-4", (portrait || showPortraitPlaceholder) ? "lg:col-span-6" : "lg:col-span-8"]} data-lay style="--i: 1">
+          {portrait && (
+            <Image src={portrait} alt="Салима" widths={[320, 640]} sizes="8rem" class="aspect-square w-28 rounded-[2px] object-cover lg:hidden" />
+          )}
+          <p class="display display-lg">{contacts.name}</p>
+          {bio.map((line) => <p class="measure md:text-lg">{line}</p>)}
+          <ul class="ticks flex flex-col gap-1.5 border-t border-stone-line pt-4">
             {promises.map((item) => <li>{item}</li>)}
           </ul>
         </div>
+
+        <Tesserae
+          cols={4}
+          rows={3}
+          offset={4}
+          on="terracotta"
+          class={`w-1/2 lg:w-auto lg:self-end ${(portrait || showPortraitPlaceholder) ? "lg:col-span-3" : "lg:col-span-4"}`}
+        />
       </div>
     </div>
   </section>
 
-  <!-- КОНТАКТЫ. Снова дверь: страница заканчивается там же, где началась,
-       наклейкой "написать". Форма — записка на табличке для тех, кому
-       удобнее, чтобы написали им. -->
-  <section id="contacts" class="scroll-mt-4 bg-glass py-16 md:py-24">
-    <div class="shell grid gap-12 lg:grid-cols-12 lg:gap-6">
-      <div class="flex flex-col gap-6 lg:col-span-5">
-        <h2 class="vinyl sign-xl">Напишите мне</h2>
-        <p class="measure text-lg text-vinyl-muted">
+  <!-- 6. НАПИШИТЕ МНЕ. Ночной кобальт, снова жёлтая плитка: страница
+       заканчивается тем же действием, с которого началась. На телефоне
+       это два экрана — WhatsApp и форма, — на компьютере один. -->
+  <section id="contacts" class="contacts screen-deep" data-screen="6" aria-labelledby="contacts-title">
+    <div class="contacts-part">
+      <div class="shell screen-body lg:justify-start">
+        <h2 id="contacts-title" class="display display-xl">Напишите мне</h2>
+        <p class="measure text-lg text-on-cobalt-muted">
           Быстрее всего в WhatsApp. Отвечаю в течение дня.
         </p>
 
@@ -331,10 +340,10 @@ const links = [
           href={contacts.whatsapp}
           target="_blank"
           rel="noopener noreferrer"
-          class="sticker self-stretch sm:self-start"
+          class="smalt self-stretch sm:self-start"
           data-cta
         >
-          <ChatIcon size={26} />
+          <ChatIcon size={24} />
           Написать в WhatsApp
           <span class="sr-only">(откроется в новой вкладке)</span>
         </a>
@@ -346,71 +355,30 @@ const links = [
                 href={href}
                 target={href.startsWith("mailto:") ? undefined : "_blank"}
                 rel={href.startsWith("mailto:") ? undefined : "noopener noreferrer"}
-                class="group flex min-h-[48px] flex-wrap items-center gap-x-4"
+                class="flex min-h-[48px] flex-wrap items-center gap-x-4"
               >
-                <span class="w-20 text-[0.9375rem] text-vinyl-muted">{label}</span>
-                <span class="vinyl-link break-all">{text}</span>
+                <span class="w-20 text-[0.9375rem] text-on-cobalt-muted">{label}</span>
+                <span class="field-link break-all">{text}</span>
               </a>
             </li>
           ))}
         </ul>
-      </div>
 
-      <div class="plate lg:col-span-7">
-        <p class="mb-6 text-lg font-medium">Или оставьте заявку, и я напишу вам сама.</p>
-        <Form />
+        <Tesserae cols={6} rows={2} offset={7} on="deep" class="mt-auto w-full max-w-[18rem]" />
       </div>
+    </div>
+
+    <div class="contacts-part">
+      <div class="shell screen-body">
+        <div class="tile" data-lay style="--i: 1">
+          <p class="mb-5 text-lg font-semibold">Или оставьте заявку, и я напишу вам сама.</p>
+          <Form />
+        </div>
+      </div>
+    </div>
+
+    <div class="contacts-footer">
+      <Footer />
     </div>
   </section>
 </Layout>
-
-<script>
-  // Створки витрины разъезжаются один раз: после первой прокрутки, когда
-  // витрина видна хотя бы на четверть. На компьютере витрина видна сразу,
-  // и створки ждут, пока человек начнёт листать, а не играют заставку при
-  // загрузке. Если человек не листает, через секунду они открываются
-  // сами: работы не должны оставаться за тонированным стеклом.
-  // Фокус с клавиатуры внутри витрины открывает их сразу.
-  // Если при загрузке витрина только выглядывает из-под края экрана
-  // (так бывает на телефоне), створки открыты сразу и без анимации:
-  // затемнённый край выглядел бы как выключенный раздел.
-  // Без JavaScript и при "уменьшить движение" створок нет.
-  const shop = document.querySelector<HTMLElement>(".js-window");
-  const peeking = (el: HTMLElement) => {
-    const { top, height } = el.getBoundingClientRect();
-    return top < innerHeight && (innerHeight - top) / height < 0.25;
-  };
-  if (shop && peeking(shop)) {
-    const leaves = shop.querySelectorAll<HTMLElement>(".leaf");
-    leaves.forEach((leaf) => (leaf.style.transition = "none"));
-    shop.classList.add("is-open");
-    shop.offsetHeight; // применить без перехода, потом вернуть переход
-    leaves.forEach((leaf) => (leaf.style.transition = ""));
-  } else if (shop && "IntersectionObserver" in window) {
-    let scrolled = false;
-    let inView = false;
-    const open = () => {
-      shop.classList.add("is-open");
-      observer.disconnect();
-      window.removeEventListener("scroll", onScroll);
-    };
-    const onScroll = () => {
-      scrolled = true;
-      if (inView) open();
-    };
-    let timer = 0;
-    const observer = new IntersectionObserver(
-      (entries) => {
-        inView = entries.some((entry) => entry.isIntersecting);
-        if (inView && scrolled) open();
-        else if (inView && !timer) timer = window.setTimeout(open, 1000);
-      },
-      { threshold: 0.25 }
-    );
-    observer.observe(shop);
-    window.addEventListener("scroll", onScroll, { passive: true });
-    shop.addEventListener("focusin", open, { once: true });
-  } else {
-    shop?.classList.add("is-open");
-  }
-</script>

@@ -1,31 +1,36 @@
 ---
 import Layout from '../layouts/Layout.astro';
 import Cards from '../components/Cards.astro';
+import Pager from '../components/Pager.astro';
+import Tesserae from '../components/Tesserae.astro';
 import { projects } from '../data/projects';
 ---
 <Layout
   title="Работы"
   description="Сайты, которые я сделала: концепты, демо и учебные проекты."
 >
-  <!-- Витрина целиком: все работы на экранах телефонов. Створок здесь нет,
-       человек пришёл сюда именно смотреть. -->
-  <section class="bg-glass pt-6 pb-16 md:pb-24">
-    <div class="shell">
-      <h1 class="vinyl sign-xl mb-6">Работы</h1>
-      <p class="measure mb-10 text-vinyl-muted">
-        Под каждой работой написано, что это. Концепт — сайт, который я сделала
-        не по заказу, а чтобы показать, каким может быть сайт такого бизнеса.
-        Демо — образец, который показывает, как всё работает, на заранее
-        подготовленных примерах. Учебный проект — сайт, на котором я училась.
-      </p>
-
-      <div class="window px-4 pt-10 pb-10 md:px-8">
-        <div class="grid gap-x-6 gap-y-14 sm:grid-cols-2 xl:grid-cols-4">
-          {projects.map((project, index) => (
-            <Cards project={project} eager={index < 2} />
-          ))}
+  <!-- Все работы на одном экране: на телефоне листаются вбок, на компьютере
+       стоят в ряд. Человек пришёл сюда именно смотреть. -->
+  <section class="screen screen-deep" data-screen="1" aria-labelledby="projects-title">
+    <div class="shell screen-body">
+      <div class="flex items-start justify-between gap-6">
+        <div class="flex flex-col gap-3">
+          <h1 id="projects-title" class="display display-xl">Работы</h1>
+          <p class="measure text-[0.9375rem] text-on-cobalt-muted md:text-base">
+            Под каждой работой написано, что это. Концепт — сайт, который я сделала
+            не по заказу, а чтобы показать, каким может быть сайт такого бизнеса.
+            Демо — образец, который показывает, как всё работает, на заранее
+            подготовленных примерах. Учебный проект — сайт, на котором я училась.
+          </p>
         </div>
+        <Tesserae cols={3} rows={2} offset={2} on="deep" class="hidden w-28 flex-none md:grid" />
       </div>
+
+      <Pager label="Работы" item="Работа" cols={4}>
+        {projects.map((project, index) => (
+          <Cards project={project} eager={index < 2} index={index} />
+        ))}
+      </Pager>
     </div>
   </section>
 </Layout>

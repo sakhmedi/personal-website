@@ -29,6 +29,7 @@ saliima.dev (live at https://saliima.netlify.app/) is Salima's storefront as a f
 
 - Stack: Astro 5 static site, Tailwind CSS 4 (tokens live in `@theme` in `src/styles/global.css`), strict TypeScript. Netlify deploys automatically from `main`. The build fails on purpose if `PUBLIC_FORMSPREE_ID` is missing.
 - Pages: `/` (works, services, process, contacts), `/projects` (all works), `/404`. The old `/about` and `/contacts` pages redirect to sections of the home page.
+- The home page is a sequence of six full screens in a fixed order (hero, works, prices, process, about, contacts), one section per screen with vertical scroll-snap. Content that does not fit a phone screen scrolls sideways inside its screen rather than stretching it. Texts, the form and the section order stay as they are when the look changes (decided 2026-10-05).
 - Services and prices: a one-page site from 80 000 ₸, usually 2–3 days; a multi-page site from 150 000 ₸, usually about 7 days; improving an existing site, with price and timeline set after reviewing the site and agreeing on the list of changes.
 - Domain and hosting: the client pays for them separately. They are registered in the client's name, and the client gets every login and password. Their cost is never quoted in advance because it depends on the domain and hosting chosen. For improvement work, Salima works with the client's existing domain and hosting and never promises to register or transfer them.
 - Status terms: концепт = made on her own initiative, not commissioned, to show what a site for such a business could be (DALA COFFEE, Дентал Плюс); демо = shows how the product works on prepared examples (Shart AI); учебный проект = built while learning (Bloom).
@@ -43,7 +44,7 @@ saliima.dev (live at https://saliima.netlify.app/) is Salima's storefront as a f
 ## Evidence on Hand
 
 - Works: DALA COFFEE (coffee shop, concept), Дентал Плюс (dental clinic, concept), Shart AI (document assistant, demo with prepared answers), Bloom (flower guide, study project). Screenshots are in `src/assets/screens/`.
-- Portrait: `src/assets/salima.jpg`. Link preview image: `public/og.png`.
+- Portrait: not provided yet. When it exists it goes to `src/assets/portrait.jpg` (or .jpeg/.png/.webp) and the site picks it up; the published build shows no placeholder. Link preview image: `public/og.png`, rendered by `npm run og`.
 - None of the works are for paying clients, and there are no testimonials, client logos, or numbers. Future work must never invent them or present a concept as client work.
 
 ## Product Principles

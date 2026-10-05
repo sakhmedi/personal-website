@@ -1,5 +1,6 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
-  <!-- Жёлтая наклейка с белой вырубкой и буквой С. -->
-  <rect x="1.5" y="1.5" width="29" height="29" rx="7" fill="#ffd31a" stroke="#ffffff" stroke-width="3"/>
-  <path d="M21.5 11.2A7 7 0 1 0 21.5 20.8" fill="none" stroke="#1c1800" stroke-width="4" stroke-linecap="round"/>
+  <!-- Жёлтая плитка смальты на кобальтовом шве, на ней буква С. -->
+  <rect width="32" height="32" rx="3" fill="#1b3a8a"/>
+  <rect x="3" y="3" width="26" height="26" rx="2" fill="#ffd31a"/>
+  <path d="M21.5 11.2A7 7 0 1 0 21.5 20.8" fill="none" stroke="#1c1800" stroke-width="4" stroke-linecap="square"/>
 </svg>

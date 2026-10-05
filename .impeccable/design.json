@@ -1,147 +1,530 @@
 {
   "schemaVersion": 2,
-  "generatedAt": "2026-10-01T00:00:00Z",
-  "title": "Design System: Салима · Витрина",
+  "generatedAt": "2026-10-05T10:52:27.334Z",
+  "title": "Design System: Салима · Мозаика",
   "extensions": {
     "colorMeta": {
-      "sticker":       { "role": "primary", "displayName": "Жёлтая наклейка", "canonical": "oklch(87.9% 0.176 93.2)", "tonalRamp": ["oklch(15% 0.176 93.2)", "oklch(26% 0.176 93.2)", "oklch(38% 0.176 93.2)", "oklch(50% 0.176 93.2)", "oklch(62% 0.176 93.2)", "oklch(74% 0.176 93.2)", "oklch(85% 0.176 93.2)", "oklch(95% 0.04 93.2)"] },
-      "sticker-hover": { "role": "primary", "displayName": "Наклейка под пальцем", "canonical": "oklch(83.7% 0.171 91.6)", "tonalRamp": ["oklch(15% 0.171 91.6)", "oklch(26% 0.171 91.6)", "oklch(38% 0.171 91.6)", "oklch(50% 0.171 91.6)", "oklch(62% 0.171 91.6)", "oklch(74% 0.171 91.6)", "oklch(85% 0.171 91.6)", "oklch(95% 0.04 91.6)"] },
-      "on-sticker":    { "role": "primary", "displayName": "Тёмный по жёлтому", "canonical": "oklch(20.7% 0.043 101.2)", "tonalRamp": ["oklch(15% 0.043 101.2)", "oklch(26% 0.043 101.2)", "oklch(38% 0.043 101.2)", "oklch(50% 0.043 101.2)", "oklch(62% 0.043 101.2)", "oklch(74% 0.043 101.2)", "oklch(85% 0.043 101.2)", "oklch(95% 0.04 101.2)"] },
-      "glass":         { "role": "neutral", "displayName": "Тёмное бирюзовое стекло", "canonical": "oklch(26.6% 0.035 210.9)", "tonalRamp": ["oklch(15% 0.035 210.9)", "oklch(26% 0.035 210.9)", "oklch(38% 0.035 210.9)", "oklch(50% 0.035 210.9)", "oklch(62% 0.035 210.9)", "oklch(74% 0.035 210.9)", "oklch(85% 0.035 210.9)", "oklch(95% 0.035 210.9)"] },
-      "glass-deep":    { "role": "neutral", "displayName": "Глубокое стекло", "canonical": "oklch(20.1% 0.022 211)", "tonalRamp": ["oklch(15% 0.022 211)", "oklch(26% 0.022 211)", "oklch(38% 0.022 211)", "oklch(50% 0.022 211)", "oklch(62% 0.022 211)", "oklch(74% 0.022 211)", "oklch(85% 0.022 211)", "oklch(95% 0.022 211)"] },
-      "frame":         { "role": "neutral", "displayName": "Алюминиевая рама", "canonical": "oklch(57.3% 0.039 207.4)", "tonalRamp": ["oklch(15% 0.039 207.4)", "oklch(26% 0.039 207.4)", "oklch(38% 0.039 207.4)", "oklch(50% 0.039 207.4)", "oklch(62% 0.039 207.4)", "oklch(74% 0.039 207.4)", "oklch(85% 0.039 207.4)", "oklch(95% 0.039 207.4)"] },
-      "vinyl":         { "role": "neutral", "displayName": "Белая плёнка", "canonical": "oklch(100% 0 0)", "tonalRamp": ["oklch(15% 0 0)", "oklch(26% 0 0)", "oklch(38% 0 0)", "oklch(50% 0 0)", "oklch(62% 0 0)", "oklch(74% 0 0)", "oklch(85% 0 0)", "oklch(95% 0 0)"] },
-      "vinyl-muted":   { "role": "neutral", "displayName": "Приглушённая плёнка", "canonical": "oklch(80.1% 0.029 202.1)", "tonalRamp": ["oklch(15% 0.029 202.1)", "oklch(26% 0.029 202.1)", "oklch(38% 0.029 202.1)", "oklch(50% 0.029 202.1)", "oklch(62% 0.029 202.1)", "oklch(74% 0.029 202.1)", "oklch(85% 0.029 202.1)", "oklch(95% 0.029 202.1)"] },
-      "phone-bezel":   { "role": "neutral", "displayName": "Чёрный корпус телефона", "canonical": "oklch(13.6% 0.014 204.4)", "tonalRamp": ["oklch(15% 0.014 204.4)", "oklch(26% 0.014 204.4)", "oklch(38% 0.014 204.4)", "oklch(50% 0.014 204.4)", "oklch(62% 0.014 204.4)", "oklch(74% 0.014 204.4)", "oklch(85% 0.014 204.4)", "oklch(95% 0.014 204.4)"] },
-      "plate":         { "role": "neutral", "displayName": "Алюминиевая табличка", "canonical": "oklch(92.9% 0.005 228.8)", "tonalRamp": ["oklch(15% 0.005 228.8)", "oklch(26% 0.005 228.8)", "oklch(38% 0.005 228.8)", "oklch(50% 0.005 228.8)", "oklch(62% 0.005 228.8)", "oklch(74% 0.005 228.8)", "oklch(85% 0.005 228.8)", "oklch(95% 0.005 228.8)"] },
-      "plate-line":    { "role": "neutral", "displayName": "Винт и пунктир", "canonical": "oklch(67.7% 0.016 218.1)", "tonalRamp": ["oklch(15% 0.016 218.1)", "oklch(26% 0.016 218.1)", "oklch(38% 0.016 218.1)", "oklch(50% 0.016 218.1)", "oklch(62% 0.016 218.1)", "oklch(74% 0.016 218.1)", "oklch(85% 0.016 218.1)", "oklch(95% 0.016 218.1)"] },
-      "ink":           { "role": "neutral", "displayName": "Краска", "canonical": "oklch(21.1% 0.012 214.7)", "tonalRamp": ["oklch(15% 0.012 214.7)", "oklch(26% 0.012 214.7)", "oklch(38% 0.012 214.7)", "oklch(50% 0.012 214.7)", "oklch(62% 0.012 214.7)", "oklch(74% 0.012 214.7)", "oklch(85% 0.012 214.7)", "oklch(95% 0.012 214.7)"] },
-      "ink-muted":     { "role": "neutral", "displayName": "Приглушённая краска", "canonical": "oklch(45% 0.017 213.2)", "tonalRamp": ["oklch(15% 0.017 213.2)", "oklch(26% 0.017 213.2)", "oklch(38% 0.017 213.2)", "oklch(50% 0.017 213.2)", "oklch(62% 0.017 213.2)", "oklch(74% 0.017 213.2)", "oklch(85% 0.017 213.2)", "oklch(95% 0.017 213.2)"] },
-      "link":          { "role": "neutral", "displayName": "Ссылка на табличке", "canonical": "oklch(39.5% 0.063 212)", "tonalRamp": ["oklch(15% 0.063 212)", "oklch(26% 0.063 212)", "oklch(38% 0.063 212)", "oklch(50% 0.063 212)", "oklch(62% 0.063 212)", "oklch(74% 0.063 212)", "oklch(85% 0.063 212)", "oklch(95% 0.04 212)"] },
-      "field":         { "role": "neutral", "displayName": "Белое поле и бумага бирки", "canonical": "oklch(100% 0 0)", "tonalRamp": ["oklch(15% 0 0)", "oklch(26% 0 0)", "oklch(38% 0 0)", "oklch(50% 0 0)", "oklch(62% 0 0)", "oklch(74% 0 0)", "oklch(85% 0 0)", "oklch(95% 0 0)"] },
-      "field-border":  { "role": "neutral", "displayName": "Рамка поля", "canonical": "oklch(56.9% 0.019 215.6)", "tonalRamp": ["oklch(15% 0.019 215.6)", "oklch(26% 0.019 215.6)", "oklch(38% 0.019 215.6)", "oklch(50% 0.019 215.6)", "oklch(62% 0.019 215.6)", "oklch(74% 0.019 215.6)", "oklch(85% 0.019 215.6)", "oklch(95% 0.019 215.6)"] },
-      "danger-plate":  { "role": "error", "displayName": "Ошибка на табличке", "canonical": "oklch(46.6% 0.168 28.4)", "tonalRamp": ["oklch(15% 0.168 28.4)", "oklch(26% 0.168 28.4)", "oklch(38% 0.168 28.4)", "oklch(50% 0.168 28.4)", "oklch(62% 0.168 28.4)", "oklch(74% 0.168 28.4)", "oklch(85% 0.168 28.4)", "oklch(95% 0.04 28.4)"] }
+      "cobalt": {
+        "role": "primary",
+        "displayName": "Кобальт",
+        "canonical": "oklch(37.8% 0.139 264.5)",
+        "tonalRamp": [
+          "oklch(15% 0.139 264.5)",
+          "oklch(26% 0.139 264.5)",
+          "oklch(38% 0.139 264.5)",
+          "oklch(50% 0.139 264.5)",
+          "oklch(62% 0.139 264.5)",
+          "oklch(74% 0.139 264.5)",
+          "oklch(85% 0.139 264.5)",
+          "oklch(95% 0.04 264.5)"
+        ]
+      },
+      "cobalt-deep": {
+        "role": "primary",
+        "displayName": "Ночной кобальт",
+        "canonical": "oklch(28% 0.099 264.5)",
+        "tonalRamp": [
+          "oklch(15% 0.099 264.5)",
+          "oklch(26% 0.099 264.5)",
+          "oklch(38% 0.099 264.5)",
+          "oklch(50% 0.099 264.5)",
+          "oklch(62% 0.099 264.5)",
+          "oklch(74% 0.099 264.5)",
+          "oklch(85% 0.099 264.5)",
+          "oklch(95% 0.04 264.5)"
+        ]
+      },
+      "terracotta": {
+        "role": "secondary",
+        "displayName": "Терракота",
+        "canonical": "oklch(58.2% 0.154 38.5)",
+        "tonalRamp": [
+          "oklch(15% 0.154 38.5)",
+          "oklch(26% 0.154 38.5)",
+          "oklch(38% 0.154 38.5)",
+          "oklch(50% 0.154 38.5)",
+          "oklch(62% 0.154 38.5)",
+          "oklch(74% 0.154 38.5)",
+          "oklch(85% 0.154 38.5)",
+          "oklch(95% 0.04 38.5)"
+        ]
+      },
+      "terracotta-ink": {
+        "role": "secondary",
+        "displayName": "Терракотовые чернила",
+        "canonical": "oklch(48.1% 0.136 38)",
+        "tonalRamp": [
+          "oklch(15% 0.136 38)",
+          "oklch(26% 0.136 38)",
+          "oklch(38% 0.136 38)",
+          "oklch(50% 0.136 38)",
+          "oklch(62% 0.136 38)",
+          "oklch(74% 0.136 38)",
+          "oklch(85% 0.136 38)",
+          "oklch(95% 0.04 38)"
+        ]
+      },
+      "smalt": {
+        "role": "tertiary",
+        "displayName": "Жёлтая смальта",
+        "canonical": "oklch(87.9% 0.176 93.2)",
+        "tonalRamp": [
+          "oklch(15% 0.176 93.2)",
+          "oklch(26% 0.176 93.2)",
+          "oklch(38% 0.176 93.2)",
+          "oklch(50% 0.176 93.2)",
+          "oklch(62% 0.176 93.2)",
+          "oklch(74% 0.176 93.2)",
+          "oklch(85% 0.176 93.2)",
+          "oklch(95% 0.04 93.2)"
+        ]
+      },
+      "smalt-hover": {
+        "role": "tertiary",
+        "displayName": "Смальта под пальцем",
+        "canonical": "oklch(83.7% 0.171 91.6)",
+        "tonalRamp": [
+          "oklch(15% 0.171 91.6)",
+          "oklch(26% 0.171 91.6)",
+          "oklch(38% 0.171 91.6)",
+          "oklch(50% 0.171 91.6)",
+          "oklch(62% 0.171 91.6)",
+          "oklch(74% 0.171 91.6)",
+          "oklch(85% 0.171 91.6)",
+          "oklch(95% 0.04 91.6)"
+        ]
+      },
+      "on-smalt": {
+        "role": "tertiary",
+        "displayName": "Тёмный по смальте",
+        "canonical": "oklch(20.7% 0.043 101.2)",
+        "tonalRamp": [
+          "oklch(15% 0.043 101.2)",
+          "oklch(26% 0.043 101.2)",
+          "oklch(38% 0.043 101.2)",
+          "oklch(50% 0.043 101.2)",
+          "oklch(62% 0.043 101.2)",
+          "oklch(74% 0.043 101.2)",
+          "oklch(85% 0.043 101.2)",
+          "oklch(95% 0.04 101.2)"
+        ]
+      },
+      "on-cobalt": {
+        "role": "neutral",
+        "displayName": "Белый по полю",
+        "canonical": "oklch(100% 0 0)",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(50% 0 0)",
+          "oklch(62% 0 0)",
+          "oklch(74% 0 0)",
+          "oklch(85% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "on-cobalt-muted": {
+        "role": "neutral",
+        "displayName": "Приглушённый по полю",
+        "canonical": "oklch(85% 0.042 270.4)",
+        "tonalRamp": [
+          "oklch(15% 0.042 270.4)",
+          "oklch(26% 0.042 270.4)",
+          "oklch(38% 0.042 270.4)",
+          "oklch(50% 0.042 270.4)",
+          "oklch(62% 0.042 270.4)",
+          "oklch(74% 0.042 270.4)",
+          "oklch(85% 0.042 270.4)",
+          "oklch(95% 0.04 270.4)"
+        ]
+      },
+      "stone": {
+        "role": "neutral",
+        "displayName": "Камень",
+        "canonical": "oklch(95.4% 0.003 247.9)",
+        "tonalRamp": [
+          "oklch(15% 0.003 247.9)",
+          "oklch(26% 0.003 247.9)",
+          "oklch(38% 0.003 247.9)",
+          "oklch(50% 0.003 247.9)",
+          "oklch(62% 0.003 247.9)",
+          "oklch(74% 0.003 247.9)",
+          "oklch(85% 0.003 247.9)",
+          "oklch(95% 0.003 247.9)"
+        ]
+      },
+      "stone-line": {
+        "role": "neutral",
+        "displayName": "Линия по камню",
+        "canonical": "oklch(71.1% 0.024 263.2)",
+        "tonalRamp": [
+          "oklch(15% 0.024 263.2)",
+          "oklch(26% 0.024 263.2)",
+          "oklch(38% 0.024 263.2)",
+          "oklch(50% 0.024 263.2)",
+          "oklch(62% 0.024 263.2)",
+          "oklch(74% 0.024 263.2)",
+          "oklch(85% 0.024 263.2)",
+          "oklch(95% 0.024 263.2)"
+        ]
+      },
+      "ink": {
+        "role": "neutral",
+        "displayName": "Графит",
+        "canonical": "oklch(20.9% 0.019 266.1)",
+        "tonalRamp": [
+          "oklch(15% 0.019 266.1)",
+          "oklch(26% 0.019 266.1)",
+          "oklch(38% 0.019 266.1)",
+          "oklch(50% 0.019 266.1)",
+          "oklch(62% 0.019 266.1)",
+          "oklch(74% 0.019 266.1)",
+          "oklch(85% 0.019 266.1)",
+          "oklch(95% 0.019 266.1)"
+        ]
+      },
+      "ink-muted": {
+        "role": "neutral",
+        "displayName": "Приглушённый графит",
+        "canonical": "oklch(43.8% 0.03 265.3)",
+        "tonalRamp": [
+          "oklch(15% 0.03 265.3)",
+          "oklch(26% 0.03 265.3)",
+          "oklch(38% 0.03 265.3)",
+          "oklch(50% 0.03 265.3)",
+          "oklch(62% 0.03 265.3)",
+          "oklch(74% 0.03 265.3)",
+          "oklch(85% 0.03 265.3)",
+          "oklch(95% 0.03 265.3)"
+        ]
+      },
+      "link": {
+        "role": "neutral",
+        "displayName": "Ссылка",
+        "canonical": "oklch(37.8% 0.139 264.5)",
+        "tonalRamp": [
+          "oklch(15% 0.139 264.5)",
+          "oklch(26% 0.139 264.5)",
+          "oklch(38% 0.139 264.5)",
+          "oklch(50% 0.139 264.5)",
+          "oklch(62% 0.139 264.5)",
+          "oklch(74% 0.139 264.5)",
+          "oklch(85% 0.139 264.5)",
+          "oklch(95% 0.04 264.5)"
+        ]
+      },
+      "field": {
+        "role": "neutral",
+        "displayName": "Белое поле",
+        "canonical": "oklch(100% 0 0)",
+        "tonalRamp": [
+          "oklch(15% 0 0)",
+          "oklch(26% 0 0)",
+          "oklch(38% 0 0)",
+          "oklch(50% 0 0)",
+          "oklch(62% 0 0)",
+          "oklch(74% 0 0)",
+          "oklch(85% 0 0)",
+          "oklch(95% 0 0)"
+        ]
+      },
+      "field-border": {
+        "role": "neutral",
+        "displayName": "Рамка поля",
+        "canonical": "oklch(55.5% 0.028 265.4)",
+        "tonalRamp": [
+          "oklch(15% 0.028 265.4)",
+          "oklch(26% 0.028 265.4)",
+          "oklch(38% 0.028 265.4)",
+          "oklch(50% 0.028 265.4)",
+          "oklch(62% 0.028 265.4)",
+          "oklch(74% 0.028 265.4)",
+          "oklch(85% 0.028 265.4)",
+          "oklch(95% 0.028 265.4)"
+        ]
+      },
+      "danger": {
+        "role": "neutral",
+        "displayName": "Ошибка",
+        "canonical": "oklch(46.6% 0.168 28.4)",
+        "tonalRamp": [
+          "oklch(15% 0.168 28.4)",
+          "oklch(26% 0.168 28.4)",
+          "oklch(38% 0.168 28.4)",
+          "oklch(50% 0.168 28.4)",
+          "oklch(62% 0.168 28.4)",
+          "oklch(74% 0.168 28.4)",
+          "oklch(85% 0.168 28.4)",
+          "oklch(95% 0.04 28.4)"
+        ]
+      },
+      "phone": {
+        "role": "neutral",
+        "displayName": "Корпус телефона",
+        "canonical": "oklch(20.1% 0.058 266.5)",
+        "tonalRamp": [
+          "oklch(15% 0.058 266.5)",
+          "oklch(26% 0.058 266.5)",
+          "oklch(38% 0.058 266.5)",
+          "oklch(50% 0.058 266.5)",
+          "oklch(62% 0.058 266.5)",
+          "oklch(74% 0.058 266.5)",
+          "oklch(85% 0.058 266.5)",
+          "oklch(95% 0.04 266.5)"
+        ]
+      }
     },
     "typographyMeta": {
-      "display":       { "displayName": "Плёнка крупно", "purpose": "Надпись на двери, «Напишите мне», заголовки /projects и 404. Прописные, text-wrap: balance." },
-      "headline":      { "displayName": "Плёнка разделов", "purpose": "Заголовки разделов на стекле. Прописные." },
-      "price":         { "displayName": "Цена", "purpose": "Цены и суммы оплаты; «от» и «₸» в 0.55em прописными, разрядка 0.04em." },
-      "title":         { "displayName": "Название на табличке", "purpose": "Услуги и шаги; 1.5rem на ≥768px; на бирке 1.125rem." },
-      "body":          { "displayName": "Текст", "purpose": "Основной текст, 1.125rem на ≥768px, строка до 36rem, табличные цифры." },
-      "body-small":    { "displayName": "Мелкий текст", "purpose": "Бирки, подвал, сноски, ошибки, подписи контактов." },
-      "sign-label":    { "displayName": "Имя на двери", "purpose": "«Салима · Астана» в шапке. Прописные." },
-      "sticker-label": { "displayName": "Надпись наклейки", "purpose": "Только наклейка «написать». Прописные." }
+      "display-xl": {
+        "displayName": "Display XL",
+        "purpose": "Заголовок первого экрана, «Напишите мне», /projects, 404."
+      },
+      "display-lg": {
+        "displayName": "Display LG",
+        "purpose": "Заголовки экранов и имя на плитке «Обо мне»."
+      },
+      "display-md": {
+        "displayName": "Display MD",
+        "purpose": "Названия тарифов, шагов и работ на плитках."
+      },
+      "price": {
+        "displayName": "Price",
+        "purpose": "Цены и суммы оплаты, табличные цифры."
+      },
+      "price-unit": {
+        "displayName": "Price unit",
+        "purpose": "«от», «₸», «по объёму» внутри цены, прописные."
+      },
+      "smalt": {
+        "displayName": "Smalt",
+        "purpose": "Подпись жёлтой плитки «написать»."
+      },
+      "smalt-md": {
+        "displayName": "Smalt MD",
+        "purpose": "Подпись жёлтой плитки на ≥768px."
+      },
+      "wordmark": {
+        "displayName": "Wordmark",
+        "purpose": "Имя в шапке и подпись смальты в шапке."
+      },
+      "label": {
+        "displayName": "Label",
+        "purpose": "Прописная подпись над данными на плитке, тип работы, счётчик экрана."
+      },
+      "label-sm": {
+        "displayName": "Label SM",
+        "purpose": "Номер экрана в квадрате у пункта меню."
+      },
+      "lead": {
+        "displayName": "Lead",
+        "purpose": "Вводная строка первого экрана и контактов."
+      },
+      "lead-md": {
+        "displayName": "Lead MD",
+        "purpose": "Вводная строка первого экрана на ≥768px."
+      },
+      "body": {
+        "displayName": "Body",
+        "purpose": "Основной текст, строка до 36rem."
+      },
+      "body-md": {
+        "displayName": "Body MD",
+        "purpose": "Основной текст на ≥768px."
+      },
+      "body-small": {
+        "displayName": "Body small",
+        "purpose": "Описания на плитках, вводные абзацы на телефоне, подвал, ошибки."
+      }
     },
     "shadows": [],
     "motion": [
-      { "name": "leaves-open", "value": "transform 1100ms cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Единственное хореографическое движение: створки витрины разъезжаются на 101% один раз. Нет при prefers-reduced-motion и без JS." },
-      { "name": "sticky-cta-slide", "value": "transform 220ms cubic-bezier(0.16, 1, 0.3, 1)", "purpose": "Липкая наклейка уезжает вниз (translateY 110%), пока видна другая наклейка." },
-      { "name": "phone-lift", "value": "transform 200ms (Tailwind default ease), translateY(-4px)", "purpose": "Телефон в витрине при наведении; выключено при reduced motion." },
-      { "name": "state-fast", "value": "140ms ease", "purpose": "Фон наклейки и стеклянной кнопки на наведение; нажатие наклейки translateY(1px)." },
-      { "name": "field-border", "value": "border-color 120ms ease", "purpose": "Рамка поля на наведение." }
+      {
+        "name": "ease-lay",
+        "value": "cubic-bezier(0.16, 1, 0.3, 1)",
+        "purpose": "Укладка плиток экрана и уезжающая липкая полоса."
+      },
+      {
+        "name": "lay-opacity",
+        "value": "520ms",
+        "purpose": "Проявление плитки при укладке."
+      },
+      {
+        "name": "lay-transform",
+        "value": "620ms",
+        "purpose": "Подъём плитки на 18px при укладке."
+      },
+      {
+        "name": "lay-stagger",
+        "value": "70ms",
+        "purpose": "Задержка на ряд: плитки ложатся ряд за рядом, один раз на экран."
+      },
+      {
+        "name": "state-fast",
+        "value": "140ms ease",
+        "purpose": "Наведение смальты и обычной кнопки."
+      },
+      {
+        "name": "state-field",
+        "value": "120ms ease",
+        "purpose": "Рамка поля формы при наведении."
+      },
+      {
+        "name": "state-pager",
+        "value": "220ms ease",
+        "purpose": "Смена выбранной плитки в листании; липкая полоса уезжает за 220ms ease-lay."
+      },
+      {
+        "name": "reduced-motion",
+        "value": "prefers-reduced-motion: reduce",
+        "purpose": "Укладка и плавная прокрутка выключены, всё сразу на месте."
+      }
     ],
     "breakpoints": [
-      { "name": "sm", "value": "640px" },
-      { "name": "md", "value": "768px" },
-      { "name": "lg", "value": "1024px" },
-      { "name": "xl", "value": "1280px" }
-    ],
-    "focus": { "value": "outline: 3px solid var(--sticker); outline-offset: 3px; border-radius: 2px", "onPlate": "outline-color: var(--glass)" },
-    "fonts": { "source": "@fontsource/fira-sans 400/500/700, @fontsource/fira-sans-extra-condensed 800", "coverage": "cyrillic, cyrillic-ext (казахские ә ғ қ ң ө ұ ү һ), latin; подключение по unicode-range" },
-    "placeholders": "Фото (src/assets/portrait.*) и bio (src/data/about.ts) не заполнены; production-сборка падает, пока их нет. Пунктирные рамки-заглушки не являются элементом системы."
+      {
+        "name": "sm",
+        "value": "640px"
+      },
+      {
+        "name": "md",
+        "value": "768px"
+      },
+      {
+        "name": "lg",
+        "value": "1024px"
+      },
+      {
+        "name": "short",
+        "value": "max-height: 700px"
+      }
+    ]
   },
   "components": [
     {
-      "name": "Наклейка «написать»",
+      "name": "Смальта «написать»",
       "kind": "button",
-      "refersTo": "sticker",
-      "description": "Единственная жёлтая вещь и единственная главная кнопка — только для «написать».",
-      "html": "<a class=\"ds-sticker\" href=\"#\"><svg viewBox=\"0 0 24 24\" width=\"26\" height=\"26\" fill=\"none\" aria-hidden=\"true\"><path d=\"M4 5.5A1.5 1.5 0 0 1 5.5 4h13A1.5 1.5 0 0 1 20 5.5v9a1.5 1.5 0 0 1-1.5 1.5H10l-4.2 3.6c-.3.3-.8 0-.8-.4V16h0a1.5 1.5 0 0 1-1-1.4z\" stroke=\"currentColor\" stroke-width=\"2.25\" stroke-linejoin=\"round\"/><path d=\"M8.5 9h7M8.5 12h4.5\" stroke=\"currentColor\" stroke-width=\"2.25\" stroke-linecap=\"round\"/></svg>Написать в WhatsApp</a>",
-      "css": ".ds-sticker { display: inline-flex; align-items: center; justify-content: center; gap: 0.625rem; min-height: 3.5rem; padding: 0.75rem 1.5rem; border: 3px solid #ffffff; border-radius: 12px; background-color: #ffd31a; color: #1c1800; font-family: 'Fira Sans Extra Condensed', 'Fira Sans', system-ui, sans-serif; font-weight: 800; font-size: 1.375rem; letter-spacing: 0.02em; text-transform: uppercase; line-height: 1; text-decoration: none; transition: background-color 140ms ease, transform 140ms ease; } .ds-sticker:hover { background-color: #f2c400; } .ds-sticker:active { transform: translateY(1px); } .ds-sticker:focus-visible { outline: 3px solid #ffd31a; outline-offset: 3px; }"
+      "refersTo": "smalt",
+      "description": "Единственная жёлтая плитка: действие «написать в WhatsApp». Одна на экран.",
+      "html": "<div class=\"ds-field\"><a href=\"#\" class=\"ds-smalt\"><svg viewBox=\"0 0 24 24\" width=\"24\" height=\"24\" aria-hidden=\"true\" fill=\"none\"><path d=\"M4 5.5A1.5 1.5 0 0 1 5.5 4h13A1.5 1.5 0 0 1 20 5.5v9a1.5 1.5 0 0 1-1.5 1.5H10l-4.2 3.6c-.3.3-.8 0-.8-.4V16h0a1.5 1.5 0 0 1-1-1.4z\" stroke=\"currentColor\" stroke-width=\"2.25\" stroke-linejoin=\"round\"/><path d=\"M8.5 9h7M8.5 12h4.5\" stroke=\"currentColor\" stroke-width=\"2.25\" stroke-linecap=\"round\"/></svg>Написать в WhatsApp</a></div>",
+      "css": ":host{--cobalt:#1b3a8a;--cobalt-deep:#0f2459;--terracotta:#c4532d;--terracotta-ink:#9b3b1b;--on-cobalt:#fff;--on-cobalt-muted:#c3cdea;--stone:#eef0f2;--stone-line:#9aa2b1;--ink:#141821;--ink-muted:#4a5263;--link:#1b3a8a;--field:#fff;--field-border:#6b7384;--smalt:#ffd31a;--smalt-hover:#f2c400;--on-smalt:#1c1800;--danger:#a3201a;--seam:6px} .ds-field{background:var(--cobalt);padding:24px} .ds-smalt{display:inline-flex;align-items:center;justify-content:center;gap:.625rem;min-height:3.5rem;padding:.75rem 1.5rem;border-radius:2px;background:var(--smalt);color:var(--on-smalt);font-family:'Unbounded Variable','Onest Variable',system-ui,sans-serif;font-weight:700;font-size:1.0625rem;letter-spacing:.01em;line-height:1.1;text-decoration:none;transition:background-color 140ms ease,transform 140ms ease} .ds-smalt:hover{background:var(--smalt-hover)} .ds-smalt:active{transform:translateY(1px)} .ds-smalt:focus-visible{outline:3px solid var(--smalt);outline-offset:3px}"
     },
     {
-      "name": "Стеклянная кнопка",
+      "name": "Обычная кнопка",
       "kind": "button",
-      "refersTo": "button-glass",
-      "description": "Любое действие, кроме «написать»: «Отправить», «На главную».",
-      "html": "<button class=\"ds-btn-glass\">Отправить</button>",
-      "css": ".ds-btn-glass { display: inline-flex; align-items: center; justify-content: center; min-height: 3rem; padding: 0.75rem 1.5rem; border: 0; border-radius: 8px; background-color: #0e2a2f; color: #ffffff; font-family: 'Fira Sans', system-ui, sans-serif; font-weight: 500; font-size: 1.125rem; transition: background-color 140ms ease; cursor: pointer; } .ds-btn-glass:hover { background-color: #09191c; } .ds-btn-glass:focus-visible { outline: 3px solid #0e2a2f; outline-offset: 3px; border-radius: 8px; } .ds-btn-glass:disabled { opacity: 0.6; }"
+      "refersTo": "button",
+      "description": "Кобальтовая плитка для всего, что не «написать».",
+      "html": "<div class=\"ds-tile-bg\"><button class=\"ds-btn\">Отправить</button></div>",
+      "css": ":host{--cobalt:#1b3a8a;--cobalt-deep:#0f2459;--terracotta:#c4532d;--terracotta-ink:#9b3b1b;--on-cobalt:#fff;--on-cobalt-muted:#c3cdea;--stone:#eef0f2;--stone-line:#9aa2b1;--ink:#141821;--ink-muted:#4a5263;--link:#1b3a8a;--field:#fff;--field-border:#6b7384;--smalt:#ffd31a;--smalt-hover:#f2c400;--on-smalt:#1c1800;--danger:#a3201a;--seam:6px} .ds-tile-bg{background:var(--stone);padding:24px;border-radius:2px} .ds-btn{display:inline-flex;align-items:center;justify-content:center;min-height:3rem;padding:.75rem 1.5rem;border:0;border-radius:2px;background:var(--cobalt);color:var(--on-cobalt);font-family:'Onest Variable',system-ui,sans-serif;font-weight:600;font-size:1rem;transition:background-color 140ms ease;cursor:pointer} .ds-btn:hover{background:var(--cobalt-deep)} .ds-btn:focus-visible{outline:3px solid var(--cobalt);outline-offset:3px} .ds-btn:disabled{opacity:.6}"
     },
     {
-      "name": "Табличка с винтами",
+      "name": "Плитка тарифа",
       "kind": "card",
-      "refersTo": "plate",
-      "description": "Светлый алюминий на двух винтах: цены, шаги, о себе, форма.",
-      "html": "<div class=\"ds-plate\"><div class=\"ds-price-row\"><h3>Сайт на одну страницу</h3><span class=\"ds-leader\"></span><p class=\"ds-price\"><small>от </small>80 000<small> ₸</small></p></div><p>Срок: обычно 2–3 дня</p></div>",
-      "css": ".ds-plate { position: relative; background-color: #e4e8ea; color: #121a1c; border-radius: 4px; padding: 2.5rem 2.5rem 2rem; font-family: 'Fira Sans', system-ui, sans-serif; font-size: 1.125rem; line-height: 1.55; font-variant-numeric: tabular-nums; } .ds-plate::before, .ds-plate::after { content: ''; position: absolute; top: 0.625rem; width: 0.625rem; height: 0.625rem; border-radius: 50%; background-color: #8d9a9e; } .ds-plate::before { left: 0.75rem; } .ds-plate::after { right: 0.75rem; } .ds-price-row { display: grid; grid-template-columns: auto 1fr auto; align-items: baseline; gap: 0.75rem; } .ds-price-row h3 { margin: 0; font-size: 1.5rem; font-weight: 700; line-height: 1.25; } .ds-leader { border-bottom: 2px dotted #8d9a9e; transform: translateY(-0.3em); } .ds-price { margin: 0; font-family: 'Fira Sans Extra Condensed', 'Fira Sans', sans-serif; font-weight: 800; font-size: 2.5rem; line-height: 1; white-space: nowrap; } .ds-price small { font-size: 0.55em; letter-spacing: 0.04em; text-transform: uppercase; }"
+      "refersTo": "tile",
+      "description": "Камень на кобальте: название, цена, срок, «что входит» с терракотовыми метками.",
+      "html": "<div class=\"ds-field\"><article class=\"ds-tile\"><h3 class=\"ds-dmd\">Сайт на одну страницу</h3><p class=\"ds-price\"><small>от </small>80&#8239;000<small> ₸</small></p><p class=\"ds-strong\">Срок: обычно 2–3 дня</p><div class=\"ds-rule\"><p class=\"ds-label\">Что входит</p><ul class=\"ds-ticks\"><li>два круга правок</li><li>домен и хостинг оформлены на вас</li></ul></div></article></div>",
+      "css": ":host{--cobalt:#1b3a8a;--cobalt-deep:#0f2459;--terracotta:#c4532d;--terracotta-ink:#9b3b1b;--on-cobalt:#fff;--on-cobalt-muted:#c3cdea;--stone:#eef0f2;--stone-line:#9aa2b1;--ink:#141821;--ink-muted:#4a5263;--link:#1b3a8a;--field:#fff;--field-border:#6b7384;--smalt:#ffd31a;--smalt-hover:#f2c400;--on-smalt:#1c1800;--danger:#a3201a;--seam:6px} .ds-field{background:var(--cobalt);padding:24px} .ds-tile{display:flex;flex-direction:column;gap:.625rem;background:var(--stone);color:var(--ink);border-radius:2px;padding:1.75rem;max-width:22rem;font-family:'Onest Variable',system-ui,sans-serif;font-size:1rem;line-height:1.5} .ds-dmd{font-family:'Unbounded Variable','Onest Variable',system-ui,sans-serif;font-weight:700;font-size:1.5rem;line-height:1.04;letter-spacing:-.01em;margin:0} .ds-price{font-family:'Unbounded Variable','Onest Variable',system-ui,sans-serif;font-weight:700;font-size:2rem;line-height:1;white-space:nowrap;margin:0;font-variant-numeric:tabular-nums} .ds-price small{font-size:.5em;font-weight:600;letter-spacing:.04em;text-transform:uppercase} .ds-strong{font-weight:600;margin:0} .ds-rule{border-top:1px solid var(--stone-line);padding-top:.75rem} .ds-label{font-family:'Unbounded Variable','Onest Variable',system-ui,sans-serif;font-weight:600;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;line-height:1.2;color:var(--ink-muted);margin:0 0 .5rem} .ds-ticks{list-style:none;margin:0;padding:0;font-size:.9375rem} .ds-ticks li{position:relative;padding-left:1.125rem} .ds-ticks li::before{content:\"\";position:absolute;left:0;top:.55em;width:.45rem;height:.45rem;background:var(--terracotta)}"
     },
     {
-      "name": "Витрина с телефоном и биркой",
-      "kind": "custom",
-      "refersTo": "window",
-      "description": "Глубокое стекло в алюминиевой раме; работа на экране телефона, под ним на нитке бумажная бирка.",
-      "html": "<div class=\"ds-window\"><article class=\"ds-work\"><div class=\"ds-phone\"><div class=\"ds-screen\"></div></div><div class=\"ds-tag\"><h3>DALA COFFEE</h3><p class=\"ds-tag-sub\">Сайт кофейни, концепт</p><a href=\"#\">Открыть сайт</a></div></article></div>",
-      "css": ".ds-window { position: relative; overflow: hidden; border: 6px solid #5d7f84; border-radius: 4px; background-color: #09191c; padding: 2rem; } .ds-work { display: flex; flex-direction: column; align-items: center; } .ds-phone { width: 12rem; border-radius: 2.25rem; background-color: #030a0b; padding: 0.5rem; border: 1px solid #5d7f84; transition: transform 200ms; } .ds-work:hover .ds-phone { transform: translateY(-4px); } .ds-screen { height: 16rem; border-radius: 1.75rem; background-color: #e4e8ea; } .ds-tag { position: relative; margin-top: 1.5rem; width: 14rem; background-color: #ffffff; color: #121a1c; border-radius: 3px 3px 6px 6px; padding: 1.5rem 1rem 1rem; font-family: 'Fira Sans', system-ui, sans-serif; font-size: 0.9375rem; } .ds-tag::before { content: ''; position: absolute; top: 0.5rem; left: 50%; width: 0.5rem; height: 0.5rem; margin-left: -0.25rem; border-radius: 50%; background-color: #09191c; } .ds-tag::after { content: ''; position: absolute; bottom: 100%; left: 50%; width: 1px; height: 1.5rem; background-color: #a9c4c6; } .ds-tag h3 { margin: 0; font-size: 1.125rem; font-weight: 700; line-height: 1.25; } .ds-tag-sub { margin: 0.375rem 0; color: #4b585b; font-weight: 500; } .ds-tag a { color: #0e4f5a; text-decoration: underline; text-underline-offset: 0.2em; font-weight: 500; } .ds-tag a:focus-visible { outline: 3px solid #0e2a2f; outline-offset: 3px; }"
-    },
-    {
-      "name": "Дверь: плёнка, ручка, табличка",
-      "kind": "custom",
-      "refersTo": "plate",
-      "description": "Стекло двери с плёночной надписью и ручкой на двух стойках.",
-      "html": "<div class=\"ds-door\"><h1 class=\"ds-vinyl\">Делаю сайты для бизнеса в Астане</h1><div class=\"ds-handle\"></div><a class=\"ds-vinyl-link\" href=\"#\">Все работы в витрине</a></div>",
-      "css": ".ds-door { position: relative; background-color: #0e2a2f; border: 6px solid #5d7f84; border-radius: 4px; padding: 2.5rem 2rem; color: #ffffff; min-height: 22rem; } .ds-vinyl { margin: 0 0 2rem; max-width: 11ch; font-family: 'Fira Sans Extra Condensed', 'Fira Sans', system-ui, sans-serif; font-weight: 800; text-transform: uppercase; letter-spacing: 0.01em; line-height: 0.96; font-size: clamp(3.25rem, 2rem + 5.4vw, 4.5rem); text-wrap: balance; } .ds-handle { position: absolute; top: 44%; right: 1.25rem; width: 0.75rem; height: 7rem; border-radius: 0.375rem; background-color: #5d7f84; } .ds-handle::before, .ds-handle::after { content: ''; position: absolute; right: 100%; width: 0.75rem; height: 0.375rem; background-color: #5d7f84; } .ds-handle::before { top: 0.75rem; } .ds-handle::after { bottom: 0.75rem; } .ds-vinyl-link { color: #ffffff; font-family: 'Fira Sans', system-ui, sans-serif; font-weight: 500; text-decoration: underline; text-decoration-color: #a9c4c6; text-decoration-thickness: 2px; text-underline-offset: 0.25em; } .ds-vinyl-link:hover { text-decoration-color: #ffffff; } .ds-vinyl-link:focus-visible { outline: 3px solid #ffd31a; outline-offset: 3px; border-radius: 2px; }"
+      "name": "Плашка платного шага",
+      "kind": "chip",
+      "refersTo": "price-chip",
+      "description": "Сумма «50%» на терракоте отмечает шаг, где клиент платит.",
+      "html": "<div class=\"ds-tile\"><span class=\"ds-label\">Вы платите мне</span><span class=\"ds-price ds-paid\">50%</span><span class=\"ds-label\">Вы платите мне</span><span class=\"ds-price\">0 ₸</span></div>",
+      "css": ":host{--cobalt:#1b3a8a;--cobalt-deep:#0f2459;--terracotta:#c4532d;--terracotta-ink:#9b3b1b;--on-cobalt:#fff;--on-cobalt-muted:#c3cdea;--stone:#eef0f2;--stone-line:#9aa2b1;--ink:#141821;--ink-muted:#4a5263;--link:#1b3a8a;--field:#fff;--field-border:#6b7384;--smalt:#ffd31a;--smalt-hover:#f2c400;--on-smalt:#1c1800;--danger:#a3201a;--seam:6px} .ds-tile{display:flex;flex-direction:column;align-items:flex-start;gap:.25rem;background:var(--stone);color:var(--ink);padding:1.125rem;border-radius:2px} .ds-label{font-family:'Unbounded Variable','Onest Variable',system-ui,sans-serif;font-weight:600;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;color:var(--ink-muted)} .ds-price{font-family:'Unbounded Variable','Onest Variable',system-ui,sans-serif;font-weight:700;font-size:2rem;line-height:1;font-variant-numeric:tabular-nums;margin-bottom:.75rem} .ds-paid{background:var(--terracotta);color:var(--on-cobalt);border-radius:2px;padding:.375rem .5rem}"
     },
     {
       "name": "Поле формы",
       "kind": "input",
       "refersTo": "field",
-      "description": "Белое поле на табличке; ошибка — рамка 2px и текст под полем.",
-      "html": "<div class=\"ds-field-wrap\"><label class=\"ds-label\" for=\"ds-f\">Телефон или WhatsApp</label><input id=\"ds-f\" class=\"ds-field\" placeholder=\"+7 ___ ___ __ __\"><input class=\"ds-field\" aria-invalid=\"true\" value=\"+7 701\"><p class=\"ds-error\">Проверьте номер: в нём не хватает цифр.</p></div>",
-      "css": ".ds-field-wrap { background-color: #e4e8ea; padding: 1.5rem; display: flex; flex-direction: column; gap: 0.75rem; font-family: 'Fira Sans', system-ui, sans-serif; color: #121a1c; } .ds-label { font-weight: 500; } .ds-field { width: 100%; min-height: 3rem; padding: 0.75rem; border-radius: 6px; border: 1px solid #6b7a7e; background-color: #ffffff; color: #121a1c; caret-color: #0e2a2f; font: inherit; transition: border-color 120ms ease; } .ds-field::placeholder { color: #4b585b; } .ds-field:hover { border-color: #0e2a2f; } .ds-field:focus-visible { outline: 3px solid #0e2a2f; outline-offset: 3px; } .ds-field[aria-invalid='true'] { border-color: #a3201a; border-width: 2px; } .ds-error { margin: 0; font-size: 0.9375rem; font-weight: 500; color: #a3201a; }"
+      "description": "Белое поле на плитке, рамка кобальтом при наведении, 2px ошибки.",
+      "html": "<div class=\"ds-tile\"><label class=\"ds-lbl\" for=\"ds-n\">Как вас зовут</label><input id=\"ds-n\" class=\"ds-input\" /><label class=\"ds-lbl\" for=\"ds-p\">Телефон или WhatsApp</label><input id=\"ds-p\" class=\"ds-input\" aria-invalid=\"true\" placeholder=\"+7 ___ ___ __ __\" /><p class=\"ds-err\">Укажите номер.</p></div>",
+      "css": ":host{--cobalt:#1b3a8a;--cobalt-deep:#0f2459;--terracotta:#c4532d;--terracotta-ink:#9b3b1b;--on-cobalt:#fff;--on-cobalt-muted:#c3cdea;--stone:#eef0f2;--stone-line:#9aa2b1;--ink:#141821;--ink-muted:#4a5263;--link:#1b3a8a;--field:#fff;--field-border:#6b7384;--smalt:#ffd31a;--smalt-hover:#f2c400;--on-smalt:#1c1800;--danger:#a3201a;--seam:6px} .ds-tile{background:var(--stone);color:var(--ink);padding:1.75rem;border-radius:2px;font-family:'Onest Variable',system-ui,sans-serif;max-width:24rem} .ds-lbl{display:block;font-weight:500;margin:0 0 .5rem} .ds-input{box-sizing:border-box;width:100%;min-height:3rem;padding:.75rem;border-radius:2px;border:1px solid var(--field-border);background:var(--field);color:var(--ink);caret-color:var(--cobalt);font:inherit;margin-bottom:1.25rem;transition:border-color 120ms ease} .ds-input::placeholder{color:var(--ink-muted)} .ds-input:hover{border-color:var(--cobalt)} .ds-input:focus-visible{outline:3px solid var(--cobalt);outline-offset:3px} .ds-input[aria-invalid=\"true\"]{border:2px solid var(--danger);margin-bottom:.5rem} .ds-err{margin:0;font-size:.9375rem;font-weight:500;color:var(--danger)}"
     },
     {
-      "name": "Шапка",
+      "name": "Шапка с адресом экрана",
       "kind": "nav",
       "refersTo": "nav-link",
-      "description": "Верхняя планка двери: имя плёнкой, пункты приглушённой плёнкой, компактная наклейка справа.",
-      "html": "<header class=\"ds-header\"><a class=\"ds-brand\" href=\"#\">Салима<span> · Астана</span></a><nav class=\"ds-nav\"><a href=\"#\">Работы</a><a href=\"#\">Цены</a><a href=\"#\">Контакты</a></nav></header>",
-      "css": ".ds-header { display: flex; align-items: center; justify-content: space-between; gap: 1.5rem; padding: 1rem 2rem; background-color: #0e2a2f; } .ds-brand { color: #ffffff; text-decoration: none; font-family: 'Fira Sans Extra Condensed', 'Fira Sans', sans-serif; font-weight: 800; font-size: 1.125rem; letter-spacing: 0.06em; text-transform: uppercase; } .ds-brand span { color: #a9c4c6; } .ds-nav { display: flex; gap: 1.75rem; font-family: 'Fira Sans', system-ui, sans-serif; font-size: 1.125rem; } .ds-nav a { color: #a9c4c6; text-decoration: none; text-underline-offset: 0.3em; } .ds-nav a:hover { color: #ffffff; text-decoration: underline; } .ds-nav a:focus-visible, .ds-brand:focus-visible { outline: 3px solid #ffd31a; outline-offset: 3px; border-radius: 2px; }"
+      "description": "Полоса ночного кобальта: имя, пункты с номером экрана (пунктир / сплошная плитка), счётчик.",
+      "html": "<header class=\"ds-head\"><a href=\"#\" class=\"ds-word\">Салима<span class=\"ds-m\">·</span><span class=\"ds-m\">Астана</span></a><nav class=\"ds-nav\"><a href=\"#\" class=\"ds-link\"><span class=\"ds-num\">2</span>Работы</a><a href=\"#\" class=\"ds-link\" aria-current=\"true\"><span class=\"ds-num\">3</span>Цены</a><a href=\"#\" class=\"ds-link\"><span class=\"ds-num\">4</span>Как я работаю</a></nav><span class=\"ds-counter\">3 / 6</span></header>",
+      "css": ":host{--cobalt:#1b3a8a;--cobalt-deep:#0f2459;--terracotta:#c4532d;--terracotta-ink:#9b3b1b;--on-cobalt:#fff;--on-cobalt-muted:#c3cdea;--stone:#eef0f2;--stone-line:#9aa2b1;--ink:#141821;--ink-muted:#4a5263;--link:#1b3a8a;--field:#fff;--field-border:#6b7384;--smalt:#ffd31a;--smalt-hover:#f2c400;--on-smalt:#1c1800;--danger:#a3201a;--seam:6px} .ds-head{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;height:4rem;padding:0 2rem;background:var(--cobalt-deep);color:var(--on-cobalt);font-family:'Onest Variable',system-ui,sans-serif;} .ds-word{display:flex;gap:.5rem;font-family:'Unbounded Variable','Onest Variable',system-ui,sans-serif;font-weight:700;font-size:.9375rem;color:var(--on-cobalt);text-decoration:none} .ds-m{color:var(--on-cobalt-muted);font-weight:600} .ds-nav{display:flex;gap:1.5rem} .ds-link{display:inline-flex;align-items:center;gap:.5rem;min-height:44px;color:var(--on-cobalt-muted);text-decoration:none} .ds-link:hover,.ds-link[aria-current=\"true\"]{color:var(--on-cobalt)} .ds-link:focus-visible{outline:3px solid var(--smalt);outline-offset:3px;border-radius:2px} .ds-num{display:grid;place-items:center;width:1.5rem;height:1.5rem;border-radius:2px;border:2px dashed var(--on-cobalt-muted);box-sizing:border-box;font-family:'Unbounded Variable','Onest Variable',system-ui,sans-serif;font-weight:600;font-size:.6875rem;letter-spacing:.08em} .ds-link[aria-current=\"true\"] .ds-num{border-style:solid;border-color:var(--on-cobalt);background:var(--on-cobalt);color:var(--cobalt-deep)} .ds-counter{display:flex;align-items:center;height:2.75rem;padding:0 .75rem;border-radius:2px;background:var(--cobalt);font-family:'Unbounded Variable','Onest Variable',system-ui,sans-serif;font-weight:600;font-size:.75rem;letter-spacing:.08em}"
+    },
+    {
+      "name": "Листание вбок",
+      "kind": "custom",
+      "refersTo": "pager-arrow",
+      "description": "Выбранная плитка выложена камнем, соседние — пунктир незаполненного шва; точки-тессеры и стрелки.",
+      "html": "<div class=\"ds-field\"><div class=\"ds-track\"><div class=\"ds-t ds-on\">Шаг 2 · Предоплата</div><div class=\"ds-t\"></div></div><div class=\"ds-navrow\"><button class=\"ds-arrow\" aria-label=\"Предыдущий\"><svg viewBox=\"0 0 20 20\" width=\"20\" height=\"20\"><path d=\"M12.5 4.5 7 10l5.5 5.5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.25\" stroke-linecap=\"square\"/></svg></button><div class=\"ds-dots\"><span class=\"ds-dot\"></span><span class=\"ds-dot ds-cur\"></span><span class=\"ds-dot\"></span></div><button class=\"ds-arrow\" aria-label=\"Следующий\"><svg viewBox=\"0 0 20 20\" width=\"20\" height=\"20\"><path d=\"M7.5 4.5 13 10l-5.5 5.5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.25\" stroke-linecap=\"square\"/></svg></button></div></div>",
+      "css": ":host{--cobalt:#1b3a8a;--cobalt-deep:#0f2459;--terracotta:#c4532d;--terracotta-ink:#9b3b1b;--on-cobalt:#fff;--on-cobalt-muted:#c3cdea;--stone:#eef0f2;--stone-line:#9aa2b1;--ink:#141821;--ink-muted:#4a5263;--link:#1b3a8a;--field:#fff;--field-border:#6b7384;--smalt:#ffd31a;--smalt-hover:#f2c400;--on-smalt:#1c1800;--danger:#a3201a;--seam:6px} .ds-field{background:var(--cobalt-deep);padding:24px;color:var(--on-cobalt);font-family:'Onest Variable',system-ui,sans-serif;max-width:26rem} .ds-track{display:grid;grid-template-columns:86% 86%;gap:var(--seam);overflow:hidden} .ds-t{min-height:8rem;border-radius:2px;padding:1.125rem;outline:2px dashed var(--on-cobalt-muted);outline-offset:-2px;transition:background-color 220ms ease} .ds-on{background:var(--stone);color:var(--ink);outline-color:transparent} .ds-navrow{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:.75rem} .ds-arrow{display:grid;place-items:center;width:2.75rem;height:2.75rem;border-radius:2px;border:2px solid var(--on-cobalt-muted);background:none;color:var(--on-cobalt);cursor:pointer} .ds-arrow:hover{border-color:var(--on-cobalt)} .ds-arrow:focus-visible{outline:3px solid var(--smalt);outline-offset:3px} .ds-dots{display:flex;gap:.25rem} .ds-dot{display:grid;place-items:center;width:2.75rem;height:2.75rem} .ds-dot::before{content:\"\";box-sizing:border-box;width:.75rem;height:.75rem;border-radius:2px;border:2px dashed var(--on-cobalt-muted)} .ds-cur::before{border:0;background:var(--on-cobalt)}"
+    },
+    {
+      "name": "Кромка тессер",
+      "kind": "custom",
+      "refersTo": "tessera",
+      "description": "Мелкие квадратные плитки через шов в палитре панно, без жёлтого.",
+      "html": "<div class=\"ds-field\"><div class=\"ds-tess\"><span class=\"s\"></span><span class=\"d\"></span><span class=\"t\"></span><span></span><span class=\"d\"></span><span class=\"s\"></span><span></span><span class=\"t\"></span></div></div>",
+      "css": ":host{--cobalt:#1b3a8a;--cobalt-deep:#0f2459;--terracotta:#c4532d;--terracotta-ink:#9b3b1b;--on-cobalt:#fff;--on-cobalt-muted:#c3cdea;--stone:#eef0f2;--stone-line:#9aa2b1;--ink:#141821;--ink-muted:#4a5263;--link:#1b3a8a;--field:#fff;--field-border:#6b7384;--smalt:#ffd31a;--smalt-hover:#f2c400;--on-smalt:#1c1800;--danger:#a3201a;--seam:6px} .ds-field{background:var(--cobalt);padding:24px} .ds-tess{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--seam);width:10rem} .ds-tess span{aspect-ratio:1;border-radius:2px} .ds-tess .s{background:var(--stone)} .ds-tess .d{background:var(--cobalt-deep)} .ds-tess .t{background:var(--terracotta)}"
     }
   ],
   "narrative": {
-    "northStar": "Витрина",
-    "overview": "Сайт устроен как фасад небольшой мастерской в Астане, к которой заходит посетитель. Половину поверхности занимает тёмное бирюзовое стекло двери и витрины. На стекле — надписи белой вырезанной плёнкой: узкий жирный гротеск прописными, как на дверях магазинов. Всё, что читают подолгу (цены, шаги, текст о себе, форма), живёт на светлых алюминиевых табличках на двух винтах. Работы стоят в витрине на экранах телефонов, у каждой на нитке бумажная бирка. Ярче всего — одна жёлтая наклейка, и она всегда значит «написать».\n\nСистема плоская. Глубину дают материалы, а не свет: стекло темнее таблички, табличка светлее стекла, наклейка ярче всего. Плотность спокойная, разделы чередуют стекло (`glass`) и глубокое стекло (`glass-deep`) полосами во всю ширину. Движение одно: створки витрины разъезжаются один раз.",
+    "northStar": "Мозаика модернизма",
+    "overview": "Каждый экран — плиточное панно казахстанского модернизма, как на фасадах 60–80-х: плоские цветовые поля, выложенные на сетке тессер, и эта сетка и есть раскладка. Большую часть поверхности занимает кобальт двух тонов. Всё, что читают подолгу (цены, шаги, работы, форма, текст о себе), лежит на светлых каменных плитках графитом. Между плитками — шов: видимый зазор 6px, в котором видно поле. Терракота — второй, редкий цвет. Жёлтая смальта на любом экране значит одно: «написать».\n\nСтраница — стопка экранов высотой в окно, которые встают на место по одному. Длинное содержимое не растягивает экран вниз, а листается вбок внутри него. Всё плоское: без теней, градиентов, стекла и размытия. Глубину даёт порядок материалов — ночной кобальт дальше, кобальт ближе, камень сверху, смальта ярче всего. Движение одно: когда экран встаёт на место, его плитки укладываются ряд за рядом, один раз.",
     "keyCharacteristics": [
-      "Тёмное стекло как основной фон, светлые таблички как носители длинного текста.",
-      "Плёночные надписи прописными узким шрифтом 800 — только заголовки, имя и цены.",
-      "Одна жёлтая наклейка с белой вырубкой — только для действия «написать».",
-      "Плоско: ни теней, ни градиентных заливок, ни размытия.",
-      "Табличные цифры везде; цены набраны плёночным шрифтом.",
-      "Предметный словарь: рама, винты, ручка на стойках, бирка на нитке, телефон, створки."
+      "Кобальтовые поля во весь экран, чередование кобальта и ночного кобальта; один терракотовый экран — «Обо мне».",
+      "Текст живёт на каменных плитках или белым прямо на поле; углы почти прямые (2px).",
+      "Шов 6px между всеми плитками, тессерами, пунктами меню и страницами листания.",
+      "Одна жёлтая плитка «написать» на экран; повторяющие её кнопки уезжают, пока видна другая.",
+      "Широкий гротеск Unbounded для надписей и цен, Onest для текста, цифры табличные.",
+      "Экраны 100svh с вертикальной привязкой; длинные ряды листаются вбок с точками-тессерами."
     ],
     "rules": [
-      { "name": "The One Sticker Rule", "body": "Жёлтый существует только на наклейке «написать» и в сигналах, которые её повторяют (фокус на стекле, выделение, фавикон). Никакая другая кнопка, плашка, иконка или подчёркивание не бывает жёлтой. Всё прочее действие — стеклянная кнопка.", "section": "colors" },
-      { "name": "The Two Surfaces Rule", "body": "Текст живёт либо плёнкой на стекле (`vinyl` / `vinyl-muted`), либо краской на табличке (`ink` / `ink-muted` / `link`). Третьей поверхности для текста нет.", "section": "colors" },
-      { "name": "The Vinyl Is For Signs Rule", "body": "Плёночный шрифт — только для заголовков, имени, цен и наклейки. Абзацы, пункты списков, подписи полей и кнопки на стекле набраны Fira Sans.", "section": "typography" },
-      { "name": "The Tabular Figures Rule", "body": "`font-variant-numeric: tabular-nums` стоит на `body`: цены, проценты и телефоны выравниваются по столбцам.", "section": "typography" },
-      { "name": "The Flat Facade Rule", "body": "Ни `box-shadow`, ни градиентных заливок, ни `backdrop-filter`. Если элементу нужно отделиться, он меняет материал (стекло → табличка), а не отбрасывает тень.", "section": "elevation" }
+      {
+        "name": "The One Smalt Rule",
+        "body": "Жёлтый существует только у действия «написать» и у сигналов, которые указывают на действие (фокус на поле, выделение, ссылка пропуска в фокусе, фавикон). На экране видна одна жёлтая плитка: кнопка в шапке и липкая полоса уезжают, пока видна другая плитка «написать» или форма заявки. В тессерах жёлтого нет.",
+        "section": "colors"
+      },
+      {
+        "name": "The One Warm Screen Rule",
+        "body": "Терракотовым полем выложен только экран «Обо мне». В остальных местах терракота — вставка: плашка платного шага, метка списка, тессера, мелкая подпись.",
+        "section": "colors"
+      },
+      {
+        "name": "The Two Surfaces Rule",
+        "body": "Текст лежит либо белым на поле (`on-cobalt` / `on-cobalt-muted`), либо графитом на камне (`ink` / `ink-muted` / `link`). Приглушённый по полю на терракоту не ставится.",
+        "section": "colors"
+      },
+      {
+        "name": "The Facade Letters Rule",
+        "body": "Unbounded — только для надписей: заголовки, имя, цены, подписи над данными и жёлтая кнопка. Абзацы, списки, подписи полей и обычная кнопка набраны Onest.",
+        "section": "typography"
+      },
+      {
+        "name": "The Tabular Figures Rule",
+        "body": "`font-variant-numeric: tabular-nums` стоит на `body`: цены, проценты и телефоны выравниваются.",
+        "section": "typography"
+      },
+      {
+        "name": "The Flat Panel Rule",
+        "body": "Ни `box-shadow`, ни градиентов, ни `backdrop-filter`. Отделиться элемент может только материалом (поле → камень) или швом.",
+        "section": "elevation"
+      }
     ],
     "dos": [
-      "**Do** ставить на каждую поверхность одно из двух: плёнку на стекле или краску на табличке.",
-      "**Do** делать каждое «написать» жёлтой наклейкой с белой вырубкой 3px и значком сообщения, и только его.",
-      "**Do** давать каждой табличке два винта в верхних углах.",
-      "**Do** набирать цены плёночным шрифтом с табличными цифрами и узким неразрывным пробелом в тысячах.",
-      "**Do** держать цели касания от 44px и строку текста до 36rem.",
-      "**Do** выключать движение при `prefers-reduced-motion` и без JavaScript: витрина просто открыта.",
-      "**Do** подключать новые начертания через @fontsource с cyrillic-ext, чтобы казахская версия не потребовала другого шрифта."
+      "Do ставить текст на одну из двух поверхностей: белым на поле или графитом на камне.",
+      "Do выкладывать каждое «написать» жёлтой плиткой со своим значком сообщения и помечать её `data-cta`, чтобы повторяющие кнопки уезжали.",
+      "Do разделять плитки швом 6px (`seam`), а не линиями и не тенями.",
+      "Do скруглять углы на 2px — у плиток, кнопок, полей, тессер и рамки фокуса.",
+      "Do показывать выбранное сплошной плиткой, а невыбранное — пунктирным швом.",
+      "Do набирать цены Unbounded с табличными цифрами и узким неразрывным пробелом в тысячах.",
+      "Do держать цели касания от 44px и строку текста до 36rem.",
+      "Do выключать укладку и плавную прокрутку при `prefers-reduced-motion` и без JavaScript."
     ],
     "donts": [
-      "**Don't** использовать тени, градиентные заливки или размытие под стекло.",
-      "**Don't** красить в жёлтый что-либо, кроме наклейки «написать» и её сигналов (фокус на стекле, выделение).",
-      "**Don't** добавлять второе хореографическое движение: створки разъезжаются один раз, остальное — смена состояния до 220ms.",
-      "**Don't** сдвигать или прятать дверь с главной наклейкой ради анимации.",
-      "**Don't** ставить ярлыки-надзаголовки над разделами; плёночная мелкая надпись — только имя в шапке и заголовок колонки на табличке.",
-      "**Don't** использовать логотип WhatsApp или стилистику WhatsApp, Kaspi, 2ГИС на своих кнопках."
+      "Don't использовать тени, градиенты, стекло и размытие.",
+      "Don't красить в жёлтый что-либо, кроме «написать» и его сигналов, и не показывать две жёлтые плитки на одном экране.",
+      "Don't выкладывать терракотовым полем другие экраны, кроме «Обо мне», и не ставить на терракоту `on-cobalt-muted` (2.9:1).",
+      "Don't ставить мелкий белый текст на терракоту: только надписи и цены 700.",
+      "Don't добавлять второе хореографическое движение: укладка один раз, остальное — смена состояния до 220ms.",
+      "Don't использовать логотип WhatsApp или стилистику WhatsApp, Kaspi, 2ГИС на своих кнопках."
     ]
   }
 }

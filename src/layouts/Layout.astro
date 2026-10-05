@@ -6,9 +6,11 @@ import Footer from "../components/Footer.astro"
 interface Props {
   title: string;
   description: string;
+  /** На главной подвал стоит внутри последнего экрана, а не после него. */
+  footer?: boolean;
 }
 
-const { title, description } = Astro.props;
+const { title, description, footer = true } = Astro.props;
 
 // Абсолютный адрес текущей страницы.
 const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
@@ -18,7 +20,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url);
 // её видно размером с ноготь.
 const ogImage = new URL("/og.png", Astro.site ?? Astro.url);
 const ogImageAlt =
-  "Надпись «Делаю сайты для бизнеса в Астане» на тёмном стекле двери, под ней «Салима · Астана» и жёлтая наклейка «Написать в WhatsApp»";
+  "Надпись «Делаю сайты для бизнеса в Астане» на кобальтовом поле с плиткой, под ней «Салима · Астана» и жёлтая плитка «Написать в WhatsApp»";
 ---
 
 <!doctype html>
@@ -48,23 +50,23 @@ const ogImageAlt =
 		<meta name="twitter:image:alt" content={ogImageAlt} />
 
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<meta name="theme-color" content="#0e2a2f" />
+		<meta name="theme-color" content="#0f2459" />
 		<script is:inline>
-			// Метка для CSS: JavaScript работает, створкам витрины можно
-			// появиться и разъехаться. Без неё створок нет вовсе.
+			// Метка для CSS: JavaScript работает, плиткам экрана можно
+			// укладываться при появлении. Без неё всё сразу на месте.
 			document.documentElement.classList.add("js");
 		</script>
 	</head>
 	<body>
 		<!-- Для тех, кто ходит по сайту клавишей Tab: сразу к содержанию,
 		     мимо логотипа и меню. Видна только в фокусе. -->
-		<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:rounded-[8px] focus:bg-sticker focus:px-4 focus:py-3 focus:font-bold focus:text-on-sticker">
+		<a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-[60] focus:rounded-[2px] focus:bg-smalt focus:px-4 focus:py-3 focus:font-bold focus:text-on-smalt">
 			К содержанию
 		</a>
 		<Header/>
-		<main id="main" tabindex="-1" class="min-h-screen focus:outline-none">
+		<main id="main" tabindex="-1" class="focus:outline-none">
 			<slot />
 		</main>
-		<Footer/>
+		{footer && <Footer/>}
 	</body>
 </html>

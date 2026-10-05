@@ -1,0 +1,44 @@
+---
+// Кромка панно: мелкие плитки в палитре мозаики. Жёлтой среди них нет —
+// жёлтая смальта только у кнопки "написать". Узор детерминированный:
+// одна и та же кромка на каждой сборке, без случайных чисел.
+interface Props {
+  cols: number;
+  rows: number;
+  /** Сдвиг узора, чтобы кромки на разных экранах не повторялись. */
+  offset?: number;
+  /** Цвет поля, на котором стоит кромка: такие плитки пропускаем. */
+  on?: "cobalt" | "deep" | "terracotta";
+  class?: string;
+}
+
+const { cols, rows, offset = 0, on = "cobalt", class: className } = Astro.props;
+
+const colors = {
+  terracotta: "bg-terracotta",
+  stone: "bg-stone",
+  deep: "bg-cobalt-deep",
+  cobalt: "bg-cobalt",
+  empty: "",
+};
+
+// Повторяющийся ряд, как у выложенной вручную смальты: камень, терракота,
+// глубокий кобальт и пропуски, в которых видно поле.
+const pattern = ["stone", "deep", "terracotta", "empty", "deep", "stone", "empty", "terracotta", "stone", "deep", "cobalt", "empty"] as const;
+const skip = on === "deep" ? "deep" : on === "terracotta" ? "terracotta" : "cobalt";
+
+const cells = Array.from({ length: cols * rows }, (_, index) => {
+  let tone = pattern[(index * 5 + offset) % pattern.length];
+  if (tone === skip) tone = "stone";
+  return { tone, row: Math.floor(index / cols) };
+});
+---
+<div
+  class:list={["tesserae", className]}
+  style={`grid-template-columns: repeat(${cols}, minmax(0, 1fr));`}
+  aria-hidden="true"
+>
+  {cells.map(({ tone, row }) => (
+    <span class:list={["tessera", colors[tone]]} data-lay style={`--i: ${row}`}></span>
+  ))}
+</div>

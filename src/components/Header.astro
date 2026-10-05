@@ -4,88 +4,82 @@ import ChatIcon from './ChatIcon.astro';
 
 // Якоря пишем от корня, чтобы ссылки работали и с /projects, и со страницы 404.
 const navLinks = [
-  { name: "Работы", href: "/#works" },
-  { name: "Цены", href: "/#services" },
-  { name: "Как я работаю", href: "/#process" },
-  { name: "Обо мне", href: "/#about" },
-  { name: "Контакты", href: "/#contacts" },
+  { name: "Работы", href: "/#works", screen: 2 },
+  { name: "Цены", href: "/#services", screen: 3 },
+  { name: "Как я работаю", href: "/#process", screen: 4 },
+  { name: "Обо мне", href: "/#about", screen: 5 },
+  { name: "Контакты", href: "/#contacts", screen: 6 },
 ];
 ---
-<!-- Шапка — верхняя планка двери: та же стеклянная плоскость, что и
-     главный экран, без своей подложки. Имя набрано плёнкой, как
-     название мастерской над входом. -->
-<header class="bg-glass">
-  <div class="shell flex items-center justify-between gap-6 py-4">
-    <a href="/" class="vinyl sign-sm flex min-h-[44px] items-center gap-2 text-vinyl" aria-label="Салима, Астана — на главную">
-      {contacts.name}<span class="text-vinyl-muted" aria-hidden="true">·</span><span class="text-vinyl-muted">{contacts.city}</span>
+<!-- Шапка — верхний ряд панно: полоса ночного кобальта поверх экранов.
+     Справа адрес экрана: какой он по счёту и сколько их всего, чтобы
+     было видно, далеко ли до контактов. -->
+<header class="fixed inset-x-0 top-0 z-40 bg-cobalt-deep">
+  <div class="shell flex h-[var(--header-h)] items-center justify-between gap-4">
+    <a href="/" class="display flex min-h-[44px] items-center gap-2 text-[0.9375rem] font-bold" aria-label="Салима, Астана — на главную">
+      {contacts.name}<span class="text-on-cobalt-muted" aria-hidden="true">·</span><span class="font-semibold text-on-cobalt-muted">{contacts.city}</span>
     </a>
 
-    <nav class="hidden md:flex md:items-center md:gap-7" aria-label="Основное меню">
-      {navLinks.map(({ name, href }) => (
-        <a href={href} class="inline-flex min-h-[44px] items-center text-vinyl-muted underline-offset-[0.3em] hover:text-vinyl hover:underline hover:decoration-vinyl">
+    <nav class="hidden lg:flex lg:items-center lg:gap-6" aria-label="Основное меню">
+      {navLinks.map(({ name, href, screen }) => (
+        <a href={href} data-nav={screen} class="group inline-flex min-h-[44px] items-center gap-2 text-on-cobalt-muted hover:text-on-cobalt aria-[current=true]:text-on-cobalt">
+          <span class="label grid h-6 w-6 place-items-center rounded-[2px] border-2 border-dashed border-on-cobalt-muted text-[0.6875rem] group-aria-[current=true]:border-solid group-aria-[current=true]:border-on-cobalt group-aria-[current=true]:bg-on-cobalt group-aria-[current=true]:text-cobalt-deep" aria-hidden="true">{screen}</span>
           {name}
         </a>
       ))}
     </nav>
 
-    <div class="flex items-center gap-3">
+    <!-- На компьютере плитка адреса встаёт на место спрятанной жёлтой
+         кнопки, а не рядом с ней: ширина шапки не меняется, меню не прыгает. -->
+    <div class="relative flex items-center gap-2">
+      <p class="label hidden h-11 items-center rounded-[2px] bg-cobalt px-3 text-on-cobalt lg:absolute lg:top-1/2 lg:right-0 lg:-translate-y-1/2" data-counter aria-hidden="true"></p>
+
       <a
         href={contacts.whatsapp}
         target="_blank"
         rel="noopener noreferrer"
-        class="sticker hidden !min-h-[2.75rem] !px-4 !text-lg lg:inline-flex"
+        id="headerCta"
+        class="smalt hidden !min-h-[2.75rem] !px-4 !text-[0.9375rem] transition-opacity lg:inline-flex [&.is-hidden]:pointer-events-none [&.is-hidden]:opacity-0"
       >
-        <ChatIcon size={20} />
+        <ChatIcon size={18} />
         Написать
         <span class="sr-only">в WhatsApp (откроется в новой вкладке)</span>
       </a>
 
       <button
         id="burgermenu"
-        class="flex h-11 w-11 items-center justify-center rounded-md border border-frame text-vinyl hover:border-vinyl md:hidden"
+        class="flex h-11 w-11 items-center justify-center rounded-[2px] border-2 border-on-cobalt-muted text-on-cobalt hover:border-on-cobalt lg:hidden"
         aria-label="Меню"
         aria-controls="mobileNav"
         aria-expanded="false"
       >
         <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true">
-          <path
-            d="M3 5.5h14M3 10h14M3 14.5h14"
-            fill="none"
-            stroke="currentColor"
-            stroke-width="1.75"
-            stroke-linecap="round"
-          />
+          <path d="M3 5.5h14M3 10h14M3 14.5h14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="square" />
         </svg>
       </button>
     </div>
   </div>
 
-  <!-- Выпадающее меню: отдельный блок под строкой шапки, а не внутри неё.
-       Видимостью на десктопе управляет только CSS (md:hidden), состоянием
-       на телефоне — атрибут hidden. Они не конфликтуют. -->
-  <nav
-    id="mobileNav"
-    hidden
-    class="shell flex flex-col border-t border-frame pb-3 md:hidden"
-    aria-label="Мобильное меню"
-  >
-    {navLinks.map(({ name, href }) => (
-      <a href={href} class="flex min-h-[48px] items-center border-b border-frame/50 text-vinyl">{name}</a>
+  <!-- Меню на телефоне: плитки под шапкой. Видимостью на десктопе
+       управляет CSS (lg:hidden), на телефоне — атрибут hidden. -->
+  <nav id="mobileNav" hidden class="shell grid gap-[var(--seam)] pb-4 lg:hidden" aria-label="Мобильное меню">
+    {navLinks.map(({ name, href, screen }) => (
+      <a href={href} class="flex min-h-[52px] items-center gap-3 rounded-[2px] bg-cobalt px-4 font-semibold">
+        <span class="label text-on-cobalt-muted" aria-hidden="true">{screen}</span>{name}
+      </a>
     ))}
   </nav>
 </header>
 
-<!-- Липкая наклейка: на телефоне человек читает с прокруткой, и написать
-     должно быть можно в любой момент. Пока на экране уже есть другая
-     наклейка (на двери или в контактах) или форма заявки, эта уезжает
-     вниз, чтобы кнопки не спорили. Запас под жест "домой" на айфоне
-     учтён в отступе body (--sticky-cta). -->
+<!-- Липкая кнопка: на телефоне написать должно быть можно с любого
+     экрана. Пока на экране уже есть другая жёлтая плитка или форма
+     заявки, эта уезжает вниз, чтобы кнопки не спорили. -->
 <a
   id="stickyCta"
   href={contacts.whatsapp}
   target="_blank"
   rel="noopener noreferrer"
-  class="sticky-cta fixed inset-x-0 bottom-0 z-50 flex min-h-[var(--sticky-cta)] items-center justify-center gap-2.5 border-t-[3px] border-vinyl bg-sticker pb-[env(safe-area-inset-bottom,0px)] font-sign text-xl font-extrabold uppercase tracking-[0.02em] text-on-sticker focus-visible:outline-offset-[-6px] lg:hidden"
+  class="sticky-cta display fixed inset-x-0 bottom-0 z-50 flex min-h-[var(--sticky-cta)] items-center justify-center gap-2.5 bg-smalt pb-[env(safe-area-inset-bottom,0px)] text-[1.0625rem] font-bold text-on-smalt focus-visible:outline-offset-[-6px] focus-visible:outline-cobalt lg:hidden"
 >
   <ChatIcon size={22} />
   Написать в WhatsApp
@@ -93,10 +87,10 @@ const navLinks = [
 </a>
 
 <script>
-  // === БУРГЕР-МЕНЮ ===
+  // === МЕНЮ ===
   const burger = document.getElementById("burgermenu");
   const panel = document.getElementById("mobileNav");
-  const desktop = window.matchMedia("(min-width: 768px)");
+  const desktop = window.matchMedia("(min-width: 1024px)");
 
   if (burger && panel) {
     const setOpen = (open: boolean) => {
@@ -105,14 +99,11 @@ const navLinks = [
     };
 
     setOpen(false);
-
     burger.addEventListener("click", () => setOpen(panel.hidden));
 
     // Клик по пункту меню закрывает его: на якорях страница не перезагружается.
     panel.addEventListener("click", (event) => {
-      if (event.target instanceof Element && event.target.closest("a")) {
-        setOpen(false);
-      }
+      if (event.target instanceof Element && event.target.closest("a")) setOpen(false);
     });
 
     document.addEventListener("keydown", (event) => {
@@ -122,22 +113,62 @@ const navLinks = [
       }
     });
 
-    // Ушли на десктопную ширину — сбрасываем состояние, чтобы при возврате
-    // на узкий экран меню не оказалось открытым само по себе.
     desktop.addEventListener("change", (event) => {
       if (event.matches) setOpen(false);
     });
   }
 
-  // === ЛИПКАЯ НАКЛЕЙКА ===
-  // Прячем её, пока видна любая другая наклейка "написать" на странице
+  // === АДРЕС ЭКРАНА ===
+  // Какой экран сейчас стоит в окне: номер в шапке и отмеченный пункт меню.
+  // Заодно экран, впервые вставший на место, укладывает свои плитки.
+  const screens = Array.from(document.querySelectorAll<HTMLElement>("[data-screen]"));
+  const counter = document.querySelector<HTMLElement>("[data-counter]");
+  const total = Number(document.querySelector<HTMLElement>("[data-screen-count]")?.dataset.screenCount ?? 0);
+
+  if (screens.length > 0) {
+    const setCurrent = (screen: HTMLElement) => {
+      const number = Number(screen.dataset.screen);
+      if (counter && total > 1) {
+        counter.textContent = `${number} / ${total}`;
+        counter.classList.add("flex");
+        counter.classList.remove("hidden");
+        // На компьютере адрес экранов 2–6 стоит на пунктах меню; у первого
+        // экрана пункта нет, и его адрес показывает эта плитка.
+        counter.classList.toggle("lg:hidden", number !== 1);
+      }
+      document.querySelectorAll<HTMLElement>("[data-nav]").forEach((link) => {
+        link.setAttribute("aria-current", String(Number(link.dataset.nav) === number));
+      });
+    };
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (!entry.isIntersecting) continue;
+          const screen = entry.target as HTMLElement;
+          screen.classList.add("is-laid");
+          setCurrent(screen);
+        }
+      },
+      // Экран считается текущим, когда пересекает середину окна.
+      { rootMargin: "-50% 0px -50% 0px" }
+    );
+    screens.forEach((screen) => observer.observe(screen));
+  }
+
+  // === ЛИПКАЯ КНОПКА ===
+  // Прячем её, пока видна любая другая жёлтая плитка "написать"
   // (помечены data-cta) или форма заявки (data-hides-sticky): у формы своя
   // главная кнопка, и жёлтая полоса под ней уводила бы из начатой заявки.
-  // Пока наклейка спрятана, она не принимает фокус.
-  const sticky = document.getElementById("stickyCta");
+  // Пока кнопка спрятана, она не принимает фокус.
+  // То же для жёлтой кнопки в шапке на компьютере: на экране одна жёлтая
+  // плитка, а не две рядом.
+  const repeats = ["stickyCta", "headerCta"]
+    .map((id) => document.getElementById(id))
+    .filter((element): element is HTMLElement => element !== null);
   const others = document.querySelectorAll("[data-cta], [data-hides-sticky]");
 
-  if (sticky && others.length > 0) {
+  if (repeats.length > 0 && others.length > 0) {
     const visible = new Set<Element>();
     const observer = new IntersectionObserver((entries) => {
       for (const entry of entries) {
@@ -145,8 +176,10 @@ const navLinks = [
         else visible.delete(entry.target);
       }
       const hide = visible.size > 0;
-      sticky.classList.toggle("is-hidden", hide);
-      sticky.toggleAttribute("inert", hide);
+      repeats.forEach((cta) => {
+        cta.classList.toggle("is-hidden", hide);
+        cta.toggleAttribute("inert", hide);
+      });
     });
     others.forEach((element) => observer.observe(element));
   }

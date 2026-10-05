@@ -1,0 +1,95 @@
+---
+// Листание вбок внутри экрана. Плитки стоят в ряд по одной на ширину
+// телефона; на широком экране, если gridFrom задан, ряд становится
+// сеткой и стрелки прячутся. Без JavaScript работает как обычная
+// прокрутка вбок с привязкой.
+interface Props {
+  /** Что листаем, для экранного диктора: "Тарифы", "Шаги работы". */
+  label: string;
+  /** Как назвать одну плитку в подписи точки: "Тариф", "Шаг". */
+  item: string;
+  /** Сколько колонок на ширине от 1024 px. Без него ряд листается везде. */
+  cols?: number;
+  class?: string;
+}
+
+const { label, item, cols, class: className } = Astro.props;
+---
+<div
+  class:list={["pager flex flex-col gap-3", cols && "pager-grid-lg", className]}
+  style={cols ? `--cols: ${cols}` : undefined}
+  data-pager
+  data-item={item}
+>
+  <div class="pager-track" role="region" aria-label={`${label}, листаются вбок`} tabindex="0">
+    <slot />
+  </div>
+
+  <div class="pager-nav" hidden>
+    <button type="button" class="pager-arrow" data-prev aria-label={`Предыдущий: ${item.toLowerCase()}`}>
+      <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="M12.5 4.5 7 10l5.5 5.5" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="square" /></svg>
+    </button>
+    <div class="pager-dots" data-dots></div>
+    <button type="button" class="pager-arrow" data-next aria-label={`Следующий: ${item.toLowerCase()}`}>
+      <svg viewBox="0 0 20 20" width="20" height="20" aria-hidden="true"><path d="M7.5 4.5 13 10l-5.5 5.5" fill="none" stroke="currentColor" stroke-width="2.25" stroke-linecap="square" /></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+  // Точки и стрелки. Выбранной считается плитка, которая видна больше
+  // чем наполовину: она выложена камнем, соседние — пунктир шва.
+  document.querySelectorAll<HTMLElement>("[data-pager]").forEach((pager) => {
+    const track = pager.querySelector<HTMLElement>(".pager-track");
+    const nav = pager.querySelector<HTMLElement>(".pager-nav");
+    const dotsBox = pager.querySelector<HTMLElement>("[data-dots]");
+    const prev = pager.querySelector<HTMLButtonElement>("[data-prev]");
+    const next = pager.querySelector<HTMLButtonElement>("[data-next]");
+    if (!track || !nav || !dotsBox || !prev || !next) return;
+
+    const items = Array.from(track.children) as HTMLElement[];
+    if (items.length < 2) return;
+    const name = pager.dataset.item ?? "Плитка";
+    let active = 0;
+
+    const dots = items.map((_, index) => {
+      const dot = document.createElement("button");
+      dot.type = "button";
+      dot.className = "pager-dot";
+      dot.setAttribute("aria-label", `${name} ${index + 1} из ${items.length}`);
+      dot.addEventListener("click", () => go(index));
+      dotsBox.append(dot);
+      return dot;
+    });
+
+    const go = (index: number) => {
+      const target = items[Math.max(0, Math.min(items.length - 1, index))];
+      track.scrollTo({ left: target.offsetLeft - items[0].offsetLeft, behavior: "smooth" });
+    };
+
+    const set = (index: number) => {
+      active = index;
+      items.forEach((card, i) => card.classList.toggle("is-active", i === index));
+      dots.forEach((dot, i) => dot.setAttribute("aria-current", String(i === index)));
+      prev.disabled = index === 0;
+      next.disabled = index === items.length - 1;
+    };
+
+    prev.addEventListener("click", () => go(active - 1));
+    next.addEventListener("click", () => go(active + 1));
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        for (const entry of entries) {
+          if (entry.isIntersecting) set(items.indexOf(entry.target as HTMLElement));
+        }
+      },
+      { root: track, threshold: 0.6 }
+    );
+    items.forEach((card) => observer.observe(card));
+
+    set(0);
+    nav.hidden = false;
+    pager.dataset.ready = "";
+  });
+</script>

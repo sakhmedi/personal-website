@@ -1,140 +1,153 @@
 @import "tailwindcss";
 
 /* ------------------------------------------------------------------
-   Шрифты. Fira Sans — текст, Fira Sans Extra Condensed 800 — надписи
-   плёнкой на стекле и цены. У обоих есть набор cyrillic-ext, то есть
-   казахские ә ғ қ ң ө ұ ү һ: казахская версия сайта не потребует
-   другого шрифта. Каждый файл подключён с unicode-range, браузер
-   скачивает только те наборы, буквы из которых есть на странице.
+   Шрифты. Unbounded — широкий геометрический гротеск для заголовков
+   и цен, в духе надписей на модернистских фасадах. Onest — рабочий
+   гротеск для текста. У обоих есть cyrillic-ext, то есть казахские
+   ә ғ қ ң ө ұ ү һ: казахская версия не потребует другого шрифта.
+   Оба переменные: один файл на набор букв, любые начертания.
    ------------------------------------------------------------------ */
-@import "@fontsource/fira-sans/400.css";
-@import "@fontsource/fira-sans/500.css";
-@import "@fontsource/fira-sans/700.css";
-@import "@fontsource/fira-sans-extra-condensed/800.css";
+@import "@fontsource-variable/unbounded";
+@import "@fontsource-variable/onest";
 
 /* ------------------------------------------------------------------
-   Витрина. Сайт устроен как фасад небольшой мастерской: тёмное стекло
-   двери и витрины, белая плёнка на нём, светлые алюминиевые таблички
-   с текстом и одна жёлтая наклейка — только для "написать".
+   Мозаика. Каждый экран — панно из плоской плитки: кобальтовое поле,
+   светлые каменные плитки с текстом, терракота редкими вставками.
+   Шов между плитками — зазор, в котором видно поле. Жёлтая смальта
+   только у действия "написать", больше нигде.
 
-   Всё плоское: ни теней, ни градиентов, ни размытия под стекло.
-   Глубину дают материалы: стекло темнее таблички, табличка светлее
-   стекла, наклейка ярче всего.
+   Всё плоское: ни теней, ни градиентов, ни размытия.
 
-   Контраст (норма AA — 4.5):
-     плёнка / стекло                15.10
-     приглушённая плёнка / стекло    8.19   / глубокое стекло 9.76
-     текст / табличка               14.31
-     приглушённый / табличка         5.98
-     ссылка / табличка               7.45
-     текст на наклейке              12.36
-     ошибка / табличка               6.13
-     рамка поля / белое поле         4.46   (норма для не-текста 3)
-     рама витрины / стекло           3.48
+   Контраст (норма AA — 4.5), измерено:
+     белый / кобальт             10.4     / ночной кобальт 14.8
+     приглушённый / кобальт       6.6     / ночной кобальт 9.3
+     текст / камень              15.6
+     приглушённый / камень        6.9
+     ссылка (кобальт) / камень    9.1
+     тёмная терракота / камень    6.1
+     текст на смальте            12.4     (на наведении 10.7)
+     ошибка / камень              6.6
+     белый / терракота            4.54    (только крупный текст)
+     приглушённый / терракота     2.9     (не использовать)
+     пунктир шва / кобальт        6.6     (не-текст, норма 3)
+     рамка поля / белое поле      4.8     (не-текст, норма 3)
    ------------------------------------------------------------------ */
 
 :root {
   color-scheme: dark;
 
-  --glass: #0e2a2f;
-  --glass-deep: #09191c;
-  --frame: #5d7f84;
-  --vinyl: #ffffff;
-  --vinyl-muted: #a9c4c6;
+  --cobalt: #1b3a8a;
+  --cobalt-deep: #0f2459;
+  --terracotta: #c4532d;
+  /* Терракота для мелкого текста на камне: обычная светловата. */
+  --terracotta-ink: #9b3b1b;
 
-  --plate: #e4e8ea;
-  --plate-line: #8d9a9e;
-  --ink: #121a1c;
-  --ink-muted: #4b585b;
-  --link: #0e4f5a;
+  --on-cobalt: #ffffff;
+  --on-cobalt-muted: #c3cdea;
+
+  --stone: #eef0f2;
+  --stone-line: #9aa2b1;
+  --ink: #141821;
+  --ink-muted: #4a5263;
+  --link: #1b3a8a;
   --field: #ffffff;
-  --field-border: #6b7a7e;
+  --field-border: #6b7384;
 
-  --sticker: #ffd31a;
-  --sticker-hover: #f2c400;
-  --on-sticker: #1c1800;
+  --smalt: #ffd31a;
+  --smalt-hover: #f2c400;
+  --on-smalt: #1c1800;
 
-  --danger-plate: #a3201a;
+  --danger: #a3201a;
 
-  /* Корпус телефона в витрине. */
-  --phone: #030a0b;
+  /* Корпус телефона в карточке работы. */
+  --phone: #0a1430;
 
-  /* Высота липкой наклейки на телефоне. Отступ снизу у body считается
-     отсюда же, чтобы подвал не уезжал под неё. */
+  /* Шов между плитками. */
+  --seam: 6px;
+
+  /* Шапка поверх экранов и липкая кнопка на телефоне: экраны оставляют
+     под них место, а не прячут под ними текст. */
+  --header-h: 4rem;
   --sticky-cta: 3.75rem;
 }
 
 @theme {
-  --font-sans: "Fira Sans", system-ui, sans-serif;
-  --font-sign: "Fira Sans Extra Condensed", "Fira Sans", system-ui, sans-serif;
+  --font-sans: "Onest Variable", system-ui, sans-serif;
+  --font-display: "Unbounded Variable", "Onest Variable", system-ui, sans-serif;
 }
 
 @theme inline {
-  --color-glass: var(--glass);
-  --color-glass-deep: var(--glass-deep);
-  --color-frame: var(--frame);
-  --color-vinyl: var(--vinyl);
-  --color-vinyl-muted: var(--vinyl-muted);
-  --color-plate: var(--plate);
-  --color-plate-line: var(--plate-line);
+  --color-cobalt: var(--cobalt);
+  --color-cobalt-deep: var(--cobalt-deep);
+  --color-terracotta: var(--terracotta);
+  --color-terracotta-ink: var(--terracotta-ink);
+  --color-on-cobalt: var(--on-cobalt);
+  --color-on-cobalt-muted: var(--on-cobalt-muted);
+  --color-stone: var(--stone);
+  --color-stone-line: var(--stone-line);
   --color-ink: var(--ink);
   --color-ink-muted: var(--ink-muted);
   --color-link: var(--link);
-  --color-sticker: var(--sticker);
-  --color-on-sticker: var(--on-sticker);
+  --color-smalt: var(--smalt);
+  --color-on-smalt: var(--on-smalt);
+  --color-danger: var(--danger);
 }
 
 @layer base {
+  /* Экраны встают ровно по одному. Если экран выше окна (маленький
+     телефон, крупный шрифт), браузер сам даёт листать внутри него:
+     так требует спецификация, и текст не обрезается. */
   html {
-    background-color: var(--glass-deep);
-    scrollbar-color: var(--frame) var(--glass-deep);
+    background-color: var(--cobalt-deep);
+    scrollbar-color: var(--on-cobalt-muted) var(--cobalt-deep);
+    scroll-snap-type: y mandatory;
+  }
+
+  /* На страницах из одного экрана привязка не нужна. */
+  html:not(:has([data-screen-count])) {
+    scroll-snap-type: none;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
   }
 
   body {
-    /* Под подвалом остаётся место для липкой наклейки: пусть оно будет
-       продолжением подвала, а не полосой другого стекла. */
-    background-color: var(--glass-deep);
-    color: var(--vinyl);
+    background-color: var(--cobalt-deep);
+    color: var(--on-cobalt);
     font-family: var(--font-sans);
-    font-size: 1.0625rem;
-    line-height: 1.55;
+    font-size: 1rem;
+    line-height: 1.5;
     font-variant-numeric: tabular-nums;
-    padding-bottom: calc(var(--sticky-cta) + env(safe-area-inset-bottom, 0px));
   }
 
   @media (min-width: 768px) {
     body {
-      font-size: 1.125rem;
-    }
-  }
-
-  /* Липкая наклейка живёт до 1024px: дальше её сменяет наклейка в шапке. */
-  @media (min-width: 1024px) {
-    body {
-      padding-bottom: 0;
+      font-size: 1.0625rem;
     }
   }
 
   ::selection {
-    background-color: var(--sticker);
-    color: var(--on-sticker);
+    background-color: var(--smalt);
+    color: var(--on-smalt);
   }
 
-  /* Рамка фокуса — жёлтая на стекле, тёмная на табличке. */
+  /* Рамка фокуса: жёлтая на кобальте, кобальтовая на камне. */
   :focus-visible {
-    outline: 3px solid var(--sticker);
+    outline: 3px solid var(--smalt);
     outline-offset: 3px;
     border-radius: 2px;
   }
 
-  .plate :focus-visible,
-  .tag :focus-visible {
-    outline-color: var(--glass);
+  .tile :focus-visible {
+    outline-color: var(--cobalt);
   }
 
   input,
   textarea {
-    caret-color: var(--glass);
+    caret-color: var(--cobalt);
   }
 }
 
@@ -142,8 +155,9 @@
   /* Колонка страницы. */
   .shell {
     margin-inline: auto;
-    max-width: 1200px;
-    padding-inline: 1.25rem;
+    width: 100%;
+    max-width: 1240px;
+    padding-inline: 1rem;
   }
 
   @media (min-width: 768px) {
@@ -152,314 +166,476 @@
     }
   }
 
-  /* Длина строки: 36rem — около 65 знаков кириллицы. */
+  /* Длина строки: около 65 знаков кириллицы. */
   .measure {
     max-width: 36rem;
   }
 
   /* ---------------------------------------------------------------
-     Плёнка: надписи, вырезанные из белой плёнки и наклеенные на стекло.
-     Узкий жирный гротеск прописными, как на дверях магазинов.
+     Экран: одна секция — одно окно. Сверху место под шапку, снизу на
+     телефоне место под липкую кнопку.
      --------------------------------------------------------------- */
-  .vinyl {
-    font-family: var(--font-sign);
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.01em;
-    line-height: 1;
-    text-wrap: balance;
+  .screen {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 100svh;
+    padding-top: calc(var(--header-h) + 1.25rem);
+    padding-bottom: calc(var(--sticky-cta) + env(safe-area-inset-bottom, 0px) + 1.25rem);
+    scroll-snap-align: start;
   }
 
-  .sign-xl {
-    font-size: clamp(3.25rem, 2rem + 5.4vw, 5.75rem);
-  }
-
-  /* На компьютере дверь занимает 5/12 ширины: надпись в ней меньше,
-     чтобы наклейка "написать" оставалась в первом экране. */
   @media (min-width: 1024px) {
-    .sign-door {
-      font-size: 4.5rem;
+    .screen {
+      padding-top: calc(var(--header-h) + 2rem);
+      padding-bottom: 2rem;
     }
   }
 
-  .sign-lg {
-    font-size: clamp(2.25rem, 1.6rem + 2.8vw, 3.5rem);
+  /* Контакты: на телефоне два экрана (WhatsApp и форма), на компьютере
+     один, где они стоят рядом. Подвал прицеплен к последнему экрану. */
+  .contacts-part {
+    display: flex;
+    flex-direction: column;
+    min-height: 100svh;
+    padding-top: calc(var(--header-h) + 1.25rem);
+    padding-bottom: 1.25rem;
+    scroll-snap-align: start;
   }
 
-  .sign-sm {
-    font-size: 1.125rem;
-    letter-spacing: 0.06em;
+  .contacts-footer {
+    scroll-snap-align: end;
   }
 
-  /* ---------------------------------------------------------------
-     Табличка: светлый алюминий на двух винтах. На ней живёт всё, что
-     читают подолгу: цены, шаги, текст о себе, форма.
-     --------------------------------------------------------------- */
-  .plate {
-    position: relative;
-    background-color: var(--plate);
-    color: var(--ink);
-    border-radius: 4px;
-    padding: 2rem 1.25rem 1.5rem;
+  @media (min-width: 1024px) {
+    .contacts {
+      display: grid;
+      grid-template-columns: repeat(12, minmax(0, 1fr));
+      grid-template-rows: 1fr auto;
+      min-height: 100svh;
+      padding-top: calc(var(--header-h) + 2rem);
+      scroll-snap-align: start;
+    }
+
+    .contacts-part {
+      min-height: 0;
+      padding: 0 0 2rem;
+      scroll-snap-align: none;
+    }
+
+    .contacts-part:first-child {
+      grid-column: 1 / 6;
+    }
+
+    .contacts-part:nth-child(2) {
+      grid-column: 6 / 13;
+    }
+
+    /* Колонку держит сам экран: внутренние колонки без своих полей. */
+    .contacts {
+      column-gap: 2rem;
+      padding-inline: max(2rem, calc((100vw - 1240px) / 2 + 2rem));
+    }
+
+    .contacts-part > .shell,
+    .contacts-footer .shell {
+      max-width: none;
+      padding-inline: 0;
+    }
+
+    .contacts-footer {
+      grid-column: 1 / -1;
+      scroll-snap-align: none;
+    }
+  }
+
+  .screen-cobalt {
+    background-color: var(--cobalt);
+  }
+
+  .screen-deep {
+    background-color: var(--cobalt-deep);
+  }
+
+  .screen-terracotta {
+    background-color: var(--terracotta);
+  }
+
+  /* Содержимое экрана держится по центру высоты, пока помещается. */
+  .screen-body {
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    justify-content: center;
+    gap: 1.25rem;
   }
 
   @media (min-width: 768px) {
-    .plate {
-      padding: 2.5rem 2.5rem 2rem;
+    .screen-body {
+      gap: 2rem;
     }
   }
 
-  /* Винты в верхних углах. */
-  .plate::before,
-  .plate::after {
-    content: "";
-    position: absolute;
-    top: 0.625rem;
-    width: 0.625rem;
-    height: 0.625rem;
-    border-radius: 50%;
-    background-color: var(--plate-line);
+  /* ---------------------------------------------------------------
+     Надписи панно: широкий гротеск, как буквы, выложенные на фасаде.
+     --------------------------------------------------------------- */
+  .display {
+    font-family: var(--font-display);
+    font-weight: 700;
+    line-height: 1.04;
+    letter-spacing: -0.01em;
+    text-wrap: balance;
   }
 
-  .plate::before {
-    left: 0.75rem;
+  .display-xl {
+    font-size: clamp(2.25rem, 1.35rem + 4.2vw, 4.5rem);
   }
 
-  .plate::after {
-    right: 0.75rem;
+  .display-lg {
+    font-size: clamp(1.75rem, 1.2rem + 2.4vw, 3rem);
   }
 
-  .plate-title {
-    font-family: var(--font-sign);
-    font-weight: 800;
+  .display-md {
+    font-size: clamp(1.25rem, 1.05rem + 0.9vw, 1.75rem);
+  }
+
+  /* Мелкая подпись прописными: заголовок колонки, адрес экрана. */
+  .label {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.75rem;
+    letter-spacing: 0.08em;
     text-transform: uppercase;
-    letter-spacing: 0.06em;
-    font-size: 1rem;
-    color: var(--ink-muted);
+    line-height: 1.2;
   }
 
-  .plate a:not(.btn-glass) {
+  /* ---------------------------------------------------------------
+     Плитка: светлый камень, на нём всё, что читают подолгу.
+     Углы почти прямые, как у колотой плитки.
+     --------------------------------------------------------------- */
+  .tile {
+    position: relative;
+    background-color: var(--stone);
+    color: var(--ink);
+    border-radius: 2px;
+    padding: 1.125rem;
+  }
+
+  @media (min-width: 768px) {
+    .tile {
+      padding: 1.75rem;
+    }
+  }
+
+  .tile a:not(.smalt, .btn) {
     color: var(--link);
     text-decoration: underline;
     text-underline-offset: 0.2em;
   }
 
-  /* Строка прайса: название, пунктир до цены, цена. Пунктиру оставлен
-     минимум места: на телефоне длинное название переносится, а не
-     съедает пунктир целиком. */
-  .price-row {
+  /* Сетка мозаики: плитки через шов, в шве видно поле. */
+  .mosaic {
     display: grid;
-    grid-template-columns: auto minmax(1.5rem, 1fr) auto;
-    align-items: baseline;
-    gap: 0.75rem;
+    gap: var(--seam);
   }
 
-  .price-row .leader {
-    border-bottom: 2px dotted var(--plate-line);
-    transform: translateY(-0.3em);
+  /* Тессеры: мелкие плитки кромки панно. */
+  .tesserae {
+    display: grid;
+    gap: var(--seam);
+  }
+
+  .tessera {
+    aspect-ratio: 1;
+    border-radius: 2px;
   }
 
   .price {
-    font-family: var(--font-sign);
-    font-weight: 800;
-    font-size: clamp(1.75rem, 1.3rem + 1.8vw, 2.5rem);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: clamp(1.625rem, 1.3rem + 1.4vw, 2.25rem);
     line-height: 1;
     white-space: nowrap;
   }
 
   .price small {
-    font-size: 0.55em;
+    font-size: 0.5em;
+    font-weight: 600;
     letter-spacing: 0.04em;
     text-transform: uppercase;
   }
 
-  /* Список "что входит": квадратные метки вместо точек. */
+  /* Список "что входит": квадратные метки-тессеры. */
   .ticks > li {
     position: relative;
-    padding-left: 1.25rem;
+    padding-left: 1.125rem;
   }
 
   .ticks > li::before {
     content: "";
     position: absolute;
     left: 0;
-    top: 0.6em;
+    top: 0.55em;
     width: 0.45rem;
     height: 0.45rem;
-    background-color: var(--glass);
+    background-color: var(--terracotta);
   }
 
   /* ---------------------------------------------------------------
-     Наклейка: единственное яркое пятно на сайте и единственная
-     главная кнопка — "написать". Белая вырубка по краю, как у
-     настоящей наклейки на стекле.
+     Смальта: единственная жёлтая плитка и единственная главная
+     кнопка — "написать".
      --------------------------------------------------------------- */
-  .sticker {
+  .smalt {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     gap: 0.625rem;
     min-height: 3.5rem;
     padding: 0.75rem 1.5rem;
-    border: 3px solid var(--vinyl);
-    border-radius: 12px;
-    background-color: var(--sticker);
-    color: var(--on-sticker);
-    font-family: var(--font-sign);
-    font-weight: 800;
-    font-size: 1.375rem;
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    line-height: 1;
+    border-radius: 2px;
+    background-color: var(--smalt);
+    color: var(--on-smalt);
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 1.0625rem;
+    letter-spacing: 0.01em;
+    line-height: 1.1;
     transition: background-color 140ms ease, transform 140ms ease;
   }
 
-  .sticker:hover {
-    background-color: var(--sticker-hover);
+  @media (min-width: 768px) {
+    .smalt {
+      font-size: 1.1875rem;
+      min-height: 3.75rem;
+      padding-inline: 1.75rem;
+    }
   }
 
-  .sticker:active {
+  .smalt:hover {
+    background-color: var(--smalt-hover);
+  }
+
+  .smalt:active {
     transform: translateY(1px);
   }
 
-  .sticker svg {
+  .smalt svg {
     flex: none;
   }
 
-  /* Обычная кнопка — стекло: для всего, что не "написать". */
-  .btn-glass {
+  /* Обычная кнопка — кобальтовая плитка: для всего, что не "написать". */
+  .btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
     min-height: 3rem;
     padding: 0.75rem 1.5rem;
-    border-radius: 8px;
-    background-color: var(--glass);
-    color: var(--vinyl);
-    font-weight: 500;
+    border-radius: 2px;
+    background-color: var(--cobalt);
+    color: var(--on-cobalt);
+    font-weight: 600;
     transition: background-color 140ms ease;
   }
 
-  .btn-glass:hover {
-    background-color: var(--glass-deep);
+  .btn:hover {
+    background-color: var(--cobalt-deep);
   }
 
-  .btn-glass:disabled {
+  .btn:disabled {
     opacity: 0.6;
   }
 
-  /* Ссылка на стекле. */
-  .vinyl-link {
-    color: var(--vinyl);
+  /* Ссылка на кобальте. */
+  .field-link {
+    color: var(--on-cobalt);
     text-decoration: underline;
-    text-decoration-color: var(--vinyl-muted);
+    text-decoration-color: var(--on-cobalt-muted);
     text-decoration-thickness: 2px;
     text-underline-offset: 0.25em;
   }
 
-  .vinyl-link:hover {
-    text-decoration-color: var(--vinyl);
+  .field-link:hover {
+    text-decoration-color: var(--on-cobalt);
   }
 
-  /* ---------------------------------------------------------------
-     Витрина: стекло с алюминиевой рамой, в нём работы на экранах
-     телефонов, у каждой бумажная бирка.
-     --------------------------------------------------------------- */
-  .window {
-    position: relative;
-    overflow: hidden;
-    border: 6px solid var(--frame);
-    border-radius: 4px;
-    background-color: var(--glass-deep);
-  }
-
+  /* Работа на картинке. На телефоне — плитка с верхом сайта во всю
+     ширину: так остаётся место тексту. На компьютере — первый экран сайта
+     в пропорциях телефона, той же плоской плиткой. */
   .phone {
-    border-radius: 2.25rem;
+    display: block;
+    width: 100%;
+    height: clamp(7rem, 16svh, 15rem);
+    overflow: hidden;
+    border-radius: 2px;
     background-color: var(--phone);
-    padding: 0.5rem;
-    border: 1px solid var(--frame);
   }
 
   .phone img {
     display: block;
     width: 100%;
-    height: auto;
-    border-radius: 1.75rem;
+    height: 100%;
+    object-fit: cover;
+    object-position: top;
   }
 
-  /* Бирка: бумага на нитке, с пробитой дыркой. */
-  .tag {
-    position: relative;
-    background-color: var(--field);
-    color: var(--ink);
-    border-radius: 3px 3px 6px 6px;
-    padding: 1.5rem 1rem 1rem;
-  }
-
-  .tag::before {
-    content: "";
-    position: absolute;
-    top: 0.5rem;
-    left: 50%;
-    width: 0.5rem;
-    height: 0.5rem;
-    margin-left: -0.25rem;
-    border-radius: 50%;
-    background-color: var(--glass-deep);
-  }
-
-  /* Нитка от телефона к бирке. */
-  .tag::after {
-    content: "";
-    position: absolute;
-    bottom: 100%;
-    left: 50%;
-    width: 1px;
-    height: 1.5rem;
-    background-color: var(--vinyl-muted);
-  }
-
-  /* Ручка двери: вертикальная алюминиевая труба на двух стойках,
-     отнесённая от стекла. Стойки — то, что отличает её от полосы
-     прокрутки. */
-  .handle {
-    width: 0.75rem;
-    border-radius: 0.375rem;
-    background-color: var(--frame);
-  }
-
-  .handle::before,
-  .handle::after {
-    content: "";
-    position: absolute;
-    right: 100%;
-    width: 0.75rem;
-    height: 0.375rem;
-    background-color: var(--frame);
-  }
-
-  .handle::before {
-    top: 0.75rem;
-  }
-
-  .handle::after {
-    bottom: 0.75rem;
-  }
-
-  /* Фото за стеклом: левый край растворяется в стекле, чтобы фото
-     читалось как человек внутри, а не как вставленная рамка. */
-  .behind-glass {
-    mask-image: linear-gradient(to right, transparent, #000 45%);
+  @media (min-width: 1024px) {
+    .phone {
+      width: auto;
+      height: clamp(13rem, 34svh, 21rem);
+      aspect-ratio: 390 / 664;
+    }
   }
 
   /* ---------------------------------------------------------------
-     Форма на табличке.
+     Листание вбок. На телефоне длинная секция не растягивает экран:
+     тарифы, шаги и работы стоят в ряд, по одной плитке на ширину,
+     следующая выглядывает с края. Без JavaScript это обычная
+     прокрутка вбок с привязкой; скрипт добавляет точки и стрелки.
+     --------------------------------------------------------------- */
+  .pager-track {
+    display: grid;
+    grid-auto-flow: column;
+    grid-auto-columns: 86%;
+    gap: var(--seam);
+    overflow-x: auto;
+    overscroll-behavior-x: contain;
+    scroll-snap-type: x mandatory;
+    scrollbar-width: none;
+    /* Плитки уходят под край экрана, а не обрезаются полем колонки. */
+    margin-inline: -1rem;
+    padding-inline: 1rem;
+    scroll-padding-inline: 1rem;
+  }
+
+  .pager-track::-webkit-scrollbar {
+    display: none;
+  }
+
+  .pager-track > * {
+    scroll-snap-align: start;
+  }
+
+  @media (min-width: 640px) {
+    .pager-track {
+      grid-auto-columns: 46%;
+    }
+  }
+
+  @media (min-width: 768px) {
+    .pager-track {
+      margin-inline: -2rem;
+      padding-inline: 2rem;
+      scroll-padding-inline: 2rem;
+    }
+  }
+
+  /* На широком экране всё помещается: ряд становится сеткой. */
+  @media (min-width: 1024px) {
+    .pager-grid-lg .pager-track {
+      grid-auto-flow: row;
+      grid-template-columns: repeat(var(--cols, 3), minmax(0, 1fr));
+      grid-auto-columns: auto;
+      overflow: visible;
+      margin-inline: 0;
+      padding-inline: 0;
+    }
+
+    .pager-grid-lg .pager-nav {
+      display: none;
+    }
+  }
+
+  .pager-nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .pager-dots {
+    display: flex;
+    gap: 0.25rem;
+  }
+
+  /* Точка — тессера: выбранная залита, остальные пустые швы. */
+  .pager-dot {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+  }
+
+  .pager-dot::before {
+    content: "";
+    width: 0.75rem;
+    height: 0.75rem;
+    border-radius: 2px;
+    border: 2px dashed var(--on-cobalt-muted);
+  }
+
+  .pager-dot[aria-current="true"]::before {
+    border: 0;
+    background-color: var(--on-cobalt);
+  }
+
+  .pager-arrow {
+    display: grid;
+    place-items: center;
+    width: 2.75rem;
+    height: 2.75rem;
+    border-radius: 2px;
+    border: 2px solid var(--on-cobalt-muted);
+    color: var(--on-cobalt);
+  }
+
+  .pager-arrow:hover:not(:disabled) {
+    border-color: var(--on-cobalt);
+  }
+
+  .pager-arrow:disabled {
+    opacity: 0.35;
+  }
+
+  /* Выбранная плитка выложена, соседние — пунктир незаполненного шва:
+     видно, что дальше есть ещё, но читать надо эту. */
+  .js .pager[data-ready] .pager-track > .tile {
+    transition: background-color 220ms ease, outline-color 220ms ease;
+    outline: 2px dashed transparent;
+    outline-offset: -2px;
+  }
+
+  .js .pager[data-ready] .pager-track > .tile:not(.is-active) {
+    background-color: transparent;
+    outline-color: var(--on-cobalt-muted);
+  }
+
+  .js .pager[data-ready] .pager-track > .tile > * {
+    transition: opacity 220ms ease;
+  }
+
+  .js .pager[data-ready] .pager-track > .tile:not(.is-active) > * {
+    opacity: 0;
+  }
+
+  @media (min-width: 1024px) {
+    .js .pager-grid-lg[data-ready] .pager-track > .tile:not(.is-active) {
+      background-color: var(--stone);
+      outline-color: transparent;
+    }
+
+    .js .pager-grid-lg[data-ready] .pager-track > .tile:not(.is-active) > * {
+      opacity: 1;
+    }
+  }
+
+  /* ---------------------------------------------------------------
+     Форма на плитке.
      --------------------------------------------------------------- */
   .field {
     width: 100%;
     min-height: 3rem;
     padding: 0.75rem;
-    border-radius: 6px;
+    border-radius: 2px;
     border: 1px solid var(--field-border);
     background-color: var(--field);
     color: var(--ink);
@@ -471,54 +647,32 @@
   }
 
   .field:hover {
-    border-color: var(--glass);
+    border-color: var(--cobalt);
   }
 
   .field[aria-invalid="true"] {
-    border-color: var(--danger-plate);
+    border-color: var(--danger);
     border-width: 2px;
   }
 }
 
 /* ------------------------------------------------------------------
-   Движение. Одно на весь сайт: створки витрины разъезжаются один раз,
-   когда витрина попадает на экран. Створки полупрозрачные, работы
-   видно сквозь них с самого начала, и ссылки под ними нажимаются:
-   движение ничего не прячет. Без JavaScript и при "уменьшить
-   движение" створок нет вовсе.
+   Движение. Одно на весь сайт: когда экран встаёт на место, его
+   плитки укладываются ряд за рядом, один раз. Текст заголовков не
+   прячется никогда; без JavaScript и при "уменьшить движение" всё
+   сразу на месте.
    ------------------------------------------------------------------ */
-.leaf {
-  display: none;
-}
-
 @media (prefers-reduced-motion: no-preference) {
-  .js .leaf {
-    display: block;
-    position: absolute;
-    inset-block: 0;
-    width: 50%;
-    z-index: 2;
-    pointer-events: none;
-    background-color: rgb(14 42 47 / 0.82);
-    transition: transform 1100ms cubic-bezier(0.16, 1, 0.3, 1);
+  .js [data-screen] [data-lay] {
+    transition:
+      opacity 520ms cubic-bezier(0.16, 1, 0.3, 1),
+      transform 620ms cubic-bezier(0.16, 1, 0.3, 1);
+    transition-delay: calc(var(--i, 0) * 70ms);
   }
 
-  .js .leaf-left {
-    left: 0;
-    border-right: 3px solid var(--frame);
-  }
-
-  .js .leaf-right {
-    right: 0;
-    border-left: 3px solid var(--frame);
-  }
-
-  .js .is-open .leaf-left {
-    transform: translateX(-101%);
-  }
-
-  .js .is-open .leaf-right {
-    transform: translateX(101%);
+  .js [data-screen]:not(.is-laid) [data-lay] {
+    opacity: 0;
+    transform: translateY(18px);
   }
 
   .sticky-cta {
@@ -526,7 +680,7 @@
   }
 }
 
-/* Липкая наклейка уезжает вниз, пока на экране уже есть другая. */
+/* Липкая кнопка уезжает вниз, пока на экране уже есть другая. */
 .sticky-cta.is-hidden {
   transform: translateY(110%);
 }

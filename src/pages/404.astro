@@ -1,20 +1,22 @@
 ---
 import Layout from '../layouts/Layout.astro';
+import Tesserae from '../components/Tesserae.astro';
 ---
 <Layout
   title="Страница не найдена"
   description="Такой страницы на сайте нет."
 >
-  <!-- Табличка на закрытой двери: что случилось и куда идти. -->
-  <section class="bg-glass py-16 md:py-24">
-    <div class="shell flex flex-col items-start gap-8">
-      <h1 class="vinyl sign-xl max-w-[12ch]">Такой страницы нет</h1>
-      <div class="plate max-w-[32rem]">
+  <!-- Панно с выпавшей плиткой: что случилось и куда идти. -->
+  <section class="screen screen-cobalt" data-screen="1" aria-labelledby="missing-title">
+    <div class="shell screen-body items-start">
+      <Tesserae cols={4} rows={1} offset={5} class="w-40" />
+      <h1 id="missing-title" class="display display-xl max-w-[14ch]">Такой страницы нет</h1>
+      <div class="tile max-w-[32rem]">
         <p class="mb-6">
           Возможно, в адресе опечатка или страница переехала. Всё главное
           есть на главной: работы, цены и как со мной связаться.
         </p>
-        <a href="/" class="btn-glass">На главную</a>
+        <a href="/" class="btn">На главную</a>
       </div>
     </div>
   </section>
