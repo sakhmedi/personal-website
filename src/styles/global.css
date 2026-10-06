@@ -400,6 +400,8 @@
     font-size: 1.0625rem;
     letter-spacing: 0.01em;
     line-height: 1.1;
+    /* Подпись в одну строку: "Написать в WhatsApp" не ломается пополам. */
+    white-space: nowrap;
     transition: background-color 140ms ease, transform 140ms ease;
   }
 

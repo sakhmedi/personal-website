@@ -280,9 +280,13 @@
         "displayName": "Display Hero",
         "purpose": "Только заголовок первого экрана, самая крупная надпись сайта."
       },
+      "display-contacts": {
+        "displayName": "Display Contacts",
+        "purpose": "«Напишите мне» на ≥1024px: до 3.5rem, в 5 колонках рядом с формой, зазор колонок 4rem."
+      },
       "display-xl": {
         "displayName": "Display XL",
-        "purpose": "«Напишите мне», заголовки /projects и 404."
+        "purpose": "Заголовки /projects и 404, «Напишите мне» на телефоне."
       },
       "display-lg": {
         "displayName": "Display LG",
@@ -314,7 +318,7 @@
       },
       "label": {
         "displayName": "Label",
-        "purpose": "Прописная подпись над данными на плитке, тип работы, счётчик экрана."
+        "purpose": "Прописная подпись над данными на плитке, тип работы."
       },
       "label-sm": {
         "displayName": "Label SM",
@@ -398,8 +402,8 @@
         "value": "1024px"
       },
       {
-        "name": "short",
-        "value": "max-height: 700px"
+        "name": "xl",
+        "value": "1280px"
       }
     ]
   },
@@ -448,7 +452,7 @@
       "name": "Шапка с адресом экрана",
       "kind": "nav",
       "refersTo": "nav-link",
-      "description": "Полоса ночного кобальта: имя и пункты с номером экрана (пунктир / сплошная плитка). Отдельного счётчика нет.",
+      "description": "Полоса ночного кобальта: имя и пункты с номером экрана (пунктир / сплошная плитка); полное меню от 1280px, ниже — кнопка меню.",
       "html": "<header class=\"ds-head\"><a href=\"#\" class=\"ds-word\">Салима<span class=\"ds-m\">·</span><span class=\"ds-m\">Астана</span></a><nav class=\"ds-nav\"><a href=\"#\" class=\"ds-link\"><span class=\"ds-num\">2</span>Работы</a><a href=\"#\" class=\"ds-link\" aria-current=\"true\"><span class=\"ds-num\">3</span>Цены</a><a href=\"#\" class=\"ds-link\"><span class=\"ds-num\">4</span>Как я работаю</a></nav></header>",
       "css": ":host{--cobalt:#1b3a8a;--cobalt-deep:#0f2459;--terracotta:#c4532d;--terracotta-ink:#9b3b1b;--on-cobalt:#fff;--on-cobalt-muted:#c3cdea;--stone:#eef0f2;--stone-line:#9aa2b1;--ink:#141821;--ink-muted:#4a5263;--link:#1b3a8a;--field:#fff;--field-border:#6b7384;--smalt:#ffd31a;--smalt-hover:#f2c400;--on-smalt:#1c1800;--danger:#a3201a;--seam:6px} .ds-head{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;height:4rem;padding:0 2rem;background:var(--cobalt-deep);color:var(--on-cobalt);font-family:'Onest Variable',system-ui,sans-serif;} .ds-word{display:flex;gap:.5rem;font-family:'Unbounded Variable','Onest Variable',system-ui,sans-serif;font-weight:700;font-size:.9375rem;color:var(--on-cobalt);text-decoration:none} .ds-m{color:var(--on-cobalt-muted);font-weight:600} .ds-nav{display:flex;gap:1.5rem} .ds-link{display:inline-flex;align-items:center;gap:.5rem;min-height:44px;color:var(--on-cobalt-muted);text-decoration:none} .ds-link:hover,.ds-link[aria-current=\"true\"]{color:var(--on-cobalt)} .ds-link:focus-visible{outline:3px solid var(--smalt);outline-offset:3px;border-radius:2px} .ds-num{display:grid;place-items:center;width:1.5rem;height:1.5rem;border-radius:2px;border:2px dashed var(--on-cobalt-muted);box-sizing:border-box;font-family:'Unbounded Variable','Onest Variable',system-ui,sans-serif;font-weight:600;font-size:.6875rem;letter-spacing:.08em} .ds-link[aria-current=\"true\"] .ds-num{border-style:solid;border-color:var(--on-cobalt);background:var(--on-cobalt);color:var(--cobalt-deep)}"
     },
@@ -456,39 +460,31 @@
       "name": "Листание вбок",
       "kind": "custom",
       "refersTo": "pager-arrow",
-      "description": "Выбранная плитка выложена камнем, соседние — пунктир незаполненного шва; точки-тессеры и стрелки.",
+      "description": "Выбранная плитка выложена камнем, соседние — пунктир незаполненного шва; квадратные точки и стрелки.",
       "html": "<div class=\"ds-field\"><div class=\"ds-track\"><div class=\"ds-t ds-on\">Шаг 2 · Предоплата</div><div class=\"ds-t\"></div></div><div class=\"ds-navrow\"><button class=\"ds-arrow\" aria-label=\"Предыдущий\"><svg viewBox=\"0 0 20 20\" width=\"20\" height=\"20\"><path d=\"M12.5 4.5 7 10l5.5 5.5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.25\" stroke-linecap=\"square\"/></svg></button><div class=\"ds-dots\"><span class=\"ds-dot\"></span><span class=\"ds-dot ds-cur\"></span><span class=\"ds-dot\"></span></div><button class=\"ds-arrow\" aria-label=\"Следующий\"><svg viewBox=\"0 0 20 20\" width=\"20\" height=\"20\"><path d=\"M7.5 4.5 13 10l-5.5 5.5\" fill=\"none\" stroke=\"currentColor\" stroke-width=\"2.25\" stroke-linecap=\"square\"/></svg></button></div></div>",
       "css": ":host{--cobalt:#1b3a8a;--cobalt-deep:#0f2459;--terracotta:#c4532d;--terracotta-ink:#9b3b1b;--on-cobalt:#fff;--on-cobalt-muted:#c3cdea;--stone:#eef0f2;--stone-line:#9aa2b1;--ink:#141821;--ink-muted:#4a5263;--link:#1b3a8a;--field:#fff;--field-border:#6b7384;--smalt:#ffd31a;--smalt-hover:#f2c400;--on-smalt:#1c1800;--danger:#a3201a;--seam:6px} .ds-field{background:var(--cobalt-deep);padding:24px;color:var(--on-cobalt);font-family:'Onest Variable',system-ui,sans-serif;max-width:26rem} .ds-track{display:grid;grid-template-columns:86% 86%;gap:var(--seam);overflow:hidden} .ds-t{min-height:8rem;border-radius:2px;padding:1.125rem;outline:2px dashed var(--on-cobalt-muted);outline-offset:-2px;transition:background-color 220ms ease} .ds-on{background:var(--stone);color:var(--ink);outline-color:transparent} .ds-navrow{display:flex;align-items:center;justify-content:space-between;gap:1rem;margin-top:.75rem} .ds-arrow{display:grid;place-items:center;width:2.75rem;height:2.75rem;border-radius:2px;border:2px solid var(--on-cobalt-muted);background:none;color:var(--on-cobalt);cursor:pointer} .ds-arrow:hover{border-color:var(--on-cobalt)} .ds-arrow:focus-visible{outline:3px solid var(--smalt);outline-offset:3px} .ds-dots{display:flex;gap:.25rem} .ds-dot{display:grid;place-items:center;width:2.75rem;height:2.75rem} .ds-dot::before{content:\"\";box-sizing:border-box;width:.75rem;height:.75rem;border-radius:2px;border:2px dashed var(--on-cobalt-muted)} .ds-cur::before{border:0;background:var(--on-cobalt)}"
-    },
-    {
-      "name": "Кромка тессер",
-      "kind": "custom",
-      "refersTo": "tessera",
-      "description": "Мелкие квадратные плитки через шов в палитре панно, без жёлтого.",
-      "html": "<div class=\"ds-field\"><div class=\"ds-tess\"><span class=\"s\"></span><span class=\"d\"></span><span class=\"t\"></span><span></span><span class=\"d\"></span><span class=\"s\"></span><span></span><span class=\"t\"></span></div></div>",
-      "css": ":host{--cobalt:#1b3a8a;--cobalt-deep:#0f2459;--terracotta:#c4532d;--terracotta-ink:#9b3b1b;--on-cobalt:#fff;--on-cobalt-muted:#c3cdea;--stone:#eef0f2;--stone-line:#9aa2b1;--ink:#141821;--ink-muted:#4a5263;--link:#1b3a8a;--field:#fff;--field-border:#6b7384;--smalt:#ffd31a;--smalt-hover:#f2c400;--on-smalt:#1c1800;--danger:#a3201a;--seam:6px} .ds-field{background:var(--cobalt);padding:24px} .ds-tess{display:grid;grid-template-columns:repeat(4,1fr);gap:var(--seam);width:10rem} .ds-tess span{aspect-ratio:1;border-radius:2px} .ds-tess .s{background:var(--stone)} .ds-tess .d{background:var(--cobalt-deep)} .ds-tess .t{background:var(--terracotta)}"
     }
   ],
   "narrative": {
     "northStar": "Мозаика модернизма",
-    "overview": "Каждый экран — плиточное панно казахстанского модернизма, как на фасадах 60–80-х: плоские цветовые поля, выложенные на сетке тессер, и эта сетка и есть раскладка. Большую часть поверхности занимает кобальт двух тонов. Всё, что читают подолгу (цены, шаги, работы, форма, текст о себе), лежит на светлых каменных плитках графитом. Между плитками — шов: видимый зазор 6px, в котором видно поле. Терракота — второй, редкий цвет. Жёлтая смальта на любом экране значит одно: «написать».\n\nСтраница — стопка экранов высотой в окно, которые встают на место по одному. Длинное содержимое не растягивает экран вниз, а листается вбок внутри него. Всё плоское: без теней, градиентов, стекла и размытия. Глубину даёт порядок материалов — ночной кобальт дальше, кобальт ближе, камень сверху, смальта ярче всего. Движение одно: когда экран встаёт на место, его плитки укладываются ряд за рядом, один раз.",
+    "overview": "Каждый экран — плиточное панно казахстанского модернизма, как на фасадах 60–80-х: плоские цветовые поля и светлые плитки на них, и эта сетка плиток и есть раскладка. Большую часть поверхности занимает кобальт двух тонов. Всё, что читают подолгу (цены, шаги, работы, форма, текст о себе), лежит на светлых каменных плитках графитом. Между плитками — шов: видимый зазор 6px, в котором видно поле. Терракота — второй, редкий цвет. Жёлтая смальта на любом экране значит одно: «написать».\n\nСтраница — стопка экранов высотой в окно, которые встают на место по одному. Длинное содержимое не растягивает экран вниз, а листается вбок внутри него. Всё плоское: без теней, градиентов, стекла и размытия. Глубину даёт порядок материалов — ночной кобальт дальше, кобальт ближе, камень сверху, смальта ярче всего. Движение одно: когда экран встаёт на место, его плитки укладываются ряд за рядом, один раз.",
     "keyCharacteristics": [
       "Кобальтовые поля во весь экран, чередование кобальта и ночного кобальта; один терракотовый экран — «Обо мне».",
       "Текст живёт на каменных плитках или белым прямо на поле; углы почти прямые (2px).",
-      "Шов 6px между всеми плитками, тессерами, пунктами меню и страницами листания.",
+      "Шов 6px между всеми плитками, пунктами меню и страницами листания.",
       "Одна жёлтая плитка «написать» на экран; повторяющие её кнопки уезжают, пока видна другая.",
       "Широкий гротеск Unbounded для надписей и цен, Onest для текста, цифры табличные.",
-      "Экраны 100svh с вертикальной привязкой; длинные ряды листаются вбок с точками-тессерами."
+      "Экраны 100svh с вертикальной привязкой; длинные ряды листаются вбок с квадратными точками."
     ],
     "rules": [
       {
         "name": "The One Smalt Rule",
-        "body": "Жёлтый существует только у действия «написать» и у сигналов, которые указывают на действие (фокус на поле, выделение, ссылка пропуска в фокусе, фавикон). На экране видна одна жёлтая плитка: кнопка в шапке и липкая полоса уезжают, пока видна другая плитка «написать» или форма заявки. В тессерах жёлтого нет.",
+        "body": "Жёлтый существует только у действия «написать» и у сигналов, которые указывают на действие (фокус на поле, выделение, ссылка пропуска в фокусе, фавикон). На экране видна одна жёлтая плитка: кнопка в шапке и липкая полоса уезжают, пока видна другая плитка «написать» или форма заявки. В декоре жёлтого нет.",
         "section": "colors"
       },
       {
         "name": "The One Warm Screen Rule",
-        "body": "Терракотовым полем выложен только экран «Обо мне». В остальных местах терракота — вставка: плашка платного шага, метка списка, тессера, мелкая подпись.",
+        "body": "Терракотовым полем выложен только экран «Обо мне». В остальных местах терракота — вставка: плашка платного шага, метка списка, мелкая подпись.",
         "section": "colors"
       },
       {
@@ -516,7 +512,7 @@
       "Do ставить текст на одну из двух поверхностей: белым на поле или графитом на камне.",
       "Do выкладывать каждое «написать» жёлтой плиткой со своим значком сообщения и помечать её `data-cta`, чтобы повторяющие кнопки уезжали.",
       "Do разделять плитки швом 6px (`seam`), а не линиями и не тенями.",
-      "Do скруглять углы на 2px — у плиток, кнопок, полей, тессер и рамки фокуса.",
+      "Do скруглять углы на 2px — у плиток, кнопок, полей и рамки фокуса.",
       "Do показывать выбранное сплошной плиткой, а невыбранное — пунктирным швом.",
       "Do набирать цены Unbounded с табличными цифрами и узким неразрывным пробелом в тысячах.",
       "Do держать цели касания от 44px и строку текста до 36rem.",

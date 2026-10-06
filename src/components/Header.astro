@@ -19,9 +19,11 @@ const navLinks = [
       {contacts.name}<span class="text-on-cobalt-muted" aria-hidden="true">·</span><span class="font-semibold text-on-cobalt-muted">{contacts.city}</span>
     </a>
 
-    <nav class="hidden lg:flex lg:items-center lg:gap-6" aria-label="Основное меню">
+    <!-- Полное меню — от 1280px: уже на 1024px пункты переносились на две
+         строки. Между 1024 и 1280 px — бургер и жёлтая кнопка рядом. -->
+    <nav class="hidden xl:flex xl:items-center xl:gap-6" aria-label="Основное меню">
       {navLinks.map(({ name, href, screen }) => (
-        <a href={href} data-nav={screen} class="group inline-flex min-h-[44px] items-center gap-2 text-on-cobalt-muted hover:text-on-cobalt aria-[current=true]:text-on-cobalt">
+        <a href={href} data-nav={screen} class="group inline-flex min-h-[44px] items-center gap-2 whitespace-nowrap text-on-cobalt-muted hover:text-on-cobalt aria-[current=true]:text-on-cobalt">
           <span class="label grid h-6 w-6 place-items-center rounded-[2px] border-2 border-dashed border-on-cobalt-muted text-[0.6875rem] group-aria-[current=true]:border-solid group-aria-[current=true]:border-on-cobalt group-aria-[current=true]:bg-on-cobalt group-aria-[current=true]:text-cobalt-deep" aria-hidden="true">{screen}</span>
           {name}
         </a>
@@ -44,7 +46,7 @@ const navLinks = [
 
       <button
         id="burgermenu"
-        class="flex h-11 w-11 items-center justify-center rounded-[2px] border-2 border-on-cobalt-muted text-on-cobalt hover:border-on-cobalt lg:hidden"
+        class="flex h-11 w-11 items-center justify-center rounded-[2px] border-2 border-on-cobalt-muted text-on-cobalt hover:border-on-cobalt xl:hidden"
         aria-label="Меню"
         aria-controls="mobileNav"
         aria-expanded="false"
@@ -57,8 +59,8 @@ const navLinks = [
   </div>
 
   <!-- Меню на телефоне: плитки под шапкой. Видимостью на десктопе
-       управляет CSS (lg:hidden), на телефоне — атрибут hidden. -->
-  <nav id="mobileNav" hidden class="shell grid gap-[var(--seam)] pb-4 lg:hidden" aria-label="Мобильное меню">
+       управляет CSS (xl:hidden), ниже — атрибут hidden. -->
+  <nav id="mobileNav" hidden class="shell grid gap-[var(--seam)] pb-4 xl:hidden" aria-label="Мобильное меню">
     {navLinks.map(({ name, href, screen }) => (
       <a href={href} class="flex min-h-[52px] items-center gap-3 rounded-[2px] bg-cobalt px-4 font-semibold">
         <span class="label text-on-cobalt-muted" aria-hidden="true">{screen}</span>{name}
@@ -86,7 +88,7 @@ const navLinks = [
   // === МЕНЮ ===
   const burger = document.getElementById("burgermenu");
   const panel = document.getElementById("mobileNav");
-  const desktop = window.matchMedia("(min-width: 1024px)");
+  const desktop = window.matchMedia("(min-width: 1280px)");
 
   if (burger && panel) {
     const setOpen = (open: boolean) => {
