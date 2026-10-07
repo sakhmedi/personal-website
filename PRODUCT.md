@@ -32,7 +32,7 @@ saliima.dev (live at https://saliima.netlify.app/) is Salima's storefront as a f
 - The home page is a sequence of six full screens in a fixed order (hero, works, prices, process, about, contacts), one section per screen with vertical scroll-snap. Content that does not fit a phone screen scrolls sideways inside its screen rather than stretching it. Texts, the form and the section order stay as they are when the look changes (decided 2026-10-05).
 - Services and prices: a one-page site from 80 000 ₸, usually 2–3 days; a multi-page site from 150 000 ₸, usually about 7 days; improving an existing site, with price and timeline set after reviewing the site and agreeing on the list of changes.
 - Domain and hosting: the client pays for them separately. They are registered in the client's name, and the client gets every login and password. Their cost is never quoted in advance because it depends on the domain and hosting chosen. For improvement work, Salima works with the client's existing domain and hosting and never promises to register or transfer them.
-- Status terms: концепт = made on her own initiative, not commissioned, to show what a site for such a business could be (DALA COFFEE, Дентал Плюс); демо = shows how the product works on prepared examples (Shart AI); учебный проект = built while learning (Bloom).
+- Status terms: концепт = made on her own initiative, not commissioned, to show what a site for such a business could be (Cheezy, DALA COFFEE, Дентал Плюс); демо = shows how the product works on prepared examples (Shart AI); учебный проект = built while learning (Bloom).
 - Portfolio entries are data in `src/data/projects.ts`. Screenshots are taken by `npm run screens` (Playwright, local only). All contact details live in `src/data/contacts.ts`.
 - Language: the site is Russian only today. A Kazakh version is needed. **Undecided:** when it ships, and whether it covers every page.
 
@@ -43,7 +43,7 @@ saliima.dev (live at https://saliima.netlify.app/) is Salima's storefront as a f
 
 ## Evidence on Hand
 
-- Works: DALA COFFEE (coffee shop, concept), Дентал Плюс (dental clinic, concept), Shart AI (document assistant, demo with prepared answers), Bloom (flower guide, study project). Screenshots are in `src/assets/screens/`.
+- Works: Cheezy (pizza delivery, concept, English, pizza builder), DALA COFFEE (coffee shop, concept), Дентал Плюс (dental clinic, concept), Shart AI (document assistant, demo with prepared answers), Bloom (flower guide, study project). Screenshots are in `src/assets/screens/`.
 - Portrait: none. The site has no photo slot; «Обо мне» is the name, two lines about Salima and four promises. Link preview image: `public/og.png`, rendered by `npm run og`.
 - None of the works are for paying clients, and there are no testimonials, client logos, or numbers. Future work must never invent them or present a concept as client work.
 

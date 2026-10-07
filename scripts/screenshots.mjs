@@ -6,6 +6,7 @@
 // увидит человек, а не голый HTML.
 //
 // Запуск: npm run screens
+// Только нужные работы: npm run screens -- cheezy dala-coffee
 
 import { chromium, devices } from 'playwright';
 import { mkdir } from 'node:fs/promises';
@@ -36,7 +37,12 @@ const context = await browser.newContext({
 
 const failed = [];
 
-for (const project of projects) {
+// Если в команде перечислены id, переснимаем только их, а остальные
+// снимки не трогаем.
+const only = process.argv.slice(2);
+const selected = only.length > 0 ? projects.filter((project) => only.includes(project.id)) : projects;
+
+for (const project of selected) {
   const page = await context.newPage();
   const file = path.join(outDir, `${project.id}.png`);
 

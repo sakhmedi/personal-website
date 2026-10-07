@@ -41,6 +41,17 @@ export interface Project {
 
 export const projects: Project[] = [
   {
+    id: "cheezy",
+    title: "Cheezy",
+    subtitle: "Сайт доставки пиццы, концепт",
+    description:
+      "Пиццу собирают сами: выбирают размер, тесто и соус, перетаскивают начинки и сразу видят, как она выглядит. Заказ оформляется на сайте с адресом доставки, оплата курьеру наличными или картой.",
+    url: "https://sakhmedi.github.io/cheezy/",
+    image: "cheezy.png",
+    imageAlt: "Главная страница сайта доставки пиццы Cheezy",
+    featured: true,
+  },
+  {
     id: "dala-coffee",
     title: "DALA COFFEE",
     subtitle: "Сайт кофейни, концепт",
